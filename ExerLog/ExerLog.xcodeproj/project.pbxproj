@@ -1,0 +1,622 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		E30C7E4F2168B73E0037EF2E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30C7E4E2168B73E0037EF2E /* AppDelegate.swift */; };
+		E30C7E512168B73E0037EF2E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30C7E502168B73E0037EF2E /* ViewController.swift */; };
+		E30C7E542168B73E0037EF2E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E30C7E522168B73E0037EF2E /* Main.storyboard */; };
+		E30C7E572168B73E0037EF2E /* ExerLog.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E30C7E552168B73E0037EF2E /* ExerLog.xcdatamodeld */; };
+		E30C7E592168B73F0037EF2E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E30C7E582168B73F0037EF2E /* Assets.xcassets */; };
+		E30C7E5C2168B73F0037EF2E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E30C7E5A2168B73F0037EF2E /* LaunchScreen.storyboard */; };
+		E30C7E672168B73F0037EF2E /* ExerLogTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30C7E662168B73F0037EF2E /* ExerLogTests.swift */; };
+		E30C7E722168B73F0037EF2E /* ExerLogUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30C7E712168B73F0037EF2E /* ExerLogUITests.swift */; };
+		E30C7E802168B7890037EF2E /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30C7E7F2168B7890037EF2E /* Exercise.swift */; };
+		E30C7E832168BA4C0037EF2E /* Workout.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30C7E822168BA4C0037EF2E /* Workout.swift */; };
+		E30C7E852168BEB00037EF2E /* WorkoutLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30C7E842168BEB00037EF2E /* WorkoutLog.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		E30C7E632168B73F0037EF2E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E30C7E432168B73E0037EF2E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E30C7E4A2168B73E0037EF2E;
+			remoteInfo = ExerLog;
+		};
+		E30C7E6E2168B73F0037EF2E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E30C7E432168B73E0037EF2E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E30C7E4A2168B73E0037EF2E;
+			remoteInfo = ExerLog;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		E30C7E4B2168B73E0037EF2E /* ExerLog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExerLog.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E30C7E4E2168B73E0037EF2E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		E30C7E502168B73E0037EF2E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		E30C7E532168B73E0037EF2E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		E30C7E562168B73E0037EF2E /* ExerLog.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ExerLog.xcdatamodel; sourceTree = "<group>"; };
+		E30C7E582168B73F0037EF2E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		E30C7E5B2168B73F0037EF2E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		E30C7E5D2168B73F0037EF2E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E30C7E622168B73F0037EF2E /* ExerLogTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExerLogTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E30C7E662168B73F0037EF2E /* ExerLogTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerLogTests.swift; sourceTree = "<group>"; };
+		E30C7E682168B73F0037EF2E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E30C7E6D2168B73F0037EF2E /* ExerLogUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExerLogUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E30C7E712168B73F0037EF2E /* ExerLogUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerLogUITests.swift; sourceTree = "<group>"; };
+		E30C7E732168B73F0037EF2E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E30C7E7F2168B7890037EF2E /* Exercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
+		E30C7E822168BA4C0037EF2E /* Workout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workout.swift; sourceTree = "<group>"; };
+		E30C7E842168BEB00037EF2E /* WorkoutLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutLog.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		E30C7E482168B73E0037EF2E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E30C7E5F2168B73F0037EF2E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E30C7E6A2168B73F0037EF2E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		E30C7E422168B73E0037EF2E = {
+			isa = PBXGroup;
+			children = (
+				E30C7E4D2168B73E0037EF2E /* ExerLog */,
+				E30C7E652168B73F0037EF2E /* ExerLogTests */,
+				E30C7E702168B73F0037EF2E /* ExerLogUITests */,
+				E30C7E4C2168B73E0037EF2E /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		E30C7E4C2168B73E0037EF2E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E30C7E4B2168B73E0037EF2E /* ExerLog.app */,
+				E30C7E622168B73F0037EF2E /* ExerLogTests.xctest */,
+				E30C7E6D2168B73F0037EF2E /* ExerLogUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E30C7E4D2168B73E0037EF2E /* ExerLog */ = {
+			isa = PBXGroup;
+			children = (
+				E30C7E812168BA330037EF2E /* WorkoutLog */,
+				E30C7E4E2168B73E0037EF2E /* AppDelegate.swift */,
+				E30C7E502168B73E0037EF2E /* ViewController.swift */,
+				E30C7E522168B73E0037EF2E /* Main.storyboard */,
+				E30C7E582168B73F0037EF2E /* Assets.xcassets */,
+				E30C7E5A2168B73F0037EF2E /* LaunchScreen.storyboard */,
+				E30C7E5D2168B73F0037EF2E /* Info.plist */,
+				E30C7E552168B73E0037EF2E /* ExerLog.xcdatamodeld */,
+			);
+			path = ExerLog;
+			sourceTree = "<group>";
+		};
+		E30C7E652168B73F0037EF2E /* ExerLogTests */ = {
+			isa = PBXGroup;
+			children = (
+				E30C7E662168B73F0037EF2E /* ExerLogTests.swift */,
+				E30C7E682168B73F0037EF2E /* Info.plist */,
+			);
+			path = ExerLogTests;
+			sourceTree = "<group>";
+		};
+		E30C7E702168B73F0037EF2E /* ExerLogUITests */ = {
+			isa = PBXGroup;
+			children = (
+				E30C7E712168B73F0037EF2E /* ExerLogUITests.swift */,
+				E30C7E732168B73F0037EF2E /* Info.plist */,
+			);
+			path = ExerLogUITests;
+			sourceTree = "<group>";
+		};
+		E30C7E812168BA330037EF2E /* WorkoutLog */ = {
+			isa = PBXGroup;
+			children = (
+				E30C7E7F2168B7890037EF2E /* Exercise.swift */,
+				E30C7E822168BA4C0037EF2E /* Workout.swift */,
+				E30C7E842168BEB00037EF2E /* WorkoutLog.swift */,
+			);
+			path = WorkoutLog;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		E30C7E4A2168B73E0037EF2E /* ExerLog */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E30C7E762168B73F0037EF2E /* Build configuration list for PBXNativeTarget "ExerLog" */;
+			buildPhases = (
+				E30C7E472168B73E0037EF2E /* Sources */,
+				E30C7E482168B73E0037EF2E /* Frameworks */,
+				E30C7E492168B73E0037EF2E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ExerLog;
+			productName = ExerLog;
+			productReference = E30C7E4B2168B73E0037EF2E /* ExerLog.app */;
+			productType = "com.apple.product-type.application";
+		};
+		E30C7E612168B73F0037EF2E /* ExerLogTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E30C7E792168B73F0037EF2E /* Build configuration list for PBXNativeTarget "ExerLogTests" */;
+			buildPhases = (
+				E30C7E5E2168B73F0037EF2E /* Sources */,
+				E30C7E5F2168B73F0037EF2E /* Frameworks */,
+				E30C7E602168B73F0037EF2E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E30C7E642168B73F0037EF2E /* PBXTargetDependency */,
+			);
+			name = ExerLogTests;
+			productName = ExerLogTests;
+			productReference = E30C7E622168B73F0037EF2E /* ExerLogTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		E30C7E6C2168B73F0037EF2E /* ExerLogUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E30C7E7C2168B73F0037EF2E /* Build configuration list for PBXNativeTarget "ExerLogUITests" */;
+			buildPhases = (
+				E30C7E692168B73F0037EF2E /* Sources */,
+				E30C7E6A2168B73F0037EF2E /* Frameworks */,
+				E30C7E6B2168B73F0037EF2E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E30C7E6F2168B73F0037EF2E /* PBXTargetDependency */,
+			);
+			name = ExerLogUITests;
+			productName = ExerLogUITests;
+			productReference = E30C7E6D2168B73F0037EF2E /* ExerLogUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		E30C7E432168B73E0037EF2E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0940;
+				LastUpgradeCheck = 0940;
+				ORGANIZATIONNAME = "kalle hålldén";
+				TargetAttributes = {
+					E30C7E4A2168B73E0037EF2E = {
+						CreatedOnToolsVersion = 9.4.1;
+					};
+					E30C7E612168B73F0037EF2E = {
+						CreatedOnToolsVersion = 9.4.1;
+						TestTargetID = E30C7E4A2168B73E0037EF2E;
+					};
+					E30C7E6C2168B73F0037EF2E = {
+						CreatedOnToolsVersion = 9.4.1;
+						TestTargetID = E30C7E4A2168B73E0037EF2E;
+					};
+				};
+			};
+			buildConfigurationList = E30C7E462168B73E0037EF2E /* Build configuration list for PBXProject "ExerLog" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = E30C7E422168B73E0037EF2E;
+			productRefGroup = E30C7E4C2168B73E0037EF2E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E30C7E4A2168B73E0037EF2E /* ExerLog */,
+				E30C7E612168B73F0037EF2E /* ExerLogTests */,
+				E30C7E6C2168B73F0037EF2E /* ExerLogUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		E30C7E492168B73E0037EF2E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E30C7E5C2168B73F0037EF2E /* LaunchScreen.storyboard in Resources */,
+				E30C7E592168B73F0037EF2E /* Assets.xcassets in Resources */,
+				E30C7E542168B73E0037EF2E /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E30C7E602168B73F0037EF2E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E30C7E6B2168B73F0037EF2E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		E30C7E472168B73E0037EF2E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E30C7E512168B73E0037EF2E /* ViewController.swift in Sources */,
+				E30C7E802168B7890037EF2E /* Exercise.swift in Sources */,
+				E30C7E852168BEB00037EF2E /* WorkoutLog.swift in Sources */,
+				E30C7E4F2168B73E0037EF2E /* AppDelegate.swift in Sources */,
+				E30C7E832168BA4C0037EF2E /* Workout.swift in Sources */,
+				E30C7E572168B73E0037EF2E /* ExerLog.xcdatamodeld in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E30C7E5E2168B73F0037EF2E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E30C7E672168B73F0037EF2E /* ExerLogTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E30C7E692168B73F0037EF2E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E30C7E722168B73F0037EF2E /* ExerLogUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		E30C7E642168B73F0037EF2E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E30C7E4A2168B73E0037EF2E /* ExerLog */;
+			targetProxy = E30C7E632168B73F0037EF2E /* PBXContainerItemProxy */;
+		};
+		E30C7E6F2168B73F0037EF2E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E30C7E4A2168B73E0037EF2E /* ExerLog */;
+			targetProxy = E30C7E6E2168B73F0037EF2E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		E30C7E522168B73E0037EF2E /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E30C7E532168B73E0037EF2E /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		E30C7E5A2168B73F0037EF2E /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E30C7E5B2168B73F0037EF2E /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		E30C7E742168B73F0037EF2E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		E30C7E752168B73F0037EF2E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		E30C7E772168B73F0037EF2E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 76A9484TZ5;
+				INFOPLIST_FILE = ExerLog/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.kalle.ExerLog;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		E30C7E782168B73F0037EF2E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 76A9484TZ5;
+				INFOPLIST_FILE = ExerLog/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.kalle.ExerLog;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		E30C7E7A2168B73F0037EF2E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = ExerLogTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.kalle.ExerLogTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ExerLog.app/ExerLog";
+			};
+			name = Debug;
+		};
+		E30C7E7B2168B73F0037EF2E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = ExerLogTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.kalle.ExerLogTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ExerLog.app/ExerLog";
+			};
+			name = Release;
+		};
+		E30C7E7D2168B73F0037EF2E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = ExerLogUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.kalle.ExerLogUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = ExerLog;
+			};
+			name = Debug;
+		};
+		E30C7E7E2168B73F0037EF2E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = ExerLogUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.kalle.ExerLogUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = ExerLog;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		E30C7E462168B73E0037EF2E /* Build configuration list for PBXProject "ExerLog" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E30C7E742168B73F0037EF2E /* Debug */,
+				E30C7E752168B73F0037EF2E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E30C7E762168B73F0037EF2E /* Build configuration list for PBXNativeTarget "ExerLog" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E30C7E772168B73F0037EF2E /* Debug */,
+				E30C7E782168B73F0037EF2E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E30C7E792168B73F0037EF2E /* Build configuration list for PBXNativeTarget "ExerLogTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E30C7E7A2168B73F0037EF2E /* Debug */,
+				E30C7E7B2168B73F0037EF2E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E30C7E7C2168B73F0037EF2E /* Build configuration list for PBXNativeTarget "ExerLogUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E30C7E7D2168B73F0037EF2E /* Debug */,
+				E30C7E7E2168B73F0037EF2E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		E30C7E552168B73E0037EF2E /* ExerLog.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				E30C7E562168B73E0037EF2E /* ExerLog.xcdatamodel */,
+			);
+			currentVersion = E30C7E562168B73E0037EF2E /* ExerLog.xcdatamodel */;
+			path = ExerLog.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = E30C7E432168B73E0037EF2E /* Project object */;
+}
