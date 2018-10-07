@@ -10,13 +10,13 @@ import Foundation
 
 class Workout: NSObject {
     
-    private var weightVolume: Double?
-    private var totalSets: Double?
-    private var totalReps: Double?
+    private var weightVolume: Double = 0.0
+    private var totalSets: Double = 0
+    private var totalReps: Double = 0
     private var exerciseList = [Exercise]()
     
     func getTotalSets() -> Double{
-        return totalSets!
+        return totalSets
     }
     func setTotalSets(listExercise: [Exercise]) {
         var sets = 0.0
@@ -36,7 +36,7 @@ class Workout: NSObject {
     }
     
     func getTotalReps() -> Double {
-        return totalReps!
+        return totalReps
     }
     
     func setTotalWeight(listExercise: [Exercise]) {
@@ -50,7 +50,8 @@ class Workout: NSObject {
         weightVolume = weight
     }
     func getTotalWeight() -> Double {
-        return weightVolume!
+        print(weightVolume)
+        return weightVolume
     }
     
     func getExercises() -> [Exercise] {

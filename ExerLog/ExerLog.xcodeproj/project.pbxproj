@@ -8,8 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		E30C7E4F2168B73E0037EF2E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30C7E4E2168B73E0037EF2E /* AppDelegate.swift */; };
-		E30C7E512168B73E0037EF2E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30C7E502168B73E0037EF2E /* ViewController.swift */; };
-		E30C7E542168B73E0037EF2E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E30C7E522168B73E0037EF2E /* Main.storyboard */; };
+		E30C7E512168B73E0037EF2E /* AddWorkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30C7E502168B73E0037EF2E /* AddWorkoutViewController.swift */; };
 		E30C7E572168B73E0037EF2E /* ExerLog.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E30C7E552168B73E0037EF2E /* ExerLog.xcdatamodeld */; };
 		E30C7E592168B73F0037EF2E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E30C7E582168B73F0037EF2E /* Assets.xcassets */; };
 		E30C7E5C2168B73F0037EF2E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E30C7E5A2168B73F0037EF2E /* LaunchScreen.storyboard */; };
@@ -18,6 +17,10 @@
 		E30C7E802168B7890037EF2E /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30C7E7F2168B7890037EF2E /* Exercise.swift */; };
 		E30C7E832168BA4C0037EF2E /* Workout.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30C7E822168BA4C0037EF2E /* Workout.swift */; };
 		E30C7E852168BEB00037EF2E /* WorkoutLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30C7E842168BEB00037EF2E /* WorkoutLog.swift */; };
+		E30C7E882169CF010037EF2E /* barChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30C7E872169CF010037EF2E /* barChartViewController.swift */; };
+		E30C7E8A2169CF130037EF2E /* barCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30C7E892169CF130037EF2E /* barCell.swift */; };
+		E30C7E8C2169DF320037EF2E /* DiaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30C7E8B2169DF320037EF2E /* DiaryCell.swift */; };
+		E30C7E8E2169E0690037EF2E /* DiaryWorkoutsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30C7E8D2169E0690037EF2E /* DiaryWorkoutsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,8 +43,7 @@
 /* Begin PBXFileReference section */
 		E30C7E4B2168B73E0037EF2E /* ExerLog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExerLog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E30C7E4E2168B73E0037EF2E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		E30C7E502168B73E0037EF2E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		E30C7E532168B73E0037EF2E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		E30C7E502168B73E0037EF2E /* AddWorkoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWorkoutViewController.swift; sourceTree = "<group>"; };
 		E30C7E562168B73E0037EF2E /* ExerLog.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ExerLog.xcdatamodel; sourceTree = "<group>"; };
 		E30C7E582168B73F0037EF2E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E30C7E5B2168B73F0037EF2E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -55,6 +57,10 @@
 		E30C7E7F2168B7890037EF2E /* Exercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
 		E30C7E822168BA4C0037EF2E /* Workout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workout.swift; sourceTree = "<group>"; };
 		E30C7E842168BEB00037EF2E /* WorkoutLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutLog.swift; sourceTree = "<group>"; };
+		E30C7E872169CF010037EF2E /* barChartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = barChartViewController.swift; path = "../../../../Apps/barChartAndInput 1.0/barChartAndInput 1.0/barChartViewController.swift"; sourceTree = "<group>"; };
+		E30C7E892169CF130037EF2E /* barCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = barCell.swift; path = "../../../Apps/barChartAndInput 1.0/barChartAndInput 1.0/barCell.swift"; sourceTree = "<group>"; };
+		E30C7E8B2169DF320037EF2E /* DiaryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryCell.swift; sourceTree = "<group>"; };
+		E30C7E8D2169E0690037EF2E /* DiaryWorkoutsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryWorkoutsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,11 +111,12 @@
 		E30C7E4D2168B73E0037EF2E /* ExerLog */ = {
 			isa = PBXGroup;
 			children = (
+				E30C7E862169CEE40037EF2E /* Views */,
 				E30C7E812168BA330037EF2E /* WorkoutLog */,
 				E30C7E4E2168B73E0037EF2E /* AppDelegate.swift */,
-				E30C7E502168B73E0037EF2E /* ViewController.swift */,
-				E30C7E522168B73E0037EF2E /* Main.storyboard */,
 				E30C7E582168B73F0037EF2E /* Assets.xcassets */,
+				E30C7E892169CF130037EF2E /* barCell.swift */,
+				E30C7E8B2169DF320037EF2E /* DiaryCell.swift */,
 				E30C7E5A2168B73F0037EF2E /* LaunchScreen.storyboard */,
 				E30C7E5D2168B73F0037EF2E /* Info.plist */,
 				E30C7E552168B73E0037EF2E /* ExerLog.xcdatamodeld */,
@@ -143,6 +150,16 @@
 				E30C7E842168BEB00037EF2E /* WorkoutLog.swift */,
 			);
 			path = WorkoutLog;
+			sourceTree = "<group>";
+		};
+		E30C7E862169CEE40037EF2E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E30C7E502168B73E0037EF2E /* AddWorkoutViewController.swift */,
+				E30C7E872169CF010037EF2E /* barChartViewController.swift */,
+				E30C7E8D2169E0690037EF2E /* DiaryWorkoutsViewController.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -251,7 +268,6 @@
 			files = (
 				E30C7E5C2168B73F0037EF2E /* LaunchScreen.storyboard in Resources */,
 				E30C7E592168B73F0037EF2E /* Assets.xcassets in Resources */,
-				E30C7E542168B73E0037EF2E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -276,11 +292,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E30C7E512168B73E0037EF2E /* ViewController.swift in Sources */,
+				E30C7E512168B73E0037EF2E /* AddWorkoutViewController.swift in Sources */,
 				E30C7E802168B7890037EF2E /* Exercise.swift in Sources */,
+				E30C7E882169CF010037EF2E /* barChartViewController.swift in Sources */,
+				E30C7E8C2169DF320037EF2E /* DiaryCell.swift in Sources */,
 				E30C7E852168BEB00037EF2E /* WorkoutLog.swift in Sources */,
 				E30C7E4F2168B73E0037EF2E /* AppDelegate.swift in Sources */,
+				E30C7E8A2169CF130037EF2E /* barCell.swift in Sources */,
 				E30C7E832168BA4C0037EF2E /* Workout.swift in Sources */,
+				E30C7E8E2169E0690037EF2E /* DiaryWorkoutsViewController.swift in Sources */,
 				E30C7E572168B73E0037EF2E /* ExerLog.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -317,14 +337,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		E30C7E522168B73E0037EF2E /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				E30C7E532168B73E0037EF2E /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		E30C7E5A2168B73F0037EF2E /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

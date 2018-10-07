@@ -9,18 +9,23 @@
 import Foundation
 
 class WorkoutLog: NSObject {
-    private var workoutList = [Workout]()
+    static var workoutList = [Workout]()
 
-    func addNewWorkout() {
-        let newWorkout = Workout()
-        workoutList.append(newWorkout)
+    func addNewWorkout(numberOfWorkouts: Int) {
+        var count = 0
+        for _ in 0...numberOfWorkouts {
+            print(count)
+            let newWorkout = Workout()
+            WorkoutLog.workoutList.append(newWorkout)
+            count += 1
+        }
     }
     func getWorkoutList() -> [Workout] {
-        return workoutList
+        return WorkoutLog.workoutList
     }
     
     func getSpecificWorkout(id: Int) -> Workout {
-        let returnWorkout = workoutList[id]
+        let returnWorkout = WorkoutLog.workoutList[id]
         return returnWorkout
     }
 }
