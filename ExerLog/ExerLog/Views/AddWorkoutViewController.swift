@@ -37,9 +37,9 @@ class AddWorkoutViewController: UIViewController {
     
     private let scrollView: UIScrollView = {
         let scroll = UIScrollView()
-        scroll.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        scroll.heightAnchor.constraint(equalToConstant: 250).isActive = true
         scroll.translatesAutoresizingMaskIntoConstraints = false
-        scroll.isScrollEnabled = true
+        
         return scroll
     }()
     
@@ -99,12 +99,14 @@ class AddWorkoutViewController: UIViewController {
         let labelRow = createRowOfLabels()
         masterStackView.addArrangedSubview(labelRow)
         
-//        addRow()
-//        viewScroller.addSubview(rowStack)
-        viewScroller.backgroundColor = Colors.grey
-        viewScroller.heightAnchor.constraint(equalToConstant: 500).isActive = true
-        scrollView.addSubview(viewScroller)
-        scrollView.backgroundColor = Colors.darkGreen
+        let row = createRowOfTextFields()
+        rowStack.addArrangedSubview(row)
+        scrollView.addSubview(rowStack)
+        rowStack.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
+        rowStack.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor).isActive = true
+        rowStack.rightAnchor.constraint(equalTo: scrollView.rightAnchor).isActive = true
+        rowStack.leftAnchor.constraint(equalTo: scrollView.leftAnchor).isActive = true
+        scrollView.isScrollEnabled = true
         masterStackView.addArrangedSubview(scrollView)
         let button = addButton()
         button.addTarget(self, action: #selector(action), for: .touchUpInside)
