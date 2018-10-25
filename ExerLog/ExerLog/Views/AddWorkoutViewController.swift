@@ -4,13 +4,68 @@ import UIKit
 
 class AddWorkoutViewController: UIViewController {
     
-    let grey = UIColor(red:0.16, green:0.16, blue:0.18, alpha:1.0)
-    let green = UIColor(red:0.02, green:0.66, blue:0.18, alpha:1.0)
+    private let contentView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false;
+        return view
+    }()
+    private var rows = [[UITextField]]()
+    
+    private let viewScroller: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false;
+        return view
+    }()
+    
+    private var masterStackView: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .vertical
+        stack.spacing = 10
+        stack.distribution = .fillProportionally
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
+    }()
+    
+    private var rowStack: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .vertical
+        stack.spacing = 10
+        stack.distribution = .fillProportionally
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
+    }()
+    
+    private let scrollView: UIScrollView = {
+        let scroll = UIScrollView()
+        scroll.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        scroll.translatesAutoresizingMaskIntoConstraints = false
+        scroll.isScrollEnabled = true
+        return scroll
+    }()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = grey
+        view.addSubview(contentView)
+        autoLayoutConstraint()
+    }
+    
+    
+    
+    
+    func autoLayoutConstraint() {
+        contentView.widthAnchor.constraint(equalToConstant: view.frame.width).isActive = true
+        contentView.topAnchor.constraint(equalTo:view.topAnchor).isActive = true
+        contentView.heightAnchor.constraint(equalToConstant: view.frame.height/3).isActive = true
+        contentView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        contentView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        contentView.backgroundColor = Colors.grey
+        let master = setUpMasterStack()
+        contentView.addSubview(master)
+        master.topAnchor.constraint(equalTo: contentView.topAnchor, constant: view.frame.height * 0.1).isActive = true
+        master.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
+        master.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -10).isActive = true
+        master.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 10).isActive = true
     }
     
     func setup() {
@@ -32,6 +87,112 @@ class AddWorkoutViewController: UIViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    
+    func addRow() {
+        let row = createRowOfTextFields()
+        rowStack.addArrangedSubview(row)
+    }
+    
+    func setUpMasterStack() -> UIStackView {
+        let labelRow = createRowOfLabels()
+        masterStackView.addArrangedSubview(labelRow)
+        
+//        addRow()
+//        viewScroller.addSubview(rowStack)
+        viewScroller.backgroundColor = Colors.grey
+        viewScroller.heightAnchor.constraint(equalToConstant: 500).isActive = true
+        scrollView.addSubview(viewScroller)
+        scrollView.backgroundColor = Colors.darkGreen
+        masterStackView.addArrangedSubview(scrollView)
+        let button = addButton()
+        button.addTarget(self, action: #selector(action), for: .touchUpInside)
+        masterStackView.addArrangedSubview(button)
+        return masterStackView
+    }
+    
+    func addButton() -> UIButton {
+        let button:UIButton = {
+            let btn = UIButton(type:.system)
+            btn.backgroundColor = Colors.green
+            btn.setTitle("ADD", for: .normal)
+            btn.tintColor = Colors.grey
+            btn.layer.cornerRadius = 0
+            btn.translatesAutoresizingMaskIntoConstraints = false
+            return btn
+        }()
+        return button
+    }
+    
+    @objc func action(sender:UIButton!) {
+        addRow()
+    }
+    
+    func textfieldMaker() -> UITextField {
+        let thisTextField: UITextField = {
+            let txtField = UITextField()
+            setUpTextFields(textField: txtField)
+            txtField.translatesAutoresizingMaskIntoConstraints = false
+            
+            return txtField
+        }()
+        return thisTextField
+    }
+    
+    func createRowOfTextFields() -> UIStackView {
+        let stackview = UIStackView()
+        var textFieldArray = [UITextField]()
+        for _ in 1...5 {
+            let textField = textfieldMaker()
+            stackview.addArrangedSubview(textField)
+            textFieldArray.append(textField)
+        }
+        stackview.alignment = .center
+        stackview.axis = .horizontal
+        stackview.distribution = .fillEqually
+        stackview.spacing = 10
+        stackview.translatesAutoresizingMaskIntoConstraints = false
+        rows.append(textFieldArray)
+        return stackview
+    }
+    
+    func createRowOfLabels() -> UIStackView {
+        let stackview = UIStackView()
+        for num in 1...5 {
+            let label = UILabel()
+            if (num == 1) {
+                label.text = "Exercise"
+            }
+            if (num == 2) {
+                label.text = "Reps"
+            }
+            if (num == 3) {
+                label.text = "Sets"
+            }
+            if (num == 4) {
+                label.text = "Weight"
+            }
+            if (num == 5) {
+                label.text = "Rest"
+            }
+            label.textColor = .white
+            
+            stackview.addArrangedSubview(label)
+        }
+        stackview.alignment = .center
+        stackview.axis = .horizontal
+        stackview.distribution = .fillEqually
+        stackview.spacing = 10
+        stackview.translatesAutoresizingMaskIntoConstraints = false
+        return stackview
+    }
+    
+    func setUpTextFields(textField: UITextField) {
+        textField.backgroundColor = Colors.green
+        textField.borderStyle = .none
+        textField.textColor = Colors.grey
+        textField.translatesAutoresizingMaskIntoConstraints = false
     }
 
 

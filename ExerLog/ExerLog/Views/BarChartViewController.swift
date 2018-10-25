@@ -1,15 +1,15 @@
 //
-//  DiaryWorkoutsViewController.swift
+//  BarChartViewController.swift
 //  ExerLog
 //
-//  Created by kalle hålldén on 2018-10-07.
+//  Created by kalle hålldén on 2018-10-25.
 //  Copyright © 2018 kalle hålldén. All rights reserved.
 //
 
-
+import Foundation
 import UIKit
 
-class DiaryWorkoutsViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class BarChartViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     let cellId = "cellid"
     var viewHeight: Int = 0
@@ -37,21 +37,21 @@ class DiaryWorkoutsViewController: UIViewController, UICollectionViewDataSource,
     
     // Amount of bars
     
-     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return volumeList.count
     }
     
-     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell =  collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! DiaryCell
         
         
-//        if let max = volumeList.max() {
-//            let value = volumeList[indexPath.item]
-//            let ratio = value / max
-//            cell.barHeightConstraint?.constant = CGFloat(viewHeight) * ratio
-//            
-//            
-//        }
+        //        if let max = volumeList.max() {
+        //            let value = volumeList[indexPath.item]
+        //            let ratio = value / max
+        //            cell.barHeightConstraint?.constant = CGFloat(viewHeight) * ratio
+        //
+        //
+        //        }
         
         
         return cell
