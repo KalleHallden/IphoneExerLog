@@ -46,7 +46,6 @@ class TabBarViewController: UITabBarController {
         diaryViewController.tabBarItem = UITabBarItem.init(title: nil, image: diaryImage, tag: 3)
         weightDiaryViewController.tabBarItem = UITabBarItem.init(title: nil, image: weightImage, tag: 4)
         
-        
 
     }
 

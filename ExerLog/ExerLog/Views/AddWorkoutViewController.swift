@@ -50,9 +50,6 @@ class AddWorkoutViewController: UIViewController {
         autoLayoutConstraint()
     }
     
-    
-    
-    
     func autoLayoutConstraint() {
         contentView.widthAnchor.constraint(equalToConstant: view.frame.width).isActive = true
         contentView.topAnchor.constraint(equalTo:view.topAnchor).isActive = true
