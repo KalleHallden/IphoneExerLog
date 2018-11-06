@@ -6,6 +6,9 @@
 //  Copyright © 2018 kalle hålldén. All rights reserved.
 //
 
+
+//New comment
+
 import UIKit
 import CoreData
 
