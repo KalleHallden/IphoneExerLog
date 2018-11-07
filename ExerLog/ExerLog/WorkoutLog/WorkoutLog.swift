@@ -9,7 +9,7 @@
 import Foundation
 
 class WorkoutLog: NSObject {
-    static var workoutList = [Workout]()
+    private static var workoutList = [Workout]()
 
     func addNewWorkout(numberOfWorkouts: Int) {
         var count = 0

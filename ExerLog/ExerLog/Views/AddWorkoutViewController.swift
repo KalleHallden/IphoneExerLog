@@ -140,16 +140,22 @@ class AddWorkoutViewController: UIViewController {
     }
     
     func createRowOfTextFields() -> UIStackView {
+        var widtdthTextField = (view.frame.width - 100) / 5
         let stackview = UIStackView()
         var textFieldArray = [UITextField]()
-        for _ in 1...5 {
+        for num in 1...5 {
             let textField = textfieldMaker()
             stackview.addArrangedSubview(textField)
             textFieldArray.append(textField)
+            if (num == 5) {
+                textField.widthAnchor.constraint(equalToConstant: 100)
+            } else {
+                textField.widthAnchor.constraint(equalToConstant: widtdthTextField)
+            }
         }
         stackview.alignment = .center
         stackview.axis = .horizontal
-        stackview.distribution = .fillEqually
+        stackview.distribution = .fillProportionally
         stackview.spacing = 10
         stackview.translatesAutoresizingMaskIntoConstraints = false
         rows.append(textFieldArray)
