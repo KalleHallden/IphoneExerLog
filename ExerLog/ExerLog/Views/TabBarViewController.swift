@@ -10,6 +10,7 @@ import UIKit
 
 class TabBarViewController: UITabBarController {
 
+    public static let workoutLog = WorkoutLog()
     let statImage = #imageLiteral(resourceName: "statIcon")
     let addImage = #imageLiteral(resourceName: "addIcon")
     let diaryImage = #imageLiteral(resourceName: "diaryIcon")

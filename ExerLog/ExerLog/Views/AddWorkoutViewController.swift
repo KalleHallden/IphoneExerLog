@@ -4,6 +4,7 @@ import UIKit
 
 class AddWorkoutViewController: UIViewController {
     
+    
     private let contentView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false;
@@ -43,10 +44,12 @@ class AddWorkoutViewController: UIViewController {
         return scroll
     }()
     
+    var workout = Workout()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(contentView)
+        startWorkout()
         autoLayoutConstraint()
     }
     
@@ -65,31 +68,49 @@ class AddWorkoutViewController: UIViewController {
         master.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 10).isActive = true
     }
     
-    func setup() {
-        let workout = Workout()
-        workout.addNewExercise(name: "Bench Press", reps: "12", sets: "3", weight: "20,3kg", rest: "60s")
-        workout.addNewExercise(name: "Deadlift", reps: "5", sets: "5", weight: "122,5kg", rest: "120s")
-        workout.addNewExercise(name: "Squat", reps: "8", sets: "3", weight: "180kg", rest: "120s")
-        
-        print(workout.getExercises().count)
-        let list = workout.getExercises()
-        
-        workout.setTotalWeight(listExercise: list)
-        workout.setTotalReps(listExercise: list)
-        workout.setTotalSets(listExercise: list)
-        print("\(workout.getTotalWeight()) kg")
-        print("\(workout.getTotalReps()) reps")
-        print("\(workout.getTotalSets())  sets")
+//    func setup() {
+//        let workout = Workout()
+//        workout.addNewExercise(name: "Bench Press", reps: "12", sets: "3", weight: "20,3kg", rest: "60s")
+//        workout.addNewExercise(name: "Deadlift", reps: "5", sets: "5", weight: "122,5kg", rest: "120s")
+//        workout.addNewExercise(name: "Squat", reps: "8", sets: "3", weight: "180kg", rest: "120s")
+//
+//        print(workout.getExercises().count)
+//        let list = workout.getExercises()
+//
+//        workout.setTotalWeight(listExercise: list)
+//        workout.setTotalReps(listExercise: list)
+//        workout.setTotalSets(listExercise: list)
+//        print("\(workout.getTotalWeight()) kg")
+//        print("\(workout.getTotalReps()) reps")
+//        print("\(workout.getTotalSets())  sets")
+//    }
+    
+    
+    
+    func startWorkout() {
+        let log = TabBarViewController.workoutLog
+        log.addNewWorkout(numberOfWorkouts: 1)
+        let numWorkouts = log.getWorkoutList().count
+        workout = log.getSpecificWorkout(id: numWorkouts - 1)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    
-    
+    func addNewExercise(exerciseNum: Int) {
+        workout.clearExercises()
+        for array in rows {
+            workout.addNewExercise(name: array[0].text!, reps: array[1].text!, sets: array[2].text!, weight: array[3].text!, rest: array[4].text!)
+        }
+        print(workout.getExercises().count)
+        print(workout.getTotalReps())
+    }
+    var rowCount = 1;
     func addRow() {
         let row = createRowOfTextFields()
         rowStack.addArrangedSubview(row)
+        addNewExercise(exerciseNum: rowCount)
+        rowCount += 1
     }
     
     func setUpMasterStack() -> UIStackView {
@@ -184,6 +205,7 @@ class AddWorkoutViewController: UIViewController {
         stackview.spacing = 10
         stackview.translatesAutoresizingMaskIntoConstraints = false
         rows.append(textFieldArray)
+        
         return stackview
     }
     

@@ -57,6 +57,9 @@ class Workout: NSObject {
     func getExercises() -> [Exercise] {
         return exerciseList
     }
+    func clearExercises() {
+        exerciseList.removeAll()
+    }
     
     func addNewExercise(name: String, reps: String, sets: String, weight: String, rest: String) {
         let theReps = removeCharsAndCommas(info: reps)
@@ -64,6 +67,9 @@ class Workout: NSObject {
         let theWeight = removeCharsAndCommas(info: weight)
         let theRest = removeCharsAndCommas(info: rest)
         let createdExercise = Exercise(names: name, repss: theReps, setss: theSets, weights: theWeight, rests: theRest)
+        setTotalReps(listExercise: exerciseList)
+        setTotalSets(listExercise: exerciseList)
+        setTotalWeight(listExercise: exerciseList)
         exerciseList.append(createdExercise)
     }
     
