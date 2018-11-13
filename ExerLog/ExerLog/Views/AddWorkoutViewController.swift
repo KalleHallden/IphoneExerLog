@@ -140,22 +140,44 @@ class AddWorkoutViewController: UIViewController {
     }
     
     func createRowOfTextFields() -> UIStackView {
-        var widtdthTextField = (view.frame.width - 100) / 5
+        let widtdthTextField = (view.frame.width - 100) / 5
         let stackview = UIStackView()
+        let stackview2 = UIStackView()
+        let stackview3 = UIStackView()
         var textFieldArray = [UITextField]()
-        for num in 1...5 {
+        
+        let textfield = textfieldMaker()
+        textfield.widthAnchor.constraint(equalToConstant: 100)
+        textFieldArray.append(textfield)
+        for num in 1...4 {
             let textField = textfieldMaker()
-            stackview.addArrangedSubview(textField)
-            textFieldArray.append(textField)
-            if (num == 5) {
-                textField.widthAnchor.constraint(equalToConstant: 100)
+            if (num < 3) {
+               stackview2.addArrangedSubview(textField)
             } else {
-                textField.widthAnchor.constraint(equalToConstant: widtdthTextField)
+                stackview3.addArrangedSubview(textField)
             }
+            textFieldArray.append(textField)
+                textField.widthAnchor.constraint(equalToConstant: widtdthTextField)
         }
+        stackview2.alignment = .center
+        stackview2.axis = .horizontal
+        stackview2.distribution = .fillEqually
+        stackview2.spacing = 10
+        stackview2.translatesAutoresizingMaskIntoConstraints = false
+        
+        stackview3.alignment = .center
+        stackview3.axis = .horizontal
+        stackview3.distribution = .fillEqually
+        stackview3.spacing = 10
+        stackview3.translatesAutoresizingMaskIntoConstraints = false
+        
+        stackview.addArrangedSubview(textfield)
+        stackview.addArrangedSubview(stackview2)
+        stackview.addArrangedSubview(stackview3)
+        
         stackview.alignment = .center
         stackview.axis = .horizontal
-        stackview.distribution = .fillProportionally
+        stackview.distribution = .fillEqually
         stackview.spacing = 10
         stackview.translatesAutoresizingMaskIntoConstraints = false
         rows.append(textFieldArray)
@@ -164,27 +186,46 @@ class AddWorkoutViewController: UIViewController {
     
     func createRowOfLabels() -> UIStackView {
         let stackview = UIStackView()
+        let stackview2 = UIStackView()
+        let stackview3 = UIStackView()
         for num in 1...5 {
             let label = UILabel()
             if (num == 1) {
                 label.text = "Exercise"
+                stackview.addArrangedSubview(label)
             }
             if (num == 2) {
                 label.text = "Reps"
+                stackview2.addArrangedSubview(label)
             }
             if (num == 3) {
                 label.text = "Sets"
+                stackview2.addArrangedSubview(label)
             }
             if (num == 4) {
                 label.text = "Weight"
+                stackview3.addArrangedSubview(label)
             }
             if (num == 5) {
                 label.text = "Rest"
+                stackview3.addArrangedSubview(label)
             }
             label.textColor = .white
-            
-            stackview.addArrangedSubview(label)
         }
+        stackview2.alignment = .center
+        stackview2.axis = .horizontal
+        stackview2.distribution = .fillEqually
+        stackview2.spacing = 10
+        stackview2.translatesAutoresizingMaskIntoConstraints = false
+        
+        stackview3.alignment = .center
+        stackview3.axis = .horizontal
+        stackview3.distribution = .fillEqually
+        stackview3.spacing = 10
+        stackview3.translatesAutoresizingMaskIntoConstraints = false
+        
+        stackview.addArrangedSubview(stackview2)
+        stackview.addArrangedSubview(stackview3)
         stackview.alignment = .center
         stackview.axis = .horizontal
         stackview.distribution = .fillEqually
