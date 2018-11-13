@@ -100,6 +100,9 @@ class AddWorkoutViewController: UIViewController {
         rowStack.addArrangedSubview(row)
         scrollView.addSubview(rowStack)
         rowStack.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
+        rowStack.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
+        rowStack.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor).isActive = true
+        rowStack.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
         rowStack.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor).isActive = true
         rowStack.rightAnchor.constraint(equalTo: scrollView.rightAnchor).isActive = true
         rowStack.leftAnchor.constraint(equalTo: scrollView.leftAnchor).isActive = true

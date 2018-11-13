@@ -35,7 +35,10 @@ class TabBarViewController: UITabBarController {
         diaryViewController.tabBarItem = UITabBarItem(tabBarSystemItem: .search, tag: 3)
         weightDiaryViewController.tabBarItem = UITabBarItem(tabBarSystemItem: .search, tag: 4)
         
-        let tabBarList = [statViewController, profileViewController, addWorkoutViewController, diaryViewController, weightDiaryViewController]
+        //let tabBarList = [statViewController, profileViewController, addWorkoutViewController, diaryViewController, weightDiaryViewController]
+        
+        let tabBarList = [statViewController, addWorkoutViewController, diaryViewController]
+        
         
         viewControllers = tabBarList
         self.tabBar.barTintColor = UIColor.black
