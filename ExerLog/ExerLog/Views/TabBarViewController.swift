@@ -42,7 +42,7 @@ class TabBarViewController: UITabBarController {
         
         
         viewControllers = tabBarList
-        self.tabBar.barTintColor = UIColor.black
+        self.tabBar.barTintColor = Colors.blacks
         self.tabBar.unselectedItemTintColor = Colors.greens
         //self.tabBarItem.image = UIImage.init(cgImage: #imageLiteral(resourceName: "statIcon"))
         statViewController.tabBarItem = UITabBarItem.init(title: nil, image: statImage, tag: 0)

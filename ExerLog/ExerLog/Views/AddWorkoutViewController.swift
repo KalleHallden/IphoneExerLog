@@ -48,7 +48,7 @@ class AddWorkoutViewController: UIViewController {
     func addButton() -> UIButton {
         let button:UIButton = {
             let btn = UIButton(type:.system)
-            btn.backgroundColor = Colors.green
+            btn.backgroundColor = Colors.greens
             btn.setTitle("ADD", for: .normal)
             btn.tintColor = Colors.grey
             btn.layer.cornerRadius = 0
@@ -61,7 +61,7 @@ class AddWorkoutViewController: UIViewController {
     func statButton() -> UIButton {
         let button:UIButton = {
             let btn = UIButton(type:.system)
-            btn.backgroundColor = Colors.green
+            btn.backgroundColor = Colors.greens
             btn.setTitle("Total Volume: 0", for: .normal)
             btn.tintColor = Colors.grey
             btn.layer.cornerRadius = 0
@@ -96,9 +96,19 @@ class AddWorkoutViewController: UIViewController {
     }
     
     func setUpMasterStack() -> UIStackView {
+        
+        var num = 0
+        for subview in masterStackView.arrangedSubviews {
+            masterStackView.removeArrangedSubview(subview)
+            subview.removeFromSuperview()
+            num += 1
+            print("This is num: \(num)")
+        }
+        
         setStatBut()
         let statbutton = getButton()
         statbutton.addTarget(self, action: #selector(statAction), for: .touchUpInside)
+        
         masterStackView.addArrangedSubview(statbutton)
         
         let labelRow = createRowOfLabels()
@@ -120,6 +130,7 @@ class AddWorkoutViewController: UIViewController {
         let addbutton = addButton()
         addbutton.addTarget(self, action: #selector(action), for: .touchUpInside)
         masterStackView.addArrangedSubview(addbutton)
+        
         return masterStackView
     }
     func setupStackViewHorizontal(stackview: UIStackView) {
@@ -131,13 +142,22 @@ class AddWorkoutViewController: UIViewController {
     }
     
     func setUpTextFields(textField: UITextField) {
-        textField.backgroundColor = Colors.green
+        textField.backgroundColor = Colors.greens
         textField.borderStyle = .none
         textField.textColor = Colors.grey
         textField.translatesAutoresizingMaskIntoConstraints = false
     }
     
     func startWorkout() {
+        for row in rowStack.arrangedSubviews {
+            rowStack.removeArrangedSubview(row)
+            row.removeFromSuperview()
+        }
+        autoLayoutConstraint()
+        let button = saveButton()
+        
+        self.navigationController?.navigationBar.topItem?.leftBarButtonItem = button
+        
         let log = TabBarViewController.workoutLog
         log.addNewWorkout(numberOfWorkouts: 1)
         let numWorkouts = log.getWorkoutList().count
@@ -236,7 +256,7 @@ class AddWorkoutViewController: UIViewController {
                 label.text = "Rest"
                 stackview3.addArrangedSubview(label)
             }
-            label.textColor = .white
+            label.textColor = Colors.whites
         }
         setupStackViewHorizontal(stackview: stackview2)
         setupStackViewHorizontal(stackview: stackview3)
@@ -276,12 +296,24 @@ class AddWorkoutViewController: UIViewController {
         }
     }
     
+    @objc func save() {
+        saveWorkout(workout: workout)
+    }
+    
+    func saveWorkout(workout: Workout) {
+        // save the workout and refresh the current view
+        print("Hey you")
+        startWorkout()
+        
+    }
+    
     func saveButton() -> UIBarButtonItem {
         let button:UIBarButtonItem = {
             let btn = UIBarButtonItem()
             btn.title = "Save"
-            btn.tintColor = Colors.darkGreen
-            btn.tintColor = Colors.green
+            btn.tintColor = Colors.greens
+            btn.action = #selector(self.save)
+            btn.target = self
             return btn
         }()
         return button
@@ -291,9 +323,6 @@ class AddWorkoutViewController: UIViewController {
         super.viewDidLoad()
         view.addSubview(contentView)
         startWorkout()
-        autoLayoutConstraint()
-        
-        self.navigationController?.navigationBar.topItem?.leftBarButtonItem = saveButton()
     }
     
     override func didReceiveMemoryWarning() {
