@@ -67,10 +67,10 @@ class Workout: NSObject {
         let theWeight = removeCharsAndCommas(info: weight)
         let theRest = removeCharsAndCommas(info: rest)
         let createdExercise = Exercise(names: name, repss: theReps, setss: theSets, weights: theWeight, rests: theRest)
+        exerciseList.append(createdExercise)
         setTotalReps(listExercise: exerciseList)
         setTotalSets(listExercise: exerciseList)
         setTotalWeight(listExercise: exerciseList)
-        exerciseList.append(createdExercise)
     }
     
     
