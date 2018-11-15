@@ -153,15 +153,17 @@ class AddWorkoutViewController: UIViewController {
             rowStack.removeArrangedSubview(row)
             row.removeFromSuperview()
         }
+        rows.removeAll()
         autoLayoutConstraint()
         let button = saveButton()
-        
         self.navigationController?.navigationBar.topItem?.leftBarButtonItem = button
         
         let log = TabBarViewController.workoutLog
         log.addNewWorkout(numberOfWorkouts: 1)
         let numWorkouts = log.getWorkoutList().count
         workout = log.getSpecificWorkout(id: numWorkouts - 1)
+        
+        print("total workouts: \(log.getWorkoutList().count)")
     }
 
 
@@ -275,11 +277,11 @@ class AddWorkoutViewController: UIViewController {
         let button = getButton()
         if (clickcount == 0) {
             print("hello")
-            button.setTitle("Total Volume: \(workout.getTotalReps())", for: .normal)
+            button.setTitle("Total Volume: \(self.workout.getTotalReps())", for: .normal)
         } else if (clickcount == 1) {
-            button.setTitle("Total Load: \(workout.getTotalWeight())", for: .normal)
+            button.setTitle("Total Load: \(self.workout.getTotalWeight())", for: .normal)
         } else {
-            button.setTitle("Total sets: \(workout.getTotalSets())", for: .normal)
+            button.setTitle("Total sets: \(self.workout.getTotalSets())", for: .normal)
         }
     }
     
@@ -301,9 +303,12 @@ class AddWorkoutViewController: UIViewController {
     }
     
     func saveWorkout(workout: Workout) {
-        // save the workout and refresh the current view
         print("Hey you")
         startWorkout()
+        
+        for wout in TabBarViewController.workoutLog.getWorkoutList() {
+            print("reps: \(wout.getTotalReps())")
+        }
         
     }
     
