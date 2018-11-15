@@ -45,24 +45,24 @@ class AddWorkoutViewController: UIViewController {
         return scroll
     }()
     
-    func addButton() -> UIButton {
-        let button:UIButton = {
-            let btn = UIButton(type:.system)
-            btn.backgroundColor = Colors.greens
-            btn.setTitle("ADD", for: .normal)
-            btn.tintColor = Colors.grey
-            btn.layer.cornerRadius = 0
-            btn.translatesAutoresizingMaskIntoConstraints = false
-            return btn
-        }()
-        return button
-    }
+//    func addButton() -> UIButton {
+//        let button:UIButton = {
+//            let btn = UIButton(type:.system)
+//            btn.backgroundColor = Colors.greens
+//            btn.setTitle("ADD", for: .normal)
+//            btn.tintColor = Colors.grey
+//            btn.layer.cornerRadius = 0
+//            btn.translatesAutoresizingMaskIntoConstraints = false
+//            return btn
+//        }()
+//        return button
+//    }
     
     func statButton() -> UIButton {
         let button:UIButton = {
             let btn = UIButton(type:.system)
             btn.backgroundColor = Colors.greens
-            btn.setTitle("Total Volume: 0", for: .normal)
+            btn.setTitle("Total Volume: 0.0", for: .normal)
             btn.tintColor = Colors.grey
             btn.layer.cornerRadius = 0
             btn.translatesAutoresizingMaskIntoConstraints = false
@@ -127,9 +127,9 @@ class AddWorkoutViewController: UIViewController {
         scrollView.isScrollEnabled = true
         
         masterStackView.addArrangedSubview(scrollView)
-        let addbutton = addButton()
-        addbutton.addTarget(self, action: #selector(action), for: .touchUpInside)
-        masterStackView.addArrangedSubview(addbutton)
+        //let addbutton = addButton()
+        // addbutton.addTarget(self, action: #selector(action), for: .touchUpInside)
+        //masterStackView.addArrangedSubview(addbutton)
         
         return masterStackView
     }
@@ -155,8 +155,10 @@ class AddWorkoutViewController: UIViewController {
         }
         rows.removeAll()
         autoLayoutConstraint()
-        let button = saveButton()
-        self.navigationController?.navigationBar.topItem?.leftBarButtonItem = button
+        let savebutton = saveButton()
+        self.navigationController?.navigationBar.topItem?.leftBarButtonItem = savebutton
+        let adderbutton = adderButton()
+        self.navigationController?.navigationBar.topItem?.rightBarButtonItem = adderbutton
         
         let log = TabBarViewController.workoutLog
         log.addNewWorkout(numberOfWorkouts: 1)
@@ -271,24 +273,25 @@ class AddWorkoutViewController: UIViewController {
     
     // Actions
     var clickcount = 0
-    
-    @objc func action(sender:UIButton!) {
-        addRow()
-        let button = getButton()
-        if (clickcount == 0) {
-            print("hello")
-            button.setTitle("Total Volume: \(self.workout.getTotalReps())", for: .normal)
-        } else if (clickcount == 1) {
-            button.setTitle("Total Load: \(self.workout.getTotalWeight())", for: .normal)
-        } else {
-            button.setTitle("Total sets: \(self.workout.getTotalSets())", for: .normal)
-        }
-    }
+   
+    //Code for the add button below the rows of exercises
+//    @objc func action(sender:UIButton!) {
+//        addRow()
+//        let button = getButton()
+//        if (clickcount == 0) {
+//            print("hello")
+//            button.setTitle("Total Volume: \(self.workout.getTotalReps())", for: .normal)
+//        } else if (clickcount == 1) {
+//            button.setTitle("Total Load: \(self.workout.getTotalWeight())kg", for: .normal)
+//        } else {
+//            button.setTitle("Total sets: \(self.workout.getTotalSets())", for: .normal)
+//        }
+//    }
     
     @objc func statAction(sender:UIButton!) {
         if (clickcount == 0) {
             clickcount += 1
-            sender.setTitle("Total Load: \(workout.getTotalWeight())", for: .normal)
+            sender.setTitle("Total Load: \(workout.getTotalWeight())kg", for: .normal)
         } else if (clickcount == 1) {
             sender.setTitle("Total sets: \(workout.getTotalSets())", for: .normal)
             clickcount += 1
@@ -300,6 +303,19 @@ class AddWorkoutViewController: UIViewController {
     
     @objc func save() {
         saveWorkout(workout: workout)
+    }
+    
+    @objc func add() {
+        addRow()
+        let button = getButton()
+        if (clickcount == 0) {
+            print("hello")
+            button.setTitle("Total Volume: \(self.workout.getTotalReps())", for: .normal)
+        } else if (clickcount == 1) {
+            button.setTitle("Total Load: \(self.workout.getTotalWeight())kg", for: .normal)
+        } else {
+            button.setTitle("Total sets: \(self.workout.getTotalSets())", for: .normal)
+        }
     }
     
     func saveWorkout(workout: Workout) {
@@ -318,6 +334,19 @@ class AddWorkoutViewController: UIViewController {
             btn.title = "Save"
             btn.tintColor = Colors.greens
             btn.action = #selector(self.save)
+            btn.target = self
+            return btn
+        }()
+        return button
+    }
+    
+    func adderButton() -> UIBarButtonItem {
+        let button:UIBarButtonItem = {
+            let btn = UIBarButtonItem()
+            btn.title = "add"
+            //btn.image = #imageLiteral(resourceName: "addIcon")
+            btn.tintColor = Colors.greens
+            btn.action = #selector(self.add)
             btn.target = self
             return btn
         }()
