@@ -57,29 +57,9 @@ class DiaryWorkoutsViewController: UIViewController, UICollectionViewDataSource,
         return cell
         
     }
-    var workoutLog = WorkoutLog()
+    var workoutLog = TabBarViewController.workoutLog
     
     func builder() {
-        workoutLog.addNewWorkout(numberOfWorkouts: 3)
-        let workout3 = workoutLog.getSpecificWorkout(id: 2)
-        let workout2 = workoutLog.getSpecificWorkout(id: 1)
-        let workout1 = workoutLog.getSpecificWorkout(id: 0)
-        
-        workout1.addNewExercise(name: "Deadlift", reps: "500", sets: "5", weight: "122,5kg", rest: "120s")
-        workout1.addNewExercise(name: "Squat", reps: "8", sets: "3", weight: "180kg", rest: "120s")
-        workout1.addNewExercise(name: "Bench Press", reps: "12", sets: "3", weight: "80kg", rest: "120s")
-        workout1.setTotalWeight(listExercise: workout1.getExercises())
-        
-        workout2.addNewExercise(name: "Deadlift", reps: "8", sets: "4", weight: "122,5kg", rest: "120s")
-        workout2.addNewExercise(name: "Squat", reps: "10", sets: "5", weight: "180kg", rest: "120s")
-        workout2.addNewExercise(name: "Bench Press", reps: "8", sets: "9", weight: "80kg", rest: "120s")
-        workout2.setTotalWeight(listExercise: workout2.getExercises())
-        
-        workout3.addNewExercise(name: "Deadlift", reps: "4", sets: "4", weight: "122,5kg", rest: "120s")
-        workout3.addNewExercise(name: "Squat", reps: "5", sets: "5", weight: "180kg", rest: "120s")
-        workout3.addNewExercise(name: "Bench Press", reps: "3", sets: "5", weight: "80kg", rest: "120s")
-        workout3.setTotalWeight(listExercise: workout3.getExercises())
-        
         setVolumeList()
     }
     

@@ -12,11 +12,10 @@ import UIKit
 
 class BarCell: UICollectionViewCell {
     
-    static let green = UIColor(red:0.02, green:0.66, blue:0.18, alpha:1.0)
     
-    let rowView: UIView = {
+    let barView: UIView = {
         let view = UIView()
-        view.backgroundColor = green
+        view.backgroundColor = Colors.greens
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
         
@@ -28,19 +27,20 @@ class BarCell: UICollectionViewCell {
         super.init(frame: frame)
         
         
-        addSubview(rowView)
+        addSubview(barView)
         
         //barView.topAnchor.constraint(equalTo: topAnchor).isActive = true
         
-        barHeightConstraint = rowView.heightAnchor.constraint(equalToConstant: 50);barHeightConstraint?.isActive = true
+        barHeightConstraint = barView.heightAnchor.constraint(equalToConstant: 300);barHeightConstraint?.isActive = true
         
-        barHeightConstraint?.constant = 50
+        barHeightConstraint?.constant = 100
         
         
-        rowView.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        rowView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = false
-        rowView.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
-        rowView.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
+        // barView.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        
+        barView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        barView.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
+        barView.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
         
         
         
@@ -50,5 +50,6 @@ class BarCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
         
     }
+    
     
 }

@@ -89,7 +89,7 @@ class AddWorkoutViewController: UIViewController {
         contentView.backgroundColor = Colors.grey
         let master = setUpMasterStack()
         contentView.addSubview(master)
-        master.topAnchor.constraint(equalTo: contentView.topAnchor, constant: view.frame.height * 0.1).isActive = true
+        master.topAnchor.constraint(equalTo: contentView.topAnchor, constant: view.frame.height * 0.12).isActive = true
         master.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         master.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -10).isActive = true
         master.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 10).isActive = true

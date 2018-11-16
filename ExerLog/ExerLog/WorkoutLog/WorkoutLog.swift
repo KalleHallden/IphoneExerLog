@@ -12,7 +12,8 @@ class WorkoutLog: NSObject {
     private var workoutList = [Workout]()
 
     func addNewWorkout(numberOfWorkouts: Int) {
-        for _ in 1...numberOfWorkouts {
+        for num in 1...numberOfWorkouts {
+            print("num of workouts: \(num)")
             let newWorkout = Workout()
             self.workoutList.append(newWorkout)
         }

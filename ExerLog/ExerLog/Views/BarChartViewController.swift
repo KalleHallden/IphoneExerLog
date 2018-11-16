@@ -9,97 +9,118 @@
 import Foundation
 import UIKit
 
-class BarChartViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    
+class BarChartViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+   
     let cellId = "cellid"
-    var viewHeight: Int = 0
-    var myCollectionView: UICollectionView!
-    let layout = UICollectionViewFlowLayout()
+    
+    var values: [CGFloat] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
+//        let leftButton = UIBarButtonItem()
+//        leftButton.title = ""
+//        self.navigationController?.navigationBar.topItem?.leftBarButtonItem = leftButton
+//        let rightButton = UIBarButtonItem()
+//        rightButton.title = ""
+//        self.navigationController?.navigationBar.topItem?.rightBarButtonItem = rightButton
         // Do any additional setup after loading the view, typically from a nib.
-        viewHeight = Int(view.frame.height) / 2
-        builder()
-        myCollectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
-        myCollectionView?.backgroundColor = Colors.grey
-        myCollectionView?.register(DiaryCell.self, forCellWithReuseIdentifier: cellId)
-        (myCollectionView?.collectionViewLayout as? UICollectionViewFlowLayout)? .scrollDirection = .vertical
-        self.view.addSubview(myCollectionView)
+        buttonBack()
         
+        collectionView?.backgroundColor = Colors.grey
+        
+        collectionView?.register(BarCell.self, forCellWithReuseIdentifier: cellId)
+        
+        (collectionView?.collectionViewLayout as? UICollectionViewFlowLayout)? .scrollDirection = .horizontal
+        
+    }
+    
+    func setValueList(num: Int) {
+        values.removeAll()
+        let workoutList = TabBarViewController.workoutLog.getWorkoutList()
+        if (num == 0) {
+            for workout in workoutList {
+                values.append(CGFloat(workout.getTotalReps()))
+                print(workout.getTotalReps())
+            }
+            numOfPresses += 1
+        } else if (num == 1) {
+            for workout in workoutList {
+                values.append(CGFloat(workout.getTotalWeight()))
+                print(workout.getTotalWeight())
+            }
+            numOfPresses += 1
+        } else {
+            for workout in workoutList {
+                values.append(CGFloat(workout.getTotalSets()))
+                print(workout.getTotalSets())
+            }
+            numOfPresses = 0
+        }
+        
+//        if (values.count == 0) {
+//            values = [1, 3, 5, 6, 10, 4, 23, 3, 6]
+//        }
     }
     
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        
         return 5
     }
     
     // Amount of bars
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return volumeList.count
+    var numOfPresses = 0
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        setValueList(num: numOfPresses)
+        return values.count
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell =  collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! DiaryCell
-        
-        
-        //        if let max = volumeList.max() {
-        //            let value = volumeList[indexPath.item]
-        //            let ratio = value / max
-        //            cell.barHeightConstraint?.constant = CGFloat(viewHeight) * ratio
-        //
-        //
-        //        }
-        
-        
-        return cell
-        
-    }
-    let workoutLog = TabBarViewController.workoutLog
-    
-    func builder() {
-        setVolumeList()
-    }
-    
-    
-    
-    var volumeList: [CGFloat] = []
-    
-    func setVolumeList() {
-        let workouts = workoutLog.getWorkoutList()
-        for workout in workouts {
-            let vol = CGFloat(workout.getTotalWeight())
-            volumeList.append(vol)
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell =  collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! BarCell
+        // cell.barHeightConstraint?.constant = values[indexPath.item]
+        if let max = values.max() {
+            let value = values[indexPath.item]
+            let ratio = value / max
+            cell.barHeightConstraint?.constant = (view.frame.height - 200) * ratio
         }
+        return cell
     }
     
     // Height and Width of bars
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let thisHeight = view.frame.height
-        let new = (thisHeight * 0.68)
-        
-        return CGSize(width: 30, height: new)
+        return CGSize(width: 30, height: view.frame.height * 0.78)
     }
     
     var backButton = UIButton()
-    
-    func buttonBack() {
-        backButton.setTitle("Back", for: .normal)
-        backButton.setTitleColor(UIColor.black, for: .normal)
-        backButton.backgroundColor = UIColor.white
-        backButton.frame = CGRect(x: view.frame.width/2-50 , y: view.frame.height/8, width: 100, height: 36)
-        view.addSubview(backButton)
-        
-        backButton.layer.borderWidth = 2
-        backButton.layer.cornerRadius = 18
-        
-        
-        
-        
+//
+    @objc func statAction(sender:UIButton!) {
+        print(numOfPresses)
+        self.collectionView?.reloadData()
+        if (numOfPresses == 0) {
+            sender.setTitle("Current view: Volume", for: .normal)
+        } else if (numOfPresses == 1) {
+            sender.setTitle("Current view: Load", for: .normal)
+        } else {
+            sender.setTitle("Current view: Sets", for: .normal)
+        }
+        //setValueList(num: numOfPresses)
     }
     
-    
+    func buttonBack() {
+        
+        if (numOfPresses == 0) {
+            backButton.setTitle("Current view: Volume", for: .normal)
+        } else if (numOfPresses == 1) {
+            backButton.setTitle("Current view: Load", for: .normal)
+        } else {
+                backButton.setTitle("Current view: Sets", for: .normal)
+        }
+        backButton.setTitleColor(Colors.grey, for: .normal)
+        backButton.backgroundColor = Colors.greens
+        backButton.frame = CGRect(x: view.frame.width / 2 - 150  , y: view.frame.height/9.5, width: 300, height: 36)
+        view.addSubview(backButton)
+        //backButton.layer.borderWidth = 2
+        backButton.layer.cornerRadius = 0
+        backButton.addTarget(self, action: #selector(statAction), for: .touchUpInside)
+    }
 }
