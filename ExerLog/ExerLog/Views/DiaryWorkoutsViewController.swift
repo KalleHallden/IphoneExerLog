@@ -9,96 +9,172 @@
 
 import UIKit
 
-class DiaryWorkoutsViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class DiaryWorkoutsViewController: UIViewController{
     
-    let cellId = "cellid"
-    var viewHeight: Int = 0
-    var myCollectionView: UICollectionView!
-    let layout = UICollectionViewFlowLayout()
+    var workout = Workout()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        viewHeight = Int(view.frame.height) / 2
-        builder()
-        myCollectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
-        myCollectionView?.backgroundColor = Colors.grey
-        myCollectionView?.register(DiaryCell.self, forCellWithReuseIdentifier: cellId)
-        (myCollectionView?.collectionViewLayout as? UICollectionViewFlowLayout)? .scrollDirection = .vertical
-        self.view.addSubview(myCollectionView)
+    private let contentView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false;
+        return view
+    }()
+    private var rows = [[UIButton]]()
+    
+    private let viewScroller: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false;
+        return view
+    }()
+    
+    private var masterStackView: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .vertical
+        stack.spacing = 10
+        stack.distribution = .fillProportionally
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
+    }()
+    
+    private var rowStack: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .vertical
+        stack.spacing = 10
+        stack.distribution = .fillProportionally
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
+    }()
+    
+    private let scrollView: UIScrollView = {
+        let scroll = UIScrollView()
+        scroll.heightAnchor.constraint(equalToConstant: 250).isActive = true
+//        scroll.backgroundColor = .white
+        scroll.translatesAutoresizingMaskIntoConstraints = false
         
+        return scroll
+    }()
+    
+    func statButton(date: String) -> UIButton {
+        let button:UIButton = {
+            let btn = UIButton(type:.system)
+            btn.backgroundColor = Colors.greens
+            btn.setTitle(date, for: .normal)
+            btn.tintColor = Colors.grey
+            btn.layer.cornerRadius = 0
+            btn.translatesAutoresizingMaskIntoConstraints = false
+            return btn
+        }()
+        return button
+    }
+    private var statButt = UIButton()
+    
+    
+    
+    func getButton() -> UIButton {
+        return statButt
     }
     
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+    func autoLayoutConstraint() {
+        print("Yes 2")
+        contentView.widthAnchor.constraint(equalToConstant: view.frame.width).isActive = true
+        contentView.topAnchor.constraint(equalTo:view.topAnchor).isActive = true
+        contentView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         
-        return 5
+        //contentView.heightAnchor.constraint(equalToConstant: view.frame.height/3).isActive = true
+        //contentView.bottomAnchor.constraint(equalTo:view.bottomAnchor).isActive = true
+       contentView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        
+        contentView.backgroundColor = Colors.grey
+        let master = setUpMasterStack()
+        master.backgroundColor = .red
+        contentView.addSubview(master)
+        master.topAnchor.constraint(equalTo: contentView.topAnchor, constant: view.frame.height * 0.12).isActive = true
+        master.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
+        master.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -10).isActive = true
+        master.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 10).isActive = true
     }
     
-    // Amount of bars
-    
-     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return volumeList.count
+    func setUpMasterStack() -> UIStackView {
+        print("Yes 3")
+        var numWorkouts = 0
+        for workout in TabBarViewController.workoutLog.getWorkoutList() {
+            print("Added one yo")
+            let row = createRowOfWorkout(date: workout.getDate())
+            if (numWorkouts != TabBarViewController.workoutLog.getWorkoutList().count) {
+                rowStack.addArrangedSubview(row)
+            }
+            numWorkouts += 1
+        }
+        
+        scrollView.addSubview(rowStack)
+        rowStack.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
+        rowStack.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
+        rowStack.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor).isActive = true
+        rowStack.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
+        rowStack.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor).isActive = true
+        rowStack.rightAnchor.constraint(equalTo: scrollView.rightAnchor).isActive = true
+        rowStack.leftAnchor.constraint(equalTo: scrollView.leftAnchor).isActive = true
+        scrollView.isScrollEnabled = true
+        masterStackView.addArrangedSubview(scrollView)
+        return masterStackView
+    }
+    func setupStackViewHorizontal(stackview: UIStackView) {
+        stackview.alignment = .center
+        stackview.axis = .horizontal
+        stackview.distribution = .fillEqually
+        stackview.spacing = 5
+        stackview.translatesAutoresizingMaskIntoConstraints = false
     }
     
-     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell =  collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! DiaryCell
-        
-        
-//        if let max = volumeList.max() {
-//            let value = volumeList[indexPath.item]
-//            let ratio = value / max
-//            cell.barHeightConstraint?.constant = CGFloat(viewHeight) * ratio
-//            
-//            
-//        }
-        
-        
-        return cell
-        
-    }
-    var workoutLog = TabBarViewController.workoutLog
-    
-    func builder() {
-        setVolumeList()
+    func setUpTextFields(textField: UITextField) {
+        textField.backgroundColor = Colors.greens
+        textField.borderStyle = .none
+        textField.textColor = Colors.grey
+        textField.translatesAutoresizingMaskIntoConstraints = false
     }
     
+    func startWorkout() {
+        print("Yes 1")
+        autoLayoutConstraint()
+    }
     
+    func createRowOfWorkout(date: String) -> UIStackView {
+        let widthRow = (view.frame.width - 100)
+        let stackview = UIStackView()
+        var rowArray = [UIButton]()
+        setupStackViewHorizontal(stackview: stackview)
+        print("yes 4")
+        let button = statButton(date: date)
+        button.setTitle(date, for: .normal)
+        button.widthAnchor.constraint(equalToConstant: widthRow)
+        rowArray.append(button)
+        button.addTarget(self, action: #selector(statAction), for: .touchUpInside)
+        stackview.addArrangedSubview(button)
+        print(stackview.arrangedSubviews.count)
+        rows.append(rowArray)
+        return stackview
+    }
+    // Actions
+    var clickcount = 0
     
-    var volumeList: [CGFloat] = []
-    
-    func setVolumeList() {
-        let workouts = workoutLog.getWorkoutList()
-        for workout in workouts {
-            let vol = CGFloat(workout.getTotalWeight())
-            volumeList.append(vol)
+    @objc func statAction(sender:UIButton!) {
+        let id = TabBarViewController.workoutLog.getWorkoutIdByDate(date: (sender.titleLabel?.text)!)
+        if (id != -1) {
+            print("This is the current workout date: \(TabBarViewController.workoutLog.getSpecificWorkout(id: id).getDate())")
+            print(TabBarViewController.workoutLog.getWorkoutIdByDate(date: (sender.titleLabel?.text)!))
         }
     }
     
-    // Height and Width of bars
+ 
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let thisHeight = view.frame.height
-        let new = (thisHeight * 0.68)
-        
-        return CGSize(width: 30, height: new)
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.addSubview(contentView)
+        startWorkout()
     }
     
-    var backButton = UIButton()
-    
-    func buttonBack() {
-        backButton.setTitle("Back", for: .normal)
-        backButton.setTitleColor(UIColor.black, for: .normal)
-        backButton.backgroundColor = UIColor.white
-        backButton.frame = CGRect(x: view.frame.width/2-50 , y: view.frame.height/8, width: 100, height: 36)
-        view.addSubview(backButton)
-        
-        backButton.layer.borderWidth = 2
-        backButton.layer.cornerRadius = 18
-        
-        
-        
-        
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
     }
     
     

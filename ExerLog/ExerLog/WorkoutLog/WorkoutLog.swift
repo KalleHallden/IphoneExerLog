@@ -27,6 +27,15 @@ class WorkoutLog: NSObject {
         let returnWorkout = self.workoutList[id]
         return returnWorkout
     }
+    
+    func getWorkoutIdByDate(date: String) -> Int {
+        for workout in workoutList {
+            if (workout.getDate() == date) {
+                return workoutList.index(of: workout)!
+            }
+        }
+        return -1
+    }
 }
 
 

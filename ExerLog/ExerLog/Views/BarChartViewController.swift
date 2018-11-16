@@ -15,11 +15,21 @@ class BarChartViewController: UICollectionViewController, UICollectionViewDelega
     
     var values: [CGFloat] = []
     
+    func leftButton() -> UIBarButtonItem {
+        let button:UIBarButtonItem = {
+            let btn = UIBarButtonItem()
+            btn.title = "Whatsup"
+            btn.tintColor = Colors.greens
+            return btn
+        }()
+        return button
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-//        let leftButton = UIBarButtonItem()
-//        leftButton.title = ""
-//        self.navigationController?.navigationBar.topItem?.leftBarButtonItem = leftButton
+        let lBtn = leftButton()
+        self.navigationController?.navigationBar.topItem?.leftBarButtonItem = lBtn
+        self.navigationController?.navigationItem.setRightBarButton(lBtn, animated: true)
 //        let rightButton = UIBarButtonItem()
 //        rightButton.title = ""
 //        self.navigationController?.navigationBar.topItem?.rightBarButtonItem = rightButton
@@ -32,6 +42,10 @@ class BarChartViewController: UICollectionViewController, UICollectionViewDelega
         
         (collectionView?.collectionViewLayout as? UICollectionViewFlowLayout)? .scrollDirection = .horizontal
         
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.collectionView?.reloadData()
     }
     
     func setValueList(num: Int) {
@@ -77,10 +91,12 @@ class BarChartViewController: UICollectionViewController, UICollectionViewDelega
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell =  collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! BarCell
         // cell.barHeightConstraint?.constant = values[indexPath.item]
-        if let max = values.max() {
-            let value = values[indexPath.item]
-            let ratio = value / max
-            cell.barHeightConstraint?.constant = (view.frame.height - 200) * ratio
+        if (values.max() != 0) {
+            if let max = values.max() {
+                let value = values[indexPath.item]
+                let ratio = value / max
+                cell.barHeightConstraint?.constant = (view.frame.height - 200) * ratio
+            }
         }
         return cell
     }

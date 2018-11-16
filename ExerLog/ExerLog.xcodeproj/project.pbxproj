@@ -23,7 +23,6 @@
 		E30C7E92216DF3290037EF2E /* WeightDiaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30C7E91216DF3290037EF2E /* WeightDiaryViewController.swift */; };
 		E30C7E94216DF4280037EF2E /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30C7E93216DF4280037EF2E /* ProfileViewController.swift */; };
 		E30C7E96216E5C2A0037EF2E /* TestChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30C7E95216E5C2A0037EF2E /* TestChartViewController.swift */; };
-		E311AF69219D78DB009742C5 /* BarChartsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E311AF68219D78DB009742C5 /* BarChartsViewController.swift */; };
 		E311AF6C219D795F009742C5 /* BarChartCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E311AF6B219D795F009742C5 /* BarChartCollectionView.swift */; };
 		E3C8B2402181E7430086163C /* colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C8B23F2181E7430086163C /* colors.swift */; };
 		E3C8B2422181EB1F0086163C /* BarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C8B2412181EB1F0086163C /* BarCell.swift */; };
@@ -70,7 +69,6 @@
 		E30C7E91216DF3290037EF2E /* WeightDiaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightDiaryViewController.swift; sourceTree = "<group>"; };
 		E30C7E93216DF4280037EF2E /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		E30C7E95216E5C2A0037EF2E /* TestChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestChartViewController.swift; sourceTree = "<group>"; };
-		E311AF68219D78DB009742C5 /* BarChartsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChartsViewController.swift; sourceTree = "<group>"; };
 		E311AF6B219D795F009742C5 /* BarChartCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChartCollectionView.swift; sourceTree = "<group>"; };
 		E3C8B23F2181E7430086163C /* colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = colors.swift; sourceTree = "<group>"; };
 		E3C8B2412181EB1F0086163C /* BarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarCell.swift; sourceTree = "<group>"; };
@@ -176,7 +174,6 @@
 				E30C7E91216DF3290037EF2E /* WeightDiaryViewController.swift */,
 				E30C7E93216DF4280037EF2E /* ProfileViewController.swift */,
 				E30C7E95216E5C2A0037EF2E /* TestChartViewController.swift */,
-				E311AF68219D78DB009742C5 /* BarChartsViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -322,7 +319,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				E30C7E512168B73E0037EF2E /* AddWorkoutViewController.swift in Sources */,
-				E311AF69219D78DB009742C5 /* BarChartsViewController.swift in Sources */,
 				E3C8B2402181E7430086163C /* colors.swift in Sources */,
 				E30C7E802168B7890037EF2E /* Exercise.swift in Sources */,
 				E30C7E90216DEEC10037EF2E /* TabBarViewController.swift in Sources */,

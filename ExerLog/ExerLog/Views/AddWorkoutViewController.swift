@@ -137,7 +137,7 @@ class AddWorkoutViewController: UIViewController {
         stackview.alignment = .center
         stackview.axis = .horizontal
         stackview.distribution = .fillEqually
-        stackview.spacing = 10
+        stackview.spacing = 5
         stackview.translatesAutoresizingMaskIntoConstraints = false
     }
     
@@ -320,12 +320,15 @@ class AddWorkoutViewController: UIViewController {
     
     func saveWorkout(workout: Workout) {
         print("Hey you")
-        startWorkout()
-        
-        for wout in TabBarViewController.workoutLog.getWorkoutList() {
-            print("reps: \(wout.getTotalReps())")
+        if (workout.getExercises().count != 0 && workout.getTotalReps() != 0) {
+            workout.setDate()
+            startWorkout()
+            
+            for wout in TabBarViewController.workoutLog.getWorkoutList() {
+                print("reps: \(wout.getTotalReps())")
+                print("Date: \(wout.getDate())")
+            }
         }
-        
     }
     
     func saveButton() -> UIBarButtonItem {
