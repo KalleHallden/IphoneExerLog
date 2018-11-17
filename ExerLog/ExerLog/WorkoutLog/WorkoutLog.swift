@@ -19,6 +19,10 @@ class WorkoutLog: NSObject {
         }
     }
     
+    func addWorkout(workout: Workout) {
+            self.workoutList.append(workout)
+    }
+    
     func getWorkoutList() -> [Workout] {
         return self.workoutList
     }

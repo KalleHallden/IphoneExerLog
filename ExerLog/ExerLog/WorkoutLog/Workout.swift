@@ -14,18 +14,25 @@ class Workout: NSObject {
     private var totalSets: Double = 0
     private var totalReps: Double = 0
     private var exerciseList = [Exercise]()
-    private var workoutDate = ""
+    private var workoutDate = Date()
     
     func setDate() {
         let date = Date()
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy/MM/dd HH:mm"
-        let thisDate = formatter.string(from: date)
-        self.workoutDate = thisDate
+        self.workoutDate = date
     }
     
     func getDate() -> String {
-        return self.workoutDate
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy/MM/dd HH:mm"
+        let thisDate = formatter.string(from: self.workoutDate)
+        return thisDate
+    }
+    
+    func getExactDate() -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy/MM/dd HH:mm:ss:m"
+        let thisDate = formatter.string(from: self.workoutDate)
+        return thisDate
     }
     
     func getTotalSets() -> Double{

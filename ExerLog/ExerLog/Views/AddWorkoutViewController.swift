@@ -4,8 +4,7 @@ import UIKit
 
 class AddWorkoutViewController: UIViewController {
     
-    var workout = Workout()
-    
+    var workout: Workout?
     private let contentView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false;
@@ -32,7 +31,7 @@ class AddWorkoutViewController: UIViewController {
         let stack = UIStackView()
         stack.axis = .vertical
         stack.spacing = 10
-        stack.distribution = .fillProportionally
+        stack.distribution = .fillEqually
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
@@ -83,8 +82,10 @@ class AddWorkoutViewController: UIViewController {
     func autoLayoutConstraint() {
         contentView.widthAnchor.constraint(equalToConstant: view.frame.width).isActive = true
         contentView.topAnchor.constraint(equalTo:view.topAnchor).isActive = true
-        contentView.heightAnchor.constraint(equalToConstant: view.frame.height/3).isActive = true
         contentView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        
+        //contentView.heightAnchor.constraint(equalToConstant: view.frame.height/3).isActive = true
+        contentView.bottomAnchor.constraint(equalTo:view.bottomAnchor).isActive = true
         contentView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         contentView.backgroundColor = Colors.grey
         let master = setUpMasterStack()
@@ -149,6 +150,7 @@ class AddWorkoutViewController: UIViewController {
     }
     
     func startWorkout() {
+        workout = Workout()
         for row in rowStack.arrangedSubviews {
             rowStack.removeArrangedSubview(row)
             row.removeFromSuperview()
@@ -159,23 +161,16 @@ class AddWorkoutViewController: UIViewController {
         self.navigationController?.navigationBar.topItem?.leftBarButtonItem = savebutton
         let adderbutton = adderButton()
         self.navigationController?.navigationBar.topItem?.rightBarButtonItem = adderbutton
-        
-        let log = TabBarViewController.workoutLog
-        log.addNewWorkout(numberOfWorkouts: 1)
-        let numWorkouts = log.getWorkoutList().count
-        workout = log.getSpecificWorkout(id: numWorkouts - 1)
-        
-        print("total workouts: \(log.getWorkoutList().count)")
     }
 
 
     func addNewExercise(exerciseNum: Int) {
-        workout.clearExercises()
+        workout!.clearExercises()
         for array in rows {
-            workout.addNewExercise(name: array[0].text!, reps: array[1].text!, sets: array[2].text!, weight: array[3].text!, rest: array[4].text!)
+            workout!.addNewExercise(name: array[0].text!, reps: array[1].text!, sets: array[2].text!, weight: array[3].text!, rest: array[4].text!)
         }
-        print(workout.getExercises().count)
-        print(workout.getTotalReps())
+        print(workout!.getExercises().count)
+        print(workout!.getTotalReps())
     }
     
     var rowCount = 1;
@@ -291,18 +286,18 @@ class AddWorkoutViewController: UIViewController {
     @objc func statAction(sender:UIButton!) {
         if (clickcount == 0) {
             clickcount += 1
-            sender.setTitle("Total Load: \(workout.getTotalWeight())kg", for: .normal)
+            sender.setTitle("Total Load: \(workout!.getTotalWeight())kg", for: .normal)
         } else if (clickcount == 1) {
-            sender.setTitle("Total sets: \(workout.getTotalSets())", for: .normal)
+            sender.setTitle("Total sets: \(workout!.getTotalSets())", for: .normal)
             clickcount += 1
         } else {
-            sender.setTitle("Total Volume: \(workout.getTotalReps())", for: .normal)
+            sender.setTitle("Total Volume: \(workout!.getTotalReps())", for: .normal)
             clickcount = 0
         }
     }
     
     @objc func save() {
-        saveWorkout(workout: workout)
+        saveWorkout(workout: workout!)
     }
     
     @objc func add() {
@@ -310,11 +305,11 @@ class AddWorkoutViewController: UIViewController {
         let button = getButton()
         if (clickcount == 0) {
             print("hello")
-            button.setTitle("Total Volume: \(self.workout.getTotalReps())", for: .normal)
+            button.setTitle("Total Volume: \(self.workout!.getTotalReps())", for: .normal)
         } else if (clickcount == 1) {
-            button.setTitle("Total Load: \(self.workout.getTotalWeight())kg", for: .normal)
+            button.setTitle("Total Load: \(self.workout!.getTotalWeight())kg", for: .normal)
         } else {
-            button.setTitle("Total sets: \(self.workout.getTotalSets())", for: .normal)
+            button.setTitle("Total sets: \(self.workout!.getTotalSets())", for: .normal)
         }
     }
     
@@ -322,6 +317,10 @@ class AddWorkoutViewController: UIViewController {
         print("Hey you")
         if (workout.getExercises().count != 0 && workout.getTotalReps() != 0) {
             workout.setDate()
+            let log = TabBarViewController.workoutLog
+            log.addWorkout(workout: workout)
+
+            print("total workouts: \(log.getWorkoutList().count)")
             startWorkout()
             
             for wout in TabBarViewController.workoutLog.getWorkoutList() {

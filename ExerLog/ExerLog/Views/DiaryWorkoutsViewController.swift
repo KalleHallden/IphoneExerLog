@@ -12,6 +12,14 @@ import UIKit
 class DiaryWorkoutsViewController: UIViewController{
     
     var workout = Workout()
+    private var height = Int()
+    
+    func setHeight(height: Int) {
+        self.height = height
+    }
+    func getHeight() -> Int {
+        return self.height
+    }
     
     private let contentView: UIView = {
         let view = UIView()
@@ -46,7 +54,7 @@ class DiaryWorkoutsViewController: UIViewController{
     
     private let scrollView: UIScrollView = {
         let scroll = UIScrollView()
-        scroll.heightAnchor.constraint(equalToConstant: 250).isActive = true
+        scroll.heightAnchor.constraint(equalToConstant: 400).isActive = true
 //        scroll.backgroundColor = .white
         scroll.translatesAutoresizingMaskIntoConstraints = false
         
@@ -74,7 +82,6 @@ class DiaryWorkoutsViewController: UIViewController{
     }
     
     func autoLayoutConstraint() {
-        print("Yes 2")
         contentView.widthAnchor.constraint(equalToConstant: view.frame.width).isActive = true
         contentView.topAnchor.constraint(equalTo:view.topAnchor).isActive = true
         contentView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
@@ -94,15 +101,19 @@ class DiaryWorkoutsViewController: UIViewController{
     }
     
     func setUpMasterStack() -> UIStackView {
-        print("Yes 3")
-        var numWorkouts = 0
+        var numberOfTotalWorkouts = 0
+        numWorkouts = 1
+        for view in rowStack.arrangedSubviews {
+            rowStack.removeArrangedSubview(view)
+            view.removeFromSuperview()
+        }
         for workout in TabBarViewController.workoutLog.getWorkoutList() {
             print("Added one yo")
             let row = createRowOfWorkout(date: workout.getDate())
-            if (numWorkouts != TabBarViewController.workoutLog.getWorkoutList().count) {
+            if (numberOfTotalWorkouts != TabBarViewController.workoutLog.getWorkoutList().count) {
                 rowStack.addArrangedSubview(row)
             }
-            numWorkouts += 1
+            numberOfTotalWorkouts += 1
         }
         
         scrollView.addSubview(rowStack)
@@ -133,42 +144,52 @@ class DiaryWorkoutsViewController: UIViewController{
     }
     
     func startWorkout() {
-        print("Yes 1")
         autoLayoutConstraint()
     }
-    
+    var numWorkouts = 1
     func createRowOfWorkout(date: String) -> UIStackView {
+        let workoutText = "Workout \(numWorkouts): \(date)"
         let widthRow = (view.frame.width - 100)
         let stackview = UIStackView()
         var rowArray = [UIButton]()
         setupStackViewHorizontal(stackview: stackview)
-        print("yes 4")
-        let button = statButton(date: date)
-        button.setTitle(date, for: .normal)
+        let button = statButton(date: workoutText)
         button.widthAnchor.constraint(equalToConstant: widthRow)
         rowArray.append(button)
         button.addTarget(self, action: #selector(statAction), for: .touchUpInside)
         stackview.addArrangedSubview(button)
-        print(stackview.arrangedSubviews.count)
+        print(workoutText)
         rows.append(rowArray)
+        numWorkouts += 1
         return stackview
     }
     // Actions
     var clickcount = 0
     
     @objc func statAction(sender:UIButton!) {
-        let id = TabBarViewController.workoutLog.getWorkoutIdByDate(date: (sender.titleLabel?.text)!)
-        if (id != -1) {
-            print("This is the current workout date: \(TabBarViewController.workoutLog.getSpecificWorkout(id: id).getDate())")
-            print(TabBarViewController.workoutLog.getWorkoutIdByDate(date: (sender.titleLabel?.text)!))
-        }
+        let num = findWorkoutNum(text: (sender.titleLabel?.text)!)
+        let workout = TabBarViewController.workoutLog.getSpecificWorkout(id: num - 1)
+        print("This is the current workout date: \(workout.getExactDate())")
+        print(workout.getTotalReps())
     }
     
- 
+    func findWorkoutNum(text: String) -> Int {
+        var textArray = text.split(separator: ":")
+        var array2 = textArray[0].split(separator: " ")
+        print(array2[1])
+        let workoutNum = Int(array2[1])
+        return workoutNum!
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.viewDidLoad()
+    }
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setHeight(height: Int(view.frame.height))
         view.addSubview(contentView)
         startWorkout()
     }
