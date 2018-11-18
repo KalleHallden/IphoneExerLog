@@ -21,6 +21,12 @@ class BarCell: UICollectionViewCell {
         
     }()
     
+    override var isSelected: Bool {
+        didSet {
+            print("Highlighted")
+            barView.backgroundColor = isHighlighted ? Colors.darkGreen : Colors.greens
+        }
+    }
     var barHeightConstraint: NSLayoutConstraint?
     
     override init(frame: CGRect) {

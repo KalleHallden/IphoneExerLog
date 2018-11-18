@@ -19,17 +19,17 @@ class TabBarViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
-//        
-//        
-//        TabBarViewController.workoutLog.addNewWorkout(numberOfWorkouts: 2)
-//        let workout1 = TabBarViewController.workoutLog.getSpecificWorkout(id: 0)
-//        let workout2 = TabBarViewController.workoutLog.getSpecificWorkout(id: 1)
-//        
-//        workout1.addNewExercise(name: "Bench", reps: "10", sets: "10", weight: "100", rest: "60")
-//        workout1.addNewExercise(name: "squat", reps: "5", sets: "3", weight: "150", rest: "60")
-//        
-//        workout2.addNewExercise(name: "Bench", reps: "4", sets: "4", weight: "100", rest: "60")
-//        workout2.addNewExercise(name: "squat", reps: "5", sets: "7", weight: "150", rest: "60")
+        
+        
+        TabBarViewController.workoutLog.addNewWorkout(numberOfWorkouts: 2)
+        let workout1 = TabBarViewController.workoutLog.getSpecificWorkout(id: 0)
+        let workout2 = TabBarViewController.workoutLog.getSpecificWorkout(id: 1)
+        
+        workout1.addNewExercise(name: "Bench", reps: "10", sets: "10", weight: "100", rest: "60")
+        workout1.addNewExercise(name: "squat", reps: "5", sets: "3", weight: "150", rest: "60")
+        
+        workout2.addNewExercise(name: "Bench", reps: "4", sets: "4", weight: "100", rest: "60")
+        workout2.addNewExercise(name: "squat", reps: "5", sets: "7", weight: "150", rest: "60")
         
         
         

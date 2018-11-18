@@ -56,7 +56,7 @@ class BarChartViewController: UICollectionViewController, UICollectionViewDelega
                 values.append(CGFloat(workout.getTotalReps()))
                 print(workout.getTotalReps())
             }
-            numOfPresses += 1
+             numOfPresses += 1
         } else if (num == 1) {
             for workout in workoutList {
                 values.append(CGFloat(workout.getTotalWeight()))
@@ -101,10 +101,20 @@ class BarChartViewController: UICollectionViewController, UICollectionViewDelega
         return cell
     }
     
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("selected \(indexPath.item)")
+        barPresed(barNumber: indexPath.item)
+        
+    }
+    
     // Height and Width of bars
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 30, height: view.frame.height * 0.78)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
     }
     
     var backButton = UIButton()
@@ -113,24 +123,74 @@ class BarChartViewController: UICollectionViewController, UICollectionViewDelega
         print(numOfPresses)
         self.collectionView?.reloadData()
         if (numOfPresses == 0) {
-            sender.setTitle("Current view: Volume", for: .normal)
-        } else if (numOfPresses == 1) {
             sender.setTitle("Current view: Load", for: .normal)
-        } else {
+        } else if (numOfPresses == 1) {
             sender.setTitle("Current view: Sets", for: .normal)
+        } else {
+            sender.setTitle("Current view: Volume", for: .normal)
         }
         //setValueList(num: numOfPresses)
     }
     
-    func buttonBack() {
-        
+    func barPresed(barNumber: Int) {
+        let workout = TabBarViewController.workoutLog.getSpecificWorkout(id: barNumber)
+        var typeOfData: String
         if (numOfPresses == 0) {
-            backButton.setTitle("Current view: Volume", for: .normal)
+            typeOfData = "\nLoad: \(workout.getTotalWeight())"
         } else if (numOfPresses == 1) {
-            backButton.setTitle("Current view: Load", for: .normal)
+            typeOfData = "\nSets: \(workout.getTotalSets())"
         } else {
-                backButton.setTitle("Current view: Sets", for: .normal)
+            typeOfData = "\nVolume: \(workout.getTotalReps())"
         }
+        
+        let message = "Workout number \(barNumber + 1) \nDate: \(workout.getDate()) \(typeOfData)"
+        let alert = UIAlertController(title: "Alert", message: message, preferredStyle: UIAlertControllerStyle.alert)
+        
+    // Style of the alert
+        alert.view.subviews.first?.subviews.first?.subviews.first?.backgroundColor = Colors.darkGreen
+        alert.view.tintColor = Colors.darkGrey
+        //alert.setValue(NSAttributedString(string: alert.message!, attributes: [NSAttributedStringKey.font : UIFont.systemFont(ofSize: 12, weight: UIFont.Weight.medium), NSAttributedStringKey.foregroundColor : Colors.darkGrey]), forKey: "attributedTitle")
+        
+        
+        alert.addAction(UIAlertAction(title: "Open", style: .default, handler: { action in
+            switch action.style{
+            case .default:
+                print("default")
+                self.openThatWorkout(workoutnum: barNumber)
+                
+            case .cancel:
+                print("cancel")
+                
+            case .destructive:
+                print("destructive")
+                
+                
+            }}))
+        alert.addAction(UIAlertAction(title: "Done", style: .default, handler: { action in
+            switch action.style{
+            case .default:
+                print("default")
+                
+            case .cancel:
+                print("cancel")
+                
+            case .destructive:
+                print("destructive")
+                
+                
+            }}))
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    
+    func openThatWorkout(workoutnum: Int) {
+        print("opening workout")
+        print(TabBarViewController.workoutLog.getSpecificWorkout(id: workoutnum).getExactDate())
+    }
+    
+    func buttonBack() {
+        backButton.setTitle("Current view: Volume", for: .normal)
         backButton.setTitleColor(Colors.grey, for: .normal)
         backButton.backgroundColor = Colors.greens
         backButton.frame = CGRect(x: view.frame.width / 2 - 150  , y: view.frame.height/9.5, width: 300, height: 36)
