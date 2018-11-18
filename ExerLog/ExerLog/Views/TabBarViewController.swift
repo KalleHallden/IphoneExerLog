@@ -21,21 +21,37 @@ class TabBarViewController: UITabBarController {
         setup()
         
         
-        TabBarViewController.workoutLog.addNewWorkout(numberOfWorkouts: 2)
-        let workout1 = TabBarViewController.workoutLog.getSpecificWorkout(id: 0)
-        let workout2 = TabBarViewController.workoutLog.getSpecificWorkout(id: 1)
-        
-        workout1.addNewExercise(name: "Bench", reps: "10", sets: "10", weight: "100", rest: "60")
-        workout1.addNewExercise(name: "squat", reps: "5", sets: "3", weight: "150", rest: "60")
-        
-        workout2.addNewExercise(name: "Bench", reps: "4", sets: "4", weight: "100", rest: "60")
-        workout2.addNewExercise(name: "squat", reps: "5", sets: "7", weight: "150", rest: "60")
+//        TabBarViewController.workoutLog.addNewWorkout(numberOfWorkouts: 2)
+//        let workout1 = TabBarViewController.workoutLog.getSpecificWorkout(id: 0)
+//        let workout2 = TabBarViewController.workoutLog.getSpecificWorkout(id: 1)
+//
+//        workout1.addNewExercise(name: "Bench", reps: "10", sets: "10", weight: "100", rest: "60")
+//        workout1.addNewExercise(name: "squat", reps: "5", sets: "3", weight: "150", rest: "60")
+//
+//        workout2.addNewExercise(name: "Bench", reps: "4", sets: "4", weight: "100", rest: "60")
+//        workout2.addNewExercise(name: "squat", reps: "5", sets: "7", weight: "150", rest: "60")
         
         
         
         
         
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        doIt()
+    }
+    
+    func doIt() {
+        guard let navigation = navigationController,
+            !(navigation.topViewController === self) else {
+                return
+        }
+        let bar = navigation.navigationBar
+        bar.setNeedsLayout()
+        bar.layoutIfNeeded()
+        bar.setNeedsDisplay()
     }
     
     func setup() {

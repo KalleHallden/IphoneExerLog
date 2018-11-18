@@ -19,6 +19,10 @@ class WorkoutLog: NSObject {
         }
     }
     
+    func removeWorkoutAt(index: Int) {
+        workoutList.remove(at: index)
+    }
+    
     func addWorkout(workout: Workout) {
             self.workoutList.append(workout)
     }

@@ -15,6 +15,15 @@ class Workout: NSObject {
     private var totalReps: Double = 0
     private var exerciseList = [Exercise]()
     private var workoutDate = Date()
+    private var id = -1
+    
+    func setId(num: Int) {
+        self.id = num
+    }
+    
+    func getId() -> Int {
+        return self.id
+    }
     
     func setDate() {
         let date = Date()

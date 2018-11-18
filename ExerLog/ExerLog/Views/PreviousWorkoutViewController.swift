@@ -1,10 +1,26 @@
-
+//
+//  PreviousWorkoutViewController.swift
+//  ExerLog
+//
+//  Created by kalle hålldén on 2018-11-18.
+//  Copyright © 2018 kalle hålldén. All rights reserved.
+//
 
 import UIKit
 
-class AddWorkoutViewController: UIViewController {
+class PreviousWorkoutViewController: UIViewController {
+
+    private static var workout: Workout!
     
-    var workout: Workout?
+    func setWorkout(workout1: Workout) {
+        print("This is the exercises: \(workout1.getExercises().count)")
+        PreviousWorkoutViewController.workout = workout1
+    }
+    
+    func getWorkout() -> Workout {
+        return PreviousWorkoutViewController.workout
+    }
+    
     private let contentView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false;
@@ -43,19 +59,6 @@ class AddWorkoutViewController: UIViewController {
         
         return scroll
     }()
-    
-//    func addButton() -> UIButton {
-//        let button:UIButton = {
-//            let btn = UIButton(type:.system)
-//            btn.backgroundColor = Colors.greens
-//            btn.setTitle("ADD", for: .normal)
-//            btn.tintColor = Colors.grey
-//            btn.layer.cornerRadius = 0
-//            btn.translatesAutoresizingMaskIntoConstraints = false
-//            return btn
-//        }()
-//        return button
-//    }
     
     func statButton() -> UIButton {
         let button:UIButton = {
@@ -96,27 +99,80 @@ class AddWorkoutViewController: UIViewController {
         master.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 10).isActive = true
     }
     
-    func setUpMasterStack() -> UIStackView {
+    
+    func addButton() -> UIButton {
+        let button:UIButton = {
+            let btn = UIButton(type:.system)
+            btn.backgroundColor = Colors.grey
+            btn.tintColor = Colors.greens
+            btn.layer.cornerRadius = 0
+            btn.translatesAutoresizingMaskIntoConstraints = false
+            return btn
+        }()
+        return button
+    }
+    
+    private var topStack: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .horizontal
+        stack.spacing = 10
+        stack.distribution = .fillEqually
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
+    }()
+    
+    func topRow() -> UIStackView {
+        let stack = topStack
         
-        var num = 0
-        for subview in masterStackView.arrangedSubviews {
-            masterStackView.removeArrangedSubview(subview)
-            subview.removeFromSuperview()
-            num += 1
-            print("This is num: \(num)")
-        }
+        let back = addButton()
+        let save = addButton()
+        let delete = addButton()
+        let add = addButton()
+        
+        add.setTitle("add", for: .normal)
+        add.addTarget(self, action: #selector(addAction), for: .touchUpInside)
+        back.setTitle("back", for: .normal)
+        back.addTarget(self, action: #selector(backAction), for: .touchUpInside)
+        save.setTitle("Save", for: .normal)
+        save.addTarget(self, action: #selector(saveAction), for: .touchUpInside)
+        delete.setTitle("delete", for: .normal)
+        delete.addTarget(self, action: #selector(deleteAction), for: .touchUpInside)
+        
+        
+        stack.addArrangedSubview(back)
+        stack.addArrangedSubview(save)
+        stack.addArrangedSubview(add)
+        stack.addArrangedSubview(delete)
+        
+        return stack
+    }
+    
+    func setUpMasterStack() -> UIStackView {
+//
+//        var num = 0
+//        for subview in masterStackView.arrangedSubviews {
+//            masterStackView.removeArrangedSubview(subview)
+//            subview.removeFromSuperview()
+//            num += 1
+//            print("This is num: \(num)")
+//        }
         
         setStatBut()
         let statbutton = getButton()
         statbutton.addTarget(self, action: #selector(statAction), for: .touchUpInside)
         
+        let top = topRow()
+        masterStackView.addArrangedSubview(top)
         masterStackView.addArrangedSubview(statbutton)
         
         let labelRow = createRowOfLabels()
         masterStackView.addArrangedSubview(labelRow)
         
-        let row = createRowOfTextFields()
-        rowStack.addArrangedSubview(row)
+        print(getWorkout().getExercises().count)
+        for exercise in getWorkout().getExercises() {
+            let row = setUpRowOfTextFields(exercise: exercise)
+            rowStack.addArrangedSubview(row)
+        }
         scrollView.addSubview(rowStack)
         rowStack.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
         rowStack.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
@@ -143,34 +199,74 @@ class AddWorkoutViewController: UIViewController {
     }
     
     func setUpTextFields(textField: UITextField) {
+        print("We are in")
         textField.backgroundColor = Colors.greens
         textField.borderStyle = .none
         textField.textColor = Colors.grey
         textField.translatesAutoresizingMaskIntoConstraints = false
     }
     
+    func setUpRowOfTextFields(exercise: Exercise) -> UIStackView {
+        let widtdthTextField = (view.frame.width - 100) / 5
+        let stackview = UIStackView()
+        let stackview2 = UIStackView()
+        let stackview3 = UIStackView()
+        var textFieldArray = [UITextField]()
+        
+        let textfield1 = textfieldMaker()
+        textfield1.widthAnchor.constraint(equalToConstant: 100)
+        textFieldArray.append(textfield1)
+        textfield1.text = exercise.getName()
+        for num in 1...4 {
+            let textField = textfieldMaker()
+            
+            if (num < 3) {
+                stackview2.addArrangedSubview(textField)
+                if (num == 1) {
+                    textField.text = String(exercise.getReps())
+                } else if (num == 2) {
+                    textField.text = String(exercise.getSets())
+                }
+            } else {
+                stackview3.addArrangedSubview(textField)
+                if (num == 3) {
+                    textField.text = String(exercise.getWeight())
+                } else if (num == 4) {
+                    textField.text = String(exercise.getRest())
+                }
+            }
+            textFieldArray.append(textField)
+            textField.widthAnchor.constraint(equalToConstant: widtdthTextField)
+        }
+        setupStackViewHorizontal(stackview: stackview2)
+        setupStackViewHorizontal(stackview: stackview3)
+        setupStackViewHorizontal(stackview: stackview)
+        
+        stackview.addArrangedSubview(textfield1)
+        stackview.addArrangedSubview(stackview2)
+        stackview.addArrangedSubview(stackview3)
+        rows.append(textFieldArray)
+        
+        return stackview
+    }
+    
     func startWorkout() {
-        workout = Workout()
         for row in rowStack.arrangedSubviews {
             rowStack.removeArrangedSubview(row)
             row.removeFromSuperview()
         }
         rows.removeAll()
         autoLayoutConstraint()
-        let savebutton = saveButton()
-        self.navigationController?.navigationBar.topItem?.leftBarButtonItem = savebutton
-        let adderbutton = adderButton()
-        self.navigationController?.navigationBar.topItem?.rightBarButtonItem = adderbutton
     }
-
-
+    
+    
     func addNewExercise(exerciseNum: Int) {
-        workout!.clearExercises()
+        getWorkout().clearExercises()
         for array in rows {
-            workout!.addNewExercise(name: array[0].text!, reps: array[1].text!, sets: array[2].text!, weight: array[3].text!, rest: array[4].text!)
+            getWorkout().addNewExercise(name: array[0].text!, reps: array[1].text!, sets: array[2].text!, weight: array[3].text!, rest: array[4].text!)
         }
-        print(workout!.getExercises().count)
-        print(workout!.getTotalReps())
+        print(getWorkout().getExercises().count)
+        print(getWorkout().getTotalReps())
     }
     
     var rowCount = 1;
@@ -209,12 +305,12 @@ class AddWorkoutViewController: UIViewController {
         for num in 1...4 {
             let textField = textfieldMaker()
             if (num < 3) {
-               stackview2.addArrangedSubview(textField)
+                stackview2.addArrangedSubview(textField)
             } else {
                 stackview3.addArrangedSubview(textField)
             }
             textFieldArray.append(textField)
-                textField.widthAnchor.constraint(equalToConstant: widtdthTextField)
+            textField.widthAnchor.constraint(equalToConstant: widtdthTextField)
         }
         setupStackViewHorizontal(stackview: stackview2)
         setupStackViewHorizontal(stackview: stackview3)
@@ -268,62 +364,78 @@ class AddWorkoutViewController: UIViewController {
     
     // Actions
     var clickcount = 0
-   
-    //Code for the add button below the rows of exercises
-//    @objc func action(sender:UIButton!) {
-//        addRow()
-//        let button = getButton()
-//        if (clickcount == 0) {
-//            print("hello")
-//            button.setTitle("Total Volume: \(self.workout.getTotalReps())", for: .normal)
-//        } else if (clickcount == 1) {
-//            button.setTitle("Total Load: \(self.workout.getTotalWeight())kg", for: .normal)
-//        } else {
-//            button.setTitle("Total sets: \(self.workout.getTotalSets())", for: .normal)
-//        }
-//    }
+    
+   // Code for the add button below the rows of exercises
+    @objc func addAction(sender:UIButton!) {
+            addRow()
+            changeStatLabel(button: getButton())
+    }
+    
+    @objc func backAction(sender:UIButton!) {
+        regSegue()
+    }
+    
+    @objc func saveAction(sender:UIButton!) {
+        saveWorkout(workout: getWorkout())
+        regSegue()
+    }
+    
+    @objc func deleteAction(sender:UIButton!) {
+        deleteWorkout(workout1: getWorkout())
+    }
+    
+    func deleteWorkout(workout1: Workout) {
+        let log = TabBarViewController.workoutLog
+        log.removeWorkoutAt(index: workout1.getId()-1)
+        regSegue()
+    }
+    
+    func regSegue(){
+        let page = NavigationViewController()
+        present(page, animated: true, completion: nil)
+    }
+    
+
+    
+    func changeStatLabel(button: UIButton) {
+        //let button = getButton()
+        if (clickcount == 0) {
+            print("hello")
+            button.setTitle("Total Volume: \(getWorkout().getTotalReps())", for: .normal)
+        } else if (clickcount == 1) {
+            button.setTitle("Total Load: \(getWorkout().getTotalWeight())kg", for: .normal)
+        } else {
+            button.setTitle("Total sets: \(getWorkout().getTotalSets())", for: .normal)
+        }
+    }
     
     @objc func statAction(sender:UIButton!) {
         if (clickcount == 0) {
             clickcount += 1
-            sender.setTitle("Total Load: \(workout!.getTotalWeight())kg", for: .normal)
+            sender.setTitle("Total Load: \(getWorkout().getTotalWeight())kg", for: .normal)
         } else if (clickcount == 1) {
-            sender.setTitle("Total sets: \(workout!.getTotalSets())", for: .normal)
+            sender.setTitle("Total sets: \(getWorkout().getTotalSets())", for: .normal)
             clickcount += 1
         } else {
-            sender.setTitle("Total Volume: \(workout!.getTotalReps())", for: .normal)
+            sender.setTitle("Total Volume: \(getWorkout().getTotalReps())", for: .normal)
             clickcount = 0
         }
     }
     
     @objc func save() {
-        saveWorkout(workout: workout!)
+        saveWorkout(workout: getWorkout())
     }
     
     @objc func add() {
         addRow()
-        let button = getButton()
-        if (clickcount == 0) {
-            print("hello")
-            button.setTitle("Total Volume: \(self.workout!.getTotalReps())", for: .normal)
-        } else if (clickcount == 1) {
-            button.setTitle("Total Load: \(self.workout!.getTotalWeight())kg", for: .normal)
-        } else {
-            button.setTitle("Total sets: \(self.workout!.getTotalSets())", for: .normal)
-        }
+        changeStatLabel(button: getButton())
     }
     
     func saveWorkout(workout: Workout) {
         print("Hey you")
         if (workout.getExercises().count != 0 && workout.getTotalReps() != 0) {
-            workout.setDate()
-            workout.setId(num: TabBarViewController.workoutLog.getWorkoutList().count + 1)
             let log = TabBarViewController.workoutLog
-            log.addWorkout(workout: workout)
-
             print("total workouts: \(log.getWorkoutList().count)")
-            startWorkout()
-            
             for wout in TabBarViewController.workoutLog.getWorkoutList() {
                 print("reps: \(wout.getTotalReps())")
                 print("Date: \(wout.getDate())")
@@ -359,13 +471,16 @@ class AddWorkoutViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(contentView)
+        self.navigationItem.title = "Date: \(getWorkout().getDate())"
+        let textAttributes = [NSAttributedStringKey.foregroundColor: Colors.greens]
+        navigationController?.navigationBar.titleTextAttributes = textAttributes
         startWorkout()
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-
-
+    
+    
 }
 

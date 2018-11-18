@@ -103,6 +103,10 @@ class DiaryWorkoutsViewController: UIViewController{
     func setUpMasterStack() -> UIStackView {
         var numberOfTotalWorkouts = 0
         numWorkouts = 1
+        for view in scrollView.subviews {
+            scrollView.willRemoveSubview(view)
+            view.removeFromSuperview()
+        }
         for view in rowStack.arrangedSubviews {
             rowStack.removeArrangedSubview(view)
             view.removeFromSuperview()
@@ -171,6 +175,13 @@ class DiaryWorkoutsViewController: UIViewController{
         let workout = TabBarViewController.workoutLog.getSpecificWorkout(id: num - 1)
         print("This is the current workout date: \(workout.getExactDate())")
         print(workout.getTotalReps())
+        regSegue(workout1: workout)
+    }
+    
+    func regSegue(workout1: Workout){
+        let page = NavigationPreviousWorkoutViewController()
+        page.setWorkout(workout1: workout1)
+        present(page, animated: true, completion: nil)
     }
     
     func findWorkoutNum(text: String) -> Int {

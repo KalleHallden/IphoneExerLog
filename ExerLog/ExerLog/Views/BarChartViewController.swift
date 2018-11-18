@@ -51,29 +51,22 @@ class BarChartViewController: UICollectionViewController, UICollectionViewDelega
     func setValueList(num: Int) {
         values.removeAll()
         let workoutList = TabBarViewController.workoutLog.getWorkoutList()
-        if (num == 0) {
+        if (num == 2) {
             for workout in workoutList {
                 values.append(CGFloat(workout.getTotalReps()))
                 print(workout.getTotalReps())
             }
-             numOfPresses += 1
         } else if (num == 1) {
-            for workout in workoutList {
-                values.append(CGFloat(workout.getTotalWeight()))
-                print(workout.getTotalWeight())
-            }
-            numOfPresses += 1
-        } else {
             for workout in workoutList {
                 values.append(CGFloat(workout.getTotalSets()))
                 print(workout.getTotalSets())
             }
-            numOfPresses = 0
+        } else {
+            for workout in workoutList {
+                values.append(CGFloat(workout.getTotalWeight()))
+                print(workout.getTotalWeight())
+            }
         }
-        
-//        if (values.count == 0) {
-//            values = [1, 3, 5, 6, 10, 4, 23, 3, 6]
-//        }
     }
     
     
@@ -82,9 +75,9 @@ class BarChartViewController: UICollectionViewController, UICollectionViewDelega
     }
     
     // Amount of bars
-    var numOfPresses = 0
+    static var numOfPresses = 0
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        setValueList(num: numOfPresses)
+        setValueList(num: getNumberOfClicks())
         return values.count
     }
     
@@ -120,11 +113,11 @@ class BarChartViewController: UICollectionViewController, UICollectionViewDelega
     var backButton = UIButton()
 //
     @objc func statAction(sender:UIButton!) {
-        print(numOfPresses)
+        pressed()
         self.collectionView?.reloadData()
-        if (numOfPresses == 0) {
+        if (getNumberOfClicks() == 0) {
             sender.setTitle("Current view: Load", for: .normal)
-        } else if (numOfPresses == 1) {
+        } else if (getNumberOfClicks() == 1) {
             sender.setTitle("Current view: Sets", for: .normal)
         } else {
             sender.setTitle("Current view: Volume", for: .normal)
@@ -135,9 +128,9 @@ class BarChartViewController: UICollectionViewController, UICollectionViewDelega
     func barPresed(barNumber: Int) {
         let workout = TabBarViewController.workoutLog.getSpecificWorkout(id: barNumber)
         var typeOfData: String
-        if (numOfPresses == 0) {
+        if (getNumberOfClicks() == 0) {
             typeOfData = "\nLoad: \(workout.getTotalWeight())"
-        } else if (numOfPresses == 1) {
+        } else if (getNumberOfClicks() == 1) {
             typeOfData = "\nSets: \(workout.getTotalSets())"
         } else {
             typeOfData = "\nVolume: \(workout.getTotalReps())"
@@ -183,14 +176,42 @@ class BarChartViewController: UICollectionViewController, UICollectionViewDelega
         self.present(alert, animated: true, completion: nil)
     }
     
+    func pressed() {
+        print("Current number of presses: \(BarChartViewController.numOfPresses)")
+        if (BarChartViewController.numOfPresses == 0) {
+            BarChartViewController.numOfPresses = 1
+        } else if (BarChartViewController.numOfPresses == 1) {
+            BarChartViewController.numOfPresses = 2
+        } else if (BarChartViewController.numOfPresses == 2) {
+            BarChartViewController.numOfPresses = 0
+        }
+    }
+    
+    func getNumberOfClicks() -> Int {
+        return BarChartViewController.numOfPresses
+    }
     
     func openThatWorkout(workoutnum: Int) {
         print("opening workout")
         print(TabBarViewController.workoutLog.getSpecificWorkout(id: workoutnum).getExactDate())
+        let workouts = TabBarViewController.workoutLog.getSpecificWorkout(id: workoutnum)
+        regSegue(workout1: workouts)
+    }
+    func regSegue(workout1: Workout){
+        let page = NavigationPreviousWorkoutViewController()
+        page.setWorkout(workout1: workout1)
+        present(page, animated: true, completion: nil)
     }
     
     func buttonBack() {
-        backButton.setTitle("Current view: Volume", for: .normal)
+        if (getNumberOfClicks() == 1) {
+            backButton.setTitle("Current view: Volume", for: .normal)
+            print("We are here now")
+        } else if (getNumberOfClicks() == 0) {
+            backButton.setTitle("Current view: Load", for: .normal)
+        } else {
+            backButton.setTitle("Current view: Sets", for: .normal)
+        }
         backButton.setTitleColor(Colors.grey, for: .normal)
         backButton.backgroundColor = Colors.greens
         backButton.frame = CGRect(x: view.frame.width / 2 - 150  , y: view.frame.height/9.5, width: 300, height: 36)

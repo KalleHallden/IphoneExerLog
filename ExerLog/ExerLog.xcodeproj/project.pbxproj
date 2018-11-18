@@ -24,6 +24,9 @@
 		E30C7E94216DF4280037EF2E /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30C7E93216DF4280037EF2E /* ProfileViewController.swift */; };
 		E30C7E96216E5C2A0037EF2E /* TestChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30C7E95216E5C2A0037EF2E /* TestChartViewController.swift */; };
 		E311AF6C219D795F009742C5 /* BarChartCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E311AF6B219D795F009742C5 /* BarChartCollectionView.swift */; };
+		E379591B21A176DF00F4396E /* PreviousWorkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E379591A21A176DF00F4396E /* PreviousWorkoutViewController.swift */; };
+		E379591D21A187E100F4396E /* NavigationPreviousWorkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E379591C21A187E100F4396E /* NavigationPreviousWorkoutViewController.swift */; };
+		E379591F21A1899700F4396E /* NavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E379591E21A1899700F4396E /* NavigationViewController.swift */; };
 		E3C8B2402181E7430086163C /* colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C8B23F2181E7430086163C /* colors.swift */; };
 		E3C8B2422181EB1F0086163C /* BarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C8B2412181EB1F0086163C /* BarCell.swift */; };
 		E3C8B2442181EB5B0086163C /* BarChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C8B2432181EB5B0086163C /* BarChartViewController.swift */; };
@@ -70,6 +73,9 @@
 		E30C7E93216DF4280037EF2E /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		E30C7E95216E5C2A0037EF2E /* TestChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestChartViewController.swift; sourceTree = "<group>"; };
 		E311AF6B219D795F009742C5 /* BarChartCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChartCollectionView.swift; sourceTree = "<group>"; };
+		E379591A21A176DF00F4396E /* PreviousWorkoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviousWorkoutViewController.swift; sourceTree = "<group>"; };
+		E379591C21A187E100F4396E /* NavigationPreviousWorkoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationPreviousWorkoutViewController.swift; sourceTree = "<group>"; };
+		E379591E21A1899700F4396E /* NavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationViewController.swift; sourceTree = "<group>"; };
 		E3C8B23F2181E7430086163C /* colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = colors.swift; sourceTree = "<group>"; };
 		E3C8B2412181EB1F0086163C /* BarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarCell.swift; sourceTree = "<group>"; };
 		E3C8B2432181EB5B0086163C /* BarChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChartViewController.swift; sourceTree = "<group>"; };
@@ -174,6 +180,9 @@
 				E30C7E91216DF3290037EF2E /* WeightDiaryViewController.swift */,
 				E30C7E93216DF4280037EF2E /* ProfileViewController.swift */,
 				E30C7E95216E5C2A0037EF2E /* TestChartViewController.swift */,
+				E379591A21A176DF00F4396E /* PreviousWorkoutViewController.swift */,
+				E379591C21A187E100F4396E /* NavigationPreviousWorkoutViewController.swift */,
+				E379591E21A1899700F4396E /* NavigationViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -323,8 +332,10 @@
 				E30C7E802168B7890037EF2E /* Exercise.swift in Sources */,
 				E30C7E90216DEEC10037EF2E /* TabBarViewController.swift in Sources */,
 				E30C7E8C2169DF320037EF2E /* DiaryCell.swift in Sources */,
+				E379591D21A187E100F4396E /* NavigationPreviousWorkoutViewController.swift in Sources */,
 				E30C7E852168BEB00037EF2E /* WorkoutLog.swift in Sources */,
 				E30C7E4F2168B73E0037EF2E /* AppDelegate.swift in Sources */,
+				E379591F21A1899700F4396E /* NavigationViewController.swift in Sources */,
 				E30C7E832168BA4C0037EF2E /* Workout.swift in Sources */,
 				E30C7E8E2169E0690037EF2E /* DiaryWorkoutsViewController.swift in Sources */,
 				E30C7E94216DF4280037EF2E /* ProfileViewController.swift in Sources */,
@@ -332,6 +343,7 @@
 				E3C8B2422181EB1F0086163C /* BarCell.swift in Sources */,
 				E3C8B2442181EB5B0086163C /* BarChartViewController.swift in Sources */,
 				E30C7E92216DF3290037EF2E /* WeightDiaryViewController.swift in Sources */,
+				E379591B21A176DF00F4396E /* PreviousWorkoutViewController.swift in Sources */,
 				E311AF6C219D795F009742C5 /* BarChartCollectionView.swift in Sources */,
 				E30C7E572168B73E0037EF2E /* ExerLog.xcdatamodeld in Sources */,
 			);
