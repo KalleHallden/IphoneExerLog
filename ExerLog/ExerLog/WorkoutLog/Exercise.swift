@@ -8,7 +8,27 @@
 
 import Foundation
 
-class Exercise: NSObject {
+class Exercise: NSObject, Codable {
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(name, forKey: "name")
+        aCoder.encode(reps, forKey: "reps")
+        aCoder.encode(sets, forKey: "sets")
+        aCoder.encode(weight, forKey: "weight")
+        aCoder.encode(rest, forKey: "rest")
+    }
+    
+    required convenience init?(coder aDecoder: NSCoder) {
+        guard let name = aDecoder.decodeObject(forKey: "name") as? String,
+        let reps = aDecoder.decodeObject(forKey: "reps") as? Double,
+        let sets = aDecoder.decodeObject(forKey: "sets") as? Double,
+        let weight = aDecoder.decodeObject(forKey: "weight") as? Double,
+        let rest = aDecoder.decodeObject(forKey: "rest") as? Double
+        else {
+            return nil
+        }
+        self.init(names: name, repss: reps, setss: sets, weights: weight, rests: rest)
+    }
+    
     
     private var name: String?
     private var reps: Double?

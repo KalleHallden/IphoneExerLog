@@ -10,30 +10,20 @@ import UIKit
 
 class TabBarViewController: UITabBarController {
 
-    public static let workoutLog = WorkoutLog()
+    public static var workoutLog = WorkoutLog()
     let statImage = #imageLiteral(resourceName: "statIcon")
     let addImage = #imageLiteral(resourceName: "addIcon")
     let diaryImage = #imageLiteral(resourceName: "diaryIcon")
     let weightImage = #imageLiteral(resourceName: "weightIcon")
+    var path: String = ""
+    
+    let log: WorkoutLog = TabBarViewController.workoutLog
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        path = fileInDocumentsDirectory(filename: "/workoutLst.json")
         setup()
-        
-        
-//        TabBarViewController.workoutLog.addNewWorkout(numberOfWorkouts: 2)
-//        let workout1 = TabBarViewController.workoutLog.getSpecificWorkout(id: 0)
-//        let workout2 = TabBarViewController.workoutLog.getSpecificWorkout(id: 1)
-//
-//        workout1.addNewExercise(name: "Bench", reps: "10", sets: "10", weight: "100", rest: "60")
-//        workout1.addNewExercise(name: "squat", reps: "5", sets: "3", weight: "150", rest: "60")
-//
-//        workout2.addNewExercise(name: "Bench", reps: "4", sets: "4", weight: "100", rest: "60")
-//        workout2.addNewExercise(name: "squat", reps: "5", sets: "7", weight: "150", rest: "60")
-        
-        
-        
-        
+        load()
         
         // Do any additional setup after loading the view.
     }
@@ -84,5 +74,82 @@ class TabBarViewController: UITabBarController {
         
 
     }
+    
+    func setWorkoutList(log: WorkoutLog) {
+        TabBarViewController.workoutLog = log
+    }
+    
+    func getFile() -> String? {
+        print(TabBarViewController.workoutLog.getWorkoutList().count)
+        let encodedObject = try? JSONEncoder().encode(TabBarViewController.workoutLog)
+        if let encodedObjectJsonString = String(data: encodedObject!, encoding: .utf8)
+        {
+            print(encodedObjectJsonString)
+            return encodedObjectJsonString
+        }
+        return "nope"
+    }
+    
+    func load() {
+        var workoutLog: WorkoutLog?
+        let jsondata = find()
+        if let jsonData = jsondata.data(using: .utf8)
+        {
+            //And here you get the Car object back
+            print("Här")
+            workoutLog = try? JSONDecoder().decode(WorkoutLog.self, from: jsonData)
+        } else {
+            print("Nej!")
+            workoutLog = WorkoutLog()
+        }
+        TabBarViewController.workoutLog = workoutLog ?? TabBarViewController.workoutLog
+    }
+
+    func documentstDirectory() -> String {
+        let documentsFolderPath = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)[0] as String
+        return documentsFolderPath
+    }
+    func fileInDocumentsDirectory(filename: String) -> String {
+        return documentstDirectory().appending(filename)
+    }
+
+    func deleteOldFile() {
+        let fileManager = FileManager.default
+        
+        do {
+            try fileManager.removeItem(atPath: path)
+            print("YESSSS")
+        }
+        catch let error as NSError {
+            print("Ooops! Something went wrong: \(error)")
+        }
+    }
+    
+    func saveMe() {
+        print("Save \(path)")
+        
+        
+        
+        let filetosave = getFile()
+        
+        
+            var success = false
+            success = NSKeyedArchiver.archiveRootObject(filetosave, toFile: path)
+            if (success) {
+                print("Saved successfully")
+            } else {
+                print("Not able to save")
+            }
+    }
+
+    func find() -> String {
+        if let returnString = NSKeyedUnarchiver.unarchiveObject(withFile: path) as? String  {
+            print("Yes..")
+            return returnString
+        } else {
+            return "no"
+        }
+    }
 
 }
+

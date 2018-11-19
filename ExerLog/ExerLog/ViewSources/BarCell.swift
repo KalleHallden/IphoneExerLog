@@ -51,10 +51,24 @@ class BarCell: UICollectionViewCell {
         
         
     }
-    
+    var hasbeen = false
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
         
+    }
+    
+    func setBackgroundColor(hasBeenPressed: Bool) {
+        if (hasBeenPressed) {
+            if (hasbeen) {
+                barView.backgroundColor = Colors.greens
+                hasbeen = false
+            } else {
+                barView.backgroundColor = Colors.darkGreen
+                hasbeen = true
+            }
+        } else {
+            barView.backgroundColor = Colors.greens
+        }
     }
     
     

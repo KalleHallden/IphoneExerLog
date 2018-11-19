@@ -27,6 +27,8 @@
 		E379591B21A176DF00F4396E /* PreviousWorkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E379591A21A176DF00F4396E /* PreviousWorkoutViewController.swift */; };
 		E379591D21A187E100F4396E /* NavigationPreviousWorkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E379591C21A187E100F4396E /* NavigationPreviousWorkoutViewController.swift */; };
 		E379591F21A1899700F4396E /* NavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E379591E21A1899700F4396E /* NavigationViewController.swift */; };
+		E379592121A1B31500F4396E /* HideKeyBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = E379592021A1B31500F4396E /* HideKeyBoard.swift */; };
+		E379592521A2FDC000F4396E /* Saver.swift in Sources */ = {isa = PBXBuildFile; fileRef = E379592421A2FDC000F4396E /* Saver.swift */; };
 		E3C8B2402181E7430086163C /* colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C8B23F2181E7430086163C /* colors.swift */; };
 		E3C8B2422181EB1F0086163C /* BarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C8B2412181EB1F0086163C /* BarCell.swift */; };
 		E3C8B2442181EB5B0086163C /* BarChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C8B2432181EB5B0086163C /* BarChartViewController.swift */; };
@@ -76,6 +78,8 @@
 		E379591A21A176DF00F4396E /* PreviousWorkoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviousWorkoutViewController.swift; sourceTree = "<group>"; };
 		E379591C21A187E100F4396E /* NavigationPreviousWorkoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationPreviousWorkoutViewController.swift; sourceTree = "<group>"; };
 		E379591E21A1899700F4396E /* NavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationViewController.swift; sourceTree = "<group>"; };
+		E379592021A1B31500F4396E /* HideKeyBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideKeyBoard.swift; sourceTree = "<group>"; };
+		E379592421A2FDC000F4396E /* Saver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Saver.swift; sourceTree = "<group>"; };
 		E3C8B23F2181E7430086163C /* colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = colors.swift; sourceTree = "<group>"; };
 		E3C8B2412181EB1F0086163C /* BarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarCell.swift; sourceTree = "<group>"; };
 		E3C8B2432181EB5B0086163C /* BarChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChartViewController.swift; sourceTree = "<group>"; };
@@ -183,6 +187,7 @@
 				E379591A21A176DF00F4396E /* PreviousWorkoutViewController.swift */,
 				E379591C21A187E100F4396E /* NavigationPreviousWorkoutViewController.swift */,
 				E379591E21A1899700F4396E /* NavigationViewController.swift */,
+				E379592421A2FDC000F4396E /* Saver.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -193,6 +198,7 @@
 				E30C7E8B2169DF320037EF2E /* DiaryCell.swift */,
 				E3C8B2412181EB1F0086163C /* BarCell.swift */,
 				E311AF6B219D795F009742C5 /* BarChartCollectionView.swift */,
+				E379592021A1B31500F4396E /* HideKeyBoard.swift */,
 			);
 			path = ViewSources;
 			sourceTree = "<group>";
@@ -327,6 +333,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E379592121A1B31500F4396E /* HideKeyBoard.swift in Sources */,
 				E30C7E512168B73E0037EF2E /* AddWorkoutViewController.swift in Sources */,
 				E3C8B2402181E7430086163C /* colors.swift in Sources */,
 				E30C7E802168B7890037EF2E /* Exercise.swift in Sources */,
@@ -346,6 +353,7 @@
 				E379591B21A176DF00F4396E /* PreviousWorkoutViewController.swift in Sources */,
 				E311AF6C219D795F009742C5 /* BarChartCollectionView.swift in Sources */,
 				E30C7E572168B73E0037EF2E /* ExerLog.xcdatamodeld in Sources */,
+				E379592521A2FDC000F4396E /* Saver.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

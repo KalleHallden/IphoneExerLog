@@ -208,6 +208,7 @@ class AddWorkoutViewController: UIViewController {
         textFieldArray.append(textfield)
         for num in 1...4 {
             let textField = textfieldMaker()
+            textField.textAlignment = .center
             if (num < 3) {
                stackview2.addArrangedSubview(textField)
             } else {
@@ -297,7 +298,25 @@ class AddWorkoutViewController: UIViewController {
     }
     
     @objc func save() {
+        let tab = TabBarViewController()
+        tab.deleteOldFile()
+        workout!.clearExercises()
+        for array in rows {
+            if (!checkIfEmpty(array: array)) {
+                workout!.addNewExercise(name: array[0].text!, reps: array[1].text!, sets: array[2].text!, weight: array[3].text!, rest: array[4].text!)
+            }
+        }
         saveWorkout(workout: workout!)
+    }
+    
+    
+    func checkIfEmpty(array: [UITextField]) -> Bool {
+        for field in array {
+            if (!field.text!.isEmpty) {
+                return false
+            }
+        }
+        return true
     }
     
     @objc func add() {
@@ -322,6 +341,8 @@ class AddWorkoutViewController: UIViewController {
             log.addWorkout(workout: workout)
 
             print("total workouts: \(log.getWorkoutList().count)")
+            let tab = TabBarViewController()
+            tab.saveMe()
             startWorkout()
             
             for wout in TabBarViewController.workoutLog.getWorkoutList() {
@@ -335,7 +356,7 @@ class AddWorkoutViewController: UIViewController {
         let button:UIBarButtonItem = {
             let btn = UIBarButtonItem()
             btn.title = "Save"
-            btn.tintColor = Colors.greens
+            btn.tintColor = Colors.darkGreen
             btn.action = #selector(self.save)
             btn.target = self
             return btn
@@ -348,7 +369,7 @@ class AddWorkoutViewController: UIViewController {
             let btn = UIBarButtonItem()
             btn.title = "add"
             //btn.image = #imageLiteral(resourceName: "addIcon")
-            btn.tintColor = Colors.greens
+            btn.tintColor = Colors.darkGreen
             btn.action = #selector(self.add)
             btn.target = self
             return btn
@@ -358,6 +379,7 @@ class AddWorkoutViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        hideKeyboardWhenTappedAround()
         view.addSubview(contentView)
         startWorkout()
     }

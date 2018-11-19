@@ -8,7 +8,40 @@
 
 import Foundation
 
-class Workout: NSObject {
+class Workout: NSObject, Codable {
+    
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(totalReps, forKey: "totReps")
+        aCoder.encode(totalSets, forKey: "totSets")
+        aCoder.encode(weightVolume, forKey: "weightVol")
+        aCoder.encodeConditionalObject(exerciseList, forKey: "exerciseLst")
+        aCoder.encodeConditionalObject(workoutDate, forKey: "date")
+        aCoder.encode(id, forKey: "theId")
+    }
+    
+    required convenience init?(coder aDecoder: NSCoder) {
+        guard let weightVol = aDecoder.decodeObject(forKey: "weightVol") as? Double,
+        let totSets = aDecoder.decodeObject(forKey: "totSets") as? Double,
+        let totReps = aDecoder.decodeObject(forKey: "totReps") as? Double,
+        let exerciseLst = aDecoder.decodeObject(forKey: "exerciseLst") as? [Exercise],
+        let date = aDecoder.decodeObject(forKey: "date") as? Date,
+        let theId = aDecoder.decodeObject(forKey: "theId") as? Int else {
+            return nil
+        }
+        self.init(weightVol: weightVol, totReps: totReps, totSets: totSets, exerciseLst: exerciseLst, theDate: date, theID: theId)
+    }
+    
+    init(weightVol:Double, totReps:Double, totSets: Double, exerciseLst: [Exercise], theDate: Date, theID: Int ) {
+        self.weightVolume = weightVol
+        self.totalSets = totSets
+        self.totalReps = totReps
+        self.exerciseList = exerciseLst
+        self.workoutDate = theDate
+        self.id = theID
+    }
+    
+    override init() { }
+    
     
     private var weightVolume: Double = 0.0
     private var totalSets: Double = 0

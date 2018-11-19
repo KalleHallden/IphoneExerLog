@@ -103,10 +103,20 @@ class PreviousWorkoutViewController: UIViewController {
     func addButton() -> UIButton {
         let button:UIButton = {
             let btn = UIButton(type:.system)
-            btn.backgroundColor = Colors.grey
-            btn.tintColor = Colors.greens
-            btn.layer.cornerRadius = 0
+            btn.backgroundColor = Colors.blacks
+            btn.tintColor = Colors.grey
+            btn.layer.cornerRadius = 15
             btn.translatesAutoresizingMaskIntoConstraints = false
+            return btn
+        }()
+        return button
+    }
+    
+    func barButton() -> UIBarButtonItem {
+        let button:UIBarButtonItem = {
+            let btn = UIBarButtonItem()
+            btn.tintColor = Colors.greens
+            btn.target = self
             return btn
         }()
         return button
@@ -125,24 +135,26 @@ class PreviousWorkoutViewController: UIViewController {
         let stack = topStack
         
         let back = addButton()
-        let save = addButton()
-        let delete = addButton()
         let add = addButton()
         
+        let save = barButton()
+        let delete = barButton()
+        
+        self.navigationController?.navigationBar.topItem?.leftBarButtonItem = save
+        let adderbutton = adderButton()
+        self.navigationController?.navigationBar.topItem?.rightBarButtonItem = delete
         add.setTitle("add", for: .normal)
         add.addTarget(self, action: #selector(addAction), for: .touchUpInside)
         back.setTitle("back", for: .normal)
         back.addTarget(self, action: #selector(backAction), for: .touchUpInside)
-        save.setTitle("Save", for: .normal)
-        save.addTarget(self, action: #selector(saveAction), for: .touchUpInside)
-        delete.setTitle("delete", for: .normal)
-        delete.addTarget(self, action: #selector(deleteAction), for: .touchUpInside)
+        save.title = "Save"
+        save.action = #selector(self.saveAction)
+        delete.title = "Delete"
+        delete.action = #selector(self.deleteAction)
         
         
         stack.addArrangedSubview(back)
-        stack.addArrangedSubview(save)
         stack.addArrangedSubview(add)
-        stack.addArrangedSubview(delete)
         
         return stack
     }
@@ -219,6 +231,7 @@ class PreviousWorkoutViewController: UIViewController {
         textfield1.text = exercise.getName()
         for num in 1...4 {
             let textField = textfieldMaker()
+            textField.textAlignment = .center
             
             if (num < 3) {
                 stackview2.addArrangedSubview(textField)
@@ -375,18 +388,38 @@ class PreviousWorkoutViewController: UIViewController {
         regSegue()
     }
     
-    @objc func saveAction(sender:UIButton!) {
+ @objc func saveAction()  {
+        getWorkout().clearExercises()
+        for array in rows {
+            if (!checkIfEmpty(array: array)) {
+                getWorkout().addNewExercise(name: array[0].text!, reps: array[1].text!, sets: array[2].text!, weight: array[3].text!, rest: array[4].text!)
+            }
+        }
         saveWorkout(workout: getWorkout())
         regSegue()
     }
     
-    @objc func deleteAction(sender:UIButton!) {
+    func checkIfEmpty(array: [UITextField]) -> Bool {
+        for field in array {
+                if (!field.text!.isEmpty) {
+                    return false
+                }
+        }
+        return true
+    }
+    
+    @objc func deleteAction() {
         deleteWorkout(workout1: getWorkout())
+
     }
     
     func deleteWorkout(workout1: Workout) {
         let log = TabBarViewController.workoutLog
         log.removeWorkoutAt(index: workout1.getId()-1)
+        let tab = TabBarViewController()
+        tab.deleteOldFile()
+        tab.setWorkoutList(log: log)
+        tab.saveMe()
         regSegue()
     }
     
@@ -423,6 +456,8 @@ class PreviousWorkoutViewController: UIViewController {
     }
     
     @objc func save() {
+        let tab = TabBarViewController()
+        tab.deleteOldFile()
         saveWorkout(workout: getWorkout())
     }
     
@@ -436,6 +471,11 @@ class PreviousWorkoutViewController: UIViewController {
         if (workout.getExercises().count != 0 && workout.getTotalReps() != 0) {
             let log = TabBarViewController.workoutLog
             print("total workouts: \(log.getWorkoutList().count)")
+            let tab = TabBarViewController()
+            tab.deleteOldFile()
+            tab.setWorkoutList(log: log)
+            tab.saveMe()
+            
             for wout in TabBarViewController.workoutLog.getWorkoutList() {
                 print("reps: \(wout.getTotalReps())")
                 print("Date: \(wout.getDate())")
@@ -470,6 +510,7 @@ class PreviousWorkoutViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        hideKeyboardWhenTappedAround()
         view.addSubview(contentView)
         self.navigationItem.title = "Date: \(getWorkout().getDate())"
         let textAttributes = [NSAttributedStringKey.foregroundColor: Colors.greens]

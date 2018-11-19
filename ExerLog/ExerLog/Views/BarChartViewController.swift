@@ -67,8 +67,9 @@ class BarChartViewController: UICollectionViewController, UICollectionViewDelega
                 print(workout.getTotalWeight())
             }
         }
+        values.reverse()
+        
     }
-    
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 5
@@ -84,6 +85,7 @@ class BarChartViewController: UICollectionViewController, UICollectionViewDelega
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell =  collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! BarCell
         // cell.barHeightConstraint?.constant = values[indexPath.item]
+        
         if (values.max() != 0) {
             if let max = values.max() {
                 let value = values[indexPath.item]
@@ -96,9 +98,26 @@ class BarChartViewController: UICollectionViewController, UICollectionViewDelega
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("selected \(indexPath.item)")
-        barPresed(barNumber: indexPath.item)
         
+        let cell = collectionView.cellForItem(at: indexPath) as? BarCell
+        cell?.setBackgroundColor(hasBeenPressed: true)
+        if (!(cell?.hasbeen)!) {
+            print("Has been pressed")
+        } else {
+            barPresed(barNumber: indexPath.item)
+        }
+        
+        //collectionView.reloadData()
     }
+    
+//    override func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
+//        let cell = collectionView.cellForItem(at: indexPath) as? BarCell
+//        cell?.setBackgroundColor(hasBeenPressed: true)
+//    }
+//    override func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+//        let cell = collectionView.cellForItem(at: indexPath) as? BarCell
+//        cell?.setBackgroundColor(hasBeenPressed: true)
+//    }
     
     // Height and Width of bars
     
