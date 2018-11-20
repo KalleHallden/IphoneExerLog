@@ -70,10 +70,10 @@ class BarCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
         
     }
-    
     func setBackgroundColor(hasBeenPressed: Bool) {
         if (hasBeenPressed) {
             if (hasbeen) {
+                print("Hi")
                 barView.backgroundColor = Colors.greens
                 UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut, animations: {
                     self.transform = CGAffineTransform(scaleX: 1, y: 1)
@@ -82,7 +82,7 @@ class BarCell: UICollectionViewCell {
             } else {
                 barView.backgroundColor = Colors.darkGreen
                     UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut, animations: {
-                        self.transform = CGAffineTransform(scaleX: 1.5, y: 1)
+                        self.transform = CGAffineTransform(scaleX: 1.8, y: 1)
                     }, completion: nil)
                 hasbeen = true
             }

@@ -140,7 +140,6 @@ class PreviousWorkoutViewController: UIViewController {
         let delete = barButton()
         
         self.navigationController?.navigationBar.topItem?.leftBarButtonItem = save
-        let adderbutton = adderButton()
         self.navigationController?.navigationBar.topItem?.rightBarButtonItem = delete
         add.setTitle("add", for: .normal)
         add.addTarget(self, action: #selector(addAction), for: .touchUpInside)
@@ -454,6 +453,9 @@ class PreviousWorkoutViewController: UIViewController {
     @objc func save() {
         let tab = TabBarViewController()
         tab.deleteOldFile()
+        let bar = BarChartViewController()
+        bar.setFresh(hasbeenLaunched: false)
+        bar.setDiaryLaunch(hasbeenLaunched: true)
         saveWorkout(workout: getWorkout())
     }
     

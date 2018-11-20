@@ -49,14 +49,10 @@ class TabBarViewController: UITabBarController {
         let statViewController = BarChartViewController(collectionViewLayout: UICollectionViewFlowLayout())
         let diaryViewController = DiaryWorkoutsViewController()
         let addWorkoutViewController = AddWorkoutViewController()
-        let weightDiaryViewController = WeightDiaryViewController()
-        let profileViewController = ProfileViewController()
         
         statViewController.tabBarItem = UITabBarItem(tabBarSystemItem: .search, tag: 0)
-        profileViewController.tabBarItem = UITabBarItem(tabBarSystemItem: .search, tag: 1)
         addWorkoutViewController.tabBarItem = UITabBarItem(tabBarSystemItem: .search, tag: 2)
         diaryViewController.tabBarItem = UITabBarItem(tabBarSystemItem: .search, tag: 3)
-        weightDiaryViewController.tabBarItem = UITabBarItem(tabBarSystemItem: .search, tag: 4)
         
         //let tabBarList = [statViewController, profileViewController, addWorkoutViewController, diaryViewController, weightDiaryViewController]
         
@@ -66,14 +62,16 @@ class TabBarViewController: UITabBarController {
         viewControllers = tabBarList
         self.tabBar.barTintColor = Colors.blacks
         self.tabBar.unselectedItemTintColor = Colors.greens
+        
+        
         //self.tabBarItem.image = UIImage.init(cgImage: #imageLiteral(resourceName: "statIcon"))
         statViewController.tabBarItem = UITabBarItem.init(title: nil, image: statImage, tag: 0)
         addWorkoutViewController.tabBarItem = UITabBarItem.init(title: nil, image: addImage, tag: 2)
         diaryViewController.tabBarItem = UITabBarItem.init(title: nil, image: diaryImage, tag: 3)
-        weightDiaryViewController.tabBarItem = UITabBarItem.init(title: nil, image: weightImage, tag: 4)
         
 
     }
+    
     
     func setWorkoutList(log: WorkoutLog) {
         TabBarViewController.workoutLog = log
@@ -150,6 +148,7 @@ class TabBarViewController: UITabBarController {
             return "no"
         }
     }
-
+    
+    
 }
 

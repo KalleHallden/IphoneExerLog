@@ -1,5 +1,5 @@
 //
-//  NavigationViewController.swift
+//  NavControllerDiary.swift
 //  ExerLog
 //
 //  Created by kalle hålldén on 2018-11-20.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NavigationViewController: UINavigationController {
+class NavControllerDiary: UINavigationController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -16,9 +16,10 @@ class NavigationViewController: UINavigationController {
     }
     
     func setUp() {
-        let newWorkout = TabBarViewController()
+        let newWorkout = DiaryWorkoutsViewController()
         let tabBarList = [newWorkout]
         viewControllers = tabBarList
+
         
     }
     

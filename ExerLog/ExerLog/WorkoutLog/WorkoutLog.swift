@@ -46,7 +46,7 @@ class WorkoutLog: NSObject, Codable {
     }
     
     func removeWorkoutAt(index: Int) {
-        workoutList.remove(at: index)
+        self.workoutList.remove(at: index)
     }
     
     func addWorkout(workout: Workout) {

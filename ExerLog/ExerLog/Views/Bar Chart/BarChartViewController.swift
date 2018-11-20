@@ -27,9 +27,10 @@ class BarChartViewController: UICollectionViewController, UICollectionViewDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let lBtn = leftButton()
-        self.navigationController?.navigationBar.topItem?.leftBarButtonItem = lBtn
-        self.navigationController?.navigationItem.setRightBarButton(lBtn, animated: true)
+//        let tab = TabBarViewController()
+        //tab.setIsWorkoutController(isWorkout: false)
+//        let lBtn = leftButton()
+        //self.navigationController?.navigationItem.setRightBarButton(lBtn, animated: true)
 //        let rightButton = UIBarButtonItem()
 //        rightButton.title = ""
 //        self.navigationController?.navigationBar.topItem?.rightBarButtonItem = rightButton
@@ -43,14 +44,33 @@ class BarChartViewController: UICollectionViewController, UICollectionViewDelega
         (collectionView?.collectionViewLayout as? UICollectionViewFlowLayout)? .scrollDirection = .horizontal
         
     }
+    static var freshLaunch = true
+    static var diaryLaunch = false
+    
+    func setFresh(hasbeenLaunched: Bool) {
+        BarChartViewController.freshLaunch = hasbeenLaunched
+    }
+    func setDiaryLaunch(hasbeenLaunched: Bool) {
+        BarChartViewController.diaryLaunch = hasbeenLaunched
+    }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.collectionView?.reloadData()
+        if BarChartViewController.freshLaunch == true {
+            BarChartViewController.freshLaunch = false
+            self.tabBarController?.selectedIndex = 1 // 5th tab
+        }
+        if (BarChartViewController.diaryLaunch == true) {
+             BarChartViewController.diaryLaunch = false
+            self.tabBarController?.selectedIndex = 3
+        }
     }
+    
     
     func setValueList(num: Int) {
         values.removeAll()
         let workoutList = TabBarViewController.workoutLog.getWorkoutList()
+       // workoutList.reversed()
         if (num == 2) {
             for workout in workoutList {
                 values.append(CGFloat(workout.getTotalReps()))
@@ -67,7 +87,7 @@ class BarChartViewController: UICollectionViewController, UICollectionViewDelega
                 print(workout.getTotalWeight())
             }
         }
-        values.reverse()
+        //values.reverse()
         
     }
     
@@ -104,7 +124,7 @@ class BarChartViewController: UICollectionViewController, UICollectionViewDelega
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("selected \(indexPath.item)")
-        
+
         let cell = collectionView.cellForItem(at: indexPath) as? BarCell
         cell?.setBackgroundColor(hasBeenPressed: true)
         if (!(cell?.hasbeen)!) {
@@ -113,17 +133,7 @@ class BarChartViewController: UICollectionViewController, UICollectionViewDelega
             barPresed(barNumber: indexPath.item)
         }
         //collectionView.reloadData()
-    }
-    
-//    override func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
-//        let cell = collectionView.cellForItem(at: indexPath) as? BarCell
-//        cell?.setBackgroundColor(hasBeenPressed: true)
-//    }
-//    override func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-//        let cell = collectionView.cellForItem(at: indexPath) as? BarCell
-//        cell?.setBackgroundColor(hasBeenPressed: true)
-//    }
-    
+    }    
     // Height and Width of bars
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -151,6 +161,7 @@ class BarChartViewController: UICollectionViewController, UICollectionViewDelega
     
     func barPresed(barNumber: Int) {
         let workout = TabBarViewController.workoutLog.getSpecificWorkout(id: barNumber)
+        print("These are the sets \(workout.getTotalSets())")
         var typeOfData: String
         if (getNumberOfClicks() == 0) {
             typeOfData = "\nLoad: \(workout.getTotalWeight())"

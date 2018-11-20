@@ -201,9 +201,12 @@ class DiaryWorkoutsViewController: UIViewController{
 
     override func viewDidLoad() {
         super.viewDidLoad()
+//        let tab = TabBarViewController()
+        //tab.setIsWorkoutController(isWorkout: false)
         setHeight(height: Int(view.frame.height))
         view.addSubview(contentView)
         startWorkout()
+        self.navigationController?.navigationBar.backItem?.leftBarButtonItem = UIBarButtonItem(title: "Hej", style: .plain, target: self, action: nil)
     }
     
     override func didReceiveMemoryWarning() {

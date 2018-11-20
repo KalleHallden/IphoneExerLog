@@ -149,6 +149,16 @@ class AddWorkoutViewController: UIViewController {
         textField.textColor = Colors.grey
         textField.translatesAutoresizingMaskIntoConstraints = false
     }
+
+    func barButton() -> UIBarButtonItem {
+        let button:UIBarButtonItem = {
+            let btn = UIBarButtonItem()
+            btn.tintColor = Colors.greens
+            btn.target = self
+            return btn
+        }()
+        return button
+    }
     
     func startWorkout() {
         workout = Workout()
@@ -158,10 +168,14 @@ class AddWorkoutViewController: UIViewController {
         }
         rows.removeAll()
         autoLayoutConstraint()
-        let savebutton = saveButton()
+        let savebutton = barButton()
+        savebutton.title = "Save"
         self.navigationController?.navigationBar.topItem?.leftBarButtonItem = savebutton
-        let adderbutton = adderButton()
+        savebutton.action = #selector(save)
+        let adderbutton = barButton()
+        adderbutton.title = "add"
         self.navigationController?.navigationBar.topItem?.rightBarButtonItem = adderbutton
+        adderbutton.action = #selector(add)
     }
 
 
@@ -380,6 +394,8 @@ class AddWorkoutViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+//        let tab = TabBarViewController()
+        //tab.setIsWorkoutController(isWorkout: false)
         hideKeyboardWhenTappedAround()
         view.addSubview(contentView)
         startWorkout()
