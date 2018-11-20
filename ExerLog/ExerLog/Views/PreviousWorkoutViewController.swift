@@ -134,7 +134,6 @@ class PreviousWorkoutViewController: UIViewController {
     func topRow() -> UIStackView {
         let stack = topStack
         
-        let back = addButton()
         let add = addButton()
         
         let save = barButton()
@@ -145,15 +144,11 @@ class PreviousWorkoutViewController: UIViewController {
         self.navigationController?.navigationBar.topItem?.rightBarButtonItem = delete
         add.setTitle("add", for: .normal)
         add.addTarget(self, action: #selector(addAction), for: .touchUpInside)
-        back.setTitle("back", for: .normal)
-        back.addTarget(self, action: #selector(backAction), for: .touchUpInside)
-        save.title = "Save"
+        save.title = "Done"
         save.action = #selector(self.saveAction)
         delete.title = "Delete"
         delete.action = #selector(self.deleteAction)
-        
-        
-        stack.addArrangedSubview(back)
+    
         stack.addArrangedSubview(add)
         
         return stack
@@ -293,6 +288,7 @@ class PreviousWorkoutViewController: UIViewController {
     func textfieldMaker() -> UITextField {
         let thisTextField: UITextField = {
             let txtField = UITextField()
+            txtField.heightAnchor.constraint(equalToConstant: 25).isActive = true
             setUpTextFields(textField: txtField)
             txtField.translatesAutoresizingMaskIntoConstraints = false
             

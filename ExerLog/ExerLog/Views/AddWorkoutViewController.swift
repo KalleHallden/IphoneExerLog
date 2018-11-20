@@ -145,6 +145,7 @@ class AddWorkoutViewController: UIViewController {
     func setUpTextFields(textField: UITextField) {
         textField.backgroundColor = Colors.greens
         textField.borderStyle = .none
+        textField.heightAnchor.constraint(equalToConstant: 25).isActive = true
         textField.textColor = Colors.grey
         textField.translatesAutoresizingMaskIntoConstraints = false
     }

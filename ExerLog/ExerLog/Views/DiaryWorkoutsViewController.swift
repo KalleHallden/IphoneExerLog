@@ -160,6 +160,7 @@ class DiaryWorkoutsViewController: UIViewController{
         let button = statButton(date: workoutText)
         button.widthAnchor.constraint(equalToConstant: widthRow)
         rowArray.append(button)
+        button.heightAnchor.constraint(equalToConstant: 45).isActive = true
         button.addTarget(self, action: #selector(statAction), for: .touchUpInside)
         stackview.addArrangedSubview(button)
         print(workoutText)
