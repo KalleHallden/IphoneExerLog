@@ -90,9 +90,15 @@ class BarChartViewController: UICollectionViewController, UICollectionViewDelega
             if let max = values.max() {
                 let value = values[indexPath.item]
                 let ratio = value / max
-                cell.barHeightConstraint?.constant = (view.frame.height - 200) * ratio
+                let height = (view.frame.height - 200) * ratio
+                cell.barHeightConstraint?.constant = height
+                cell.barHeightAnimation(viewHeight: Int(view.frame.height))
+                cell.barHeightAnimation(viewHeight: Int(view.frame.height))
+
+                
             }
         }
+        
         return cell
     }
     
@@ -106,7 +112,6 @@ class BarChartViewController: UICollectionViewController, UICollectionViewDelega
         } else {
             barPresed(barNumber: indexPath.item)
         }
-        
         //collectionView.reloadData()
     }
     

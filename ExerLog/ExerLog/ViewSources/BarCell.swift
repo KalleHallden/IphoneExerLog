@@ -25,6 +25,10 @@ class BarCell: UICollectionViewCell {
         didSet {
             print("Highlighted")
             barView.backgroundColor = isHighlighted ? Colors.darkGreen : Colors.greens
+            UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut, animations: {
+                self.transform = CGAffineTransform(scaleX: 1, y: 1)
+            }, completion: nil)
+
         }
     }
     var barHeightConstraint: NSLayoutConstraint?
@@ -51,6 +55,16 @@ class BarCell: UICollectionViewCell {
         
         
     }
+    var barHeightAnimationShouldHappen = false
+    func barHeightAnimation(viewHeight: Int) {
+        UIView.animate(withDuration: 0.3, delay: 0, animations: {
+            self.transform = CGAffineTransform(translationX: 0, y: CGFloat(viewHeight))
+        }) { (finished) in
+            UIView.animate(withDuration: 0.5, delay: 0.3, animations: {
+                self.transform = CGAffineTransform.identity
+            })
+        }
+    }
     var hasbeen = false
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -61,12 +75,21 @@ class BarCell: UICollectionViewCell {
         if (hasBeenPressed) {
             if (hasbeen) {
                 barView.backgroundColor = Colors.greens
+                UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut, animations: {
+                    self.transform = CGAffineTransform(scaleX: 1, y: 1)
+                }, completion: nil)
                 hasbeen = false
             } else {
                 barView.backgroundColor = Colors.darkGreen
+                    UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut, animations: {
+                        self.transform = CGAffineTransform(scaleX: 1.5, y: 1)
+                    }, completion: nil)
                 hasbeen = true
             }
         } else {
+            UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut, animations: {
+                self.transform = CGAffineTransform(scaleX: 1, y: 1)
+            }, completion: nil)
             barView.backgroundColor = Colors.greens
         }
     }
