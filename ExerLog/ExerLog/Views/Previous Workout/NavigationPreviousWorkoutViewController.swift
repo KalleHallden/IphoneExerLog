@@ -21,6 +21,8 @@ class NavigationPreviousWorkoutViewController: UINavigationController {
     }
         override func viewDidLoad() {
             super.viewDidLoad()
+            let color = Colors()
+            color.setColors()
             setup()
         }
     

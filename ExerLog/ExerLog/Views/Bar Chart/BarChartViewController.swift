@@ -160,7 +160,7 @@ class BarChartViewController: UICollectionViewController, UICollectionViewDelega
         let colors = Colors()
         clicks += 1
         print("Clicks: \(clicks)" )
-        if (clicks == 2) {
+        if (clicks == 20) {
             if (TabBarViewController.workoutLog.getTheme()) {
                 TabBarViewController.workoutLog.setTheme(themeHasBeenSet: false)
                 print("Setting theme dark")

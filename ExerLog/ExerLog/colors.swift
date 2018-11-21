@@ -16,6 +16,7 @@ class Colors: UIColor {
     static var blacks: UIColor?
     static var darkGrey: UIColor?
     static var darkGreen: UIColor?
+    static var lightBlue: UIColor?
     
     
     func setColors() {
@@ -26,7 +27,9 @@ class Colors: UIColor {
             Colors.greens = UIColor(red:0.04, green:0.50, blue:0.99, alpha:1.0)
             Colors.darkGrey = UIColor.white
             Colors.blacks = UIColor.white
-            Colors.darkGreen = UIColor(red:0.01, green:0.33, blue:0.09, alpha:1.0)
+            Colors.darkGreen = UIColor(red:0.16, green:0.36, blue:1.00, alpha:1.0)
+            Colors.lightBlue = UIColor(red:0.59, green:0.93, blue:0.99, alpha:1.0)
+            
         } else {
             print("Dark theme")
             Colors.grey = UIColor(red:0.16, green:0.16, blue:0.18, alpha:1.0)

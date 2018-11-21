@@ -103,8 +103,13 @@ class PreviousWorkoutViewController: UIViewController {
     func addButton() -> UIButton {
         let button:UIButton = {
             let btn = UIButton(type:.system)
-            btn.backgroundColor = Colors.darkGrey
-            btn.tintColor = Colors.darkGreen
+            if (TabBarViewController.workoutLog.getTheme()) {
+                btn.backgroundColor = Colors.darkGreen
+                btn.tintColor = Colors.blacks
+            } else {
+                btn.backgroundColor = Colors.darkGrey
+                btn.tintColor = Colors.darkGreen
+            }
             btn.layer.cornerRadius = 15
             btn.heightAnchor.constraint(equalToConstant: 50).isActive = true
             btn.translatesAutoresizingMaskIntoConstraints = false
@@ -515,7 +520,7 @@ class PreviousWorkoutViewController: UIViewController {
         hideKeyboardWhenTappedAround()
         view.addSubview(contentView)
         self.navigationItem.title = "Date: \(getWorkout().getDate())"
-        let textAttributes = [NSAttributedStringKey.foregroundColor: Colors.greens]
+        let textAttributes = [NSAttributedStringKey.foregroundColor: Colors.darkGreen]
         navigationController?.navigationBar.titleTextAttributes = textAttributes
         startWorkout()
     }

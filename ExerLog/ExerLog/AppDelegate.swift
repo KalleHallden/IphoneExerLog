@@ -24,6 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.makeKeyAndVisible()
         if (TabBarViewController.workoutLog.getTheme()) {
             UINavigationBar.appearance().barTintColor = .white
+            UITabBar.appearance().tintColor = .black
             let color = Colors()
             color.setColors()
     
@@ -31,6 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().barTintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
             let color = Colors()
             color.setColors()
+            UITabBar.appearance().tintColor = Colors.grey
         }
         UIApplication.shared.statusBarStyle = .lightContent
         return true
