@@ -19,7 +19,6 @@ class NavControllerBarChart: UINavigationController {
         let newWorkout = BarChartViewController(collectionViewLayout: UICollectionViewFlowLayout())
         let tabBarList = [newWorkout]
         viewControllers = tabBarList
-        self.navigationBar.barTintColor = .black
         
     }
     

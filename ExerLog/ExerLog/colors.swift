@@ -10,19 +10,33 @@ import Foundation
 import UIKit
 
 class Colors: UIColor {
-    static let grey = UIColor(red:0.16, green:0.16, blue:0.18, alpha:1.0)
-    static let greens = UIColor(red:0.00, green:0.75, blue:0.10, alpha:1.0)
-    static let whites = UIColor.white
-    static let blacks = UIColor.black
-    static let darkGrey = UIColor(red:0.04, green:0.04, blue:0.04, alpha:1.0)
-    static let darkGreen = UIColor(red:0.01, green:0.33, blue:0.09, alpha:1.0)
+    static var grey: UIColor?
+    static var greens: UIColor?
+    static var whites: UIColor?
+    static var blacks: UIColor?
+    static var darkGrey: UIColor?
+    static var darkGreen: UIColor?
     
-//    static let grey = UIColor.white
-//    static let whites = UIColor.black
-//    static let greens = UIColor(red:0.04, green:0.50, blue:0.99, alpha:1.0)
-//    static let darkGrey = UIColor.white
-//    static let blacks = UIColor.white
-//    static let darkGreen = UIColor(red:0.01, green:0.33, blue:0.09, alpha:1.0)
+    
+    func setColors() {
+        if (TabBarViewController.workoutLog.getTheme()) {
+            print("Light theme")
+            Colors.grey = UIColor.white
+            Colors.whites = UIColor.black
+            Colors.greens = UIColor(red:0.04, green:0.50, blue:0.99, alpha:1.0)
+            Colors.darkGrey = UIColor.white
+            Colors.blacks = UIColor.white
+            Colors.darkGreen = UIColor(red:0.01, green:0.33, blue:0.09, alpha:1.0)
+        } else {
+            print("Dark theme")
+            Colors.grey = UIColor(red:0.16, green:0.16, blue:0.18, alpha:1.0)
+            Colors.greens = UIColor(red:0.00, green:0.75, blue:0.10, alpha:1.0)
+            Colors.whites = UIColor.white
+            Colors.blacks = UIColor.black
+            Colors.darkGrey = UIColor(red:0.04, green:0.04, blue:0.04, alpha:1.0)
+            Colors.darkGreen = UIColor(red:0.01, green:0.33, blue:0.09, alpha:1.0)
+        }
+    }
 }
 
 

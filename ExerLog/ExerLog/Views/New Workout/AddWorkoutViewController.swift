@@ -168,14 +168,6 @@ class AddWorkoutViewController: UIViewController {
         }
         rows.removeAll()
         autoLayoutConstraint()
-        let savebutton = barButton()
-        savebutton.title = "Save"
-        self.navigationController?.navigationBar.topItem?.leftBarButtonItem = savebutton
-        savebutton.action = #selector(save)
-        let adderbutton = barButton()
-        adderbutton.title = "add"
-        self.navigationController?.navigationBar.topItem?.rightBarButtonItem = adderbutton
-        adderbutton.action = #selector(add)
     }
 
 
@@ -405,6 +397,23 @@ class AddWorkoutViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+
+        
+        
+        let font = UIFont.systemFont(ofSize: 32);
+        
+        let savebutton = barButton()
+        savebutton.title = "Save"
+        self.navigationController?.navigationBar.topItem?.leftBarButtonItem = savebutton
+        savebutton.action = #selector(save)
+        let adderbutton = barButton()
+        adderbutton.title = "+"
+        adderbutton.setTitleTextAttributes([NSAttributedStringKey.font: font], for: .normal)
+        self.navigationController?.navigationBar.topItem?.rightBarButtonItem = adderbutton
+        adderbutton.action = #selector(add)
+        self.viewDidLoad()
+    }
 
 }
 

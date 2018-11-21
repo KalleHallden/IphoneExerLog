@@ -195,6 +195,8 @@ class DiaryWorkoutsViewController: UIViewController{
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.tabBarController?.navigationItem.leftBarButtonItem = nil
+        self.tabBarController?.navigationItem.rightBarButtonItem = nil
         self.viewDidLoad()
     }
     
@@ -206,7 +208,6 @@ class DiaryWorkoutsViewController: UIViewController{
         setHeight(height: Int(view.frame.height))
         view.addSubview(contentView)
         startWorkout()
-        self.navigationController?.navigationBar.backItem?.leftBarButtonItem = UIBarButtonItem(title: "Hej", style: .plain, target: self, action: nil)
     }
     
     override func didReceiveMemoryWarning() {

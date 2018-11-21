@@ -35,8 +35,9 @@ class BarCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
-        
+//        
+//        let color = Colors()
+//        color.setColors()
         addSubview(barView)
         
         //barView.topAnchor.constraint(equalTo: topAnchor).isActive = true
@@ -71,6 +72,8 @@ class BarCell: UICollectionViewCell {
         
     }
     func setBackgroundColor(hasBeenPressed: Bool) {
+//        let color = Colors()
+//        color.setColors()
         if (hasBeenPressed) {
             if (hasbeen) {
                 print("Hi")

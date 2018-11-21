@@ -30,19 +30,20 @@ class TabBarViewController: UITabBarController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        doIt()
+        self.viewDidLoad()
+//        doIt()
     }
     
-    func doIt() {
-        guard let navigation = navigationController,
-            !(navigation.topViewController === self) else {
-                return
-        }
-        let bar = navigation.navigationBar
-        bar.setNeedsLayout()
-        bar.layoutIfNeeded()
-        bar.setNeedsDisplay()
-    }
+//    func doIt() {
+//        guard let navigation = navigationController,
+//            !(navigation.topViewController === self) else {
+//                return
+//        }
+//        let bar = navigation.navigationBar
+//        bar.setNeedsLayout()
+//        bar.layoutIfNeeded()
+//        bar.setNeedsDisplay()
+//    }
     
     func setup() {
         

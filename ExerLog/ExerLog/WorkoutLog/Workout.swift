@@ -58,6 +58,7 @@ class Workout: NSObject, Codable {
         return self.id
     }
     
+    
     func setDate() {
         let date = Date()
         self.workoutDate = date

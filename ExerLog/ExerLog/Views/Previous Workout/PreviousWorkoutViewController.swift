@@ -103,9 +103,10 @@ class PreviousWorkoutViewController: UIViewController {
     func addButton() -> UIButton {
         let button:UIButton = {
             let btn = UIButton(type:.system)
-            btn.backgroundColor = Colors.blacks
-            btn.tintColor = Colors.grey
+            btn.backgroundColor = Colors.darkGrey
+            btn.tintColor = Colors.darkGreen
             btn.layer.cornerRadius = 15
+            btn.heightAnchor.constraint(equalToConstant: 50).isActive = true
             btn.translatesAutoresizingMaskIntoConstraints = false
             return btn
         }()
@@ -132,8 +133,10 @@ class PreviousWorkoutViewController: UIViewController {
     }()
     
     func topRow() -> UIStackView {
-        let stack = topStack
+        let filler = addButton()
+        filler.backgroundColor = Colors.greens
         
+        let stack = topStack
         let add = addButton()
         
         let save = barButton()
@@ -410,7 +413,8 @@ class PreviousWorkoutViewController: UIViewController {
     
     func deleteWorkout(workout1: Workout) {
         let log = TabBarViewController.workoutLog
-        log.removeWorkoutAt(index: workout1.getId()-1)
+        let index = log.getWorkoutList().firstIndex(of: workout1)
+        log.removeWorkoutAt(index: index!)
         let tab = TabBarViewController()
         tab.deleteOldFile()
         tab.setWorkoutList(log: log)

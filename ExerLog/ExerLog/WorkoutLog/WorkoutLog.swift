@@ -14,14 +14,16 @@ class WorkoutLog: NSObject, Codable {
 
     func encode(with aCoder: NSCoder) {
        aCoder.encode(workoutList, forKey: "workLst")
+        aCoder.encode(theme, forKey: "thme")
     }
 
     required convenience init?(coder aDecoder: NSCoder) {
-        guard let workList = aDecoder.decodeObject(forKey: "workLst") as? [Workout] else {
+        guard let workList = aDecoder.decodeObject(forKey: "workLst") as? [Workout],
+        let thme = aDecoder.decodeObject(forKey: "thme") as? Bool else {
             print("didn't work")
             return nil
         }
-        self.init(workoutLst: workList)
+        self.init(workoutLst: workList, theme: thme)
     }
 
     
@@ -29,12 +31,13 @@ class WorkoutLog: NSObject, Codable {
         self.workoutList = workoutList
     }
     
-    init(workoutLst:[Workout]) {
+    init(workoutLst:[Workout], theme: Bool) {
         self.workoutList = workoutLst
+        self.theme = theme
     }
     override init() {}
 
-    
+    private var theme = false
     private var workoutList = [Workout]()
 
     func addNewWorkout(numberOfWorkouts: Int) {
@@ -43,6 +46,14 @@ class WorkoutLog: NSObject, Codable {
             let newWorkout = Workout()
             self.workoutList.append(newWorkout)
         }
+    }
+    
+    func getTheme() -> Bool {
+        return self.theme
+    }
+    
+    func setTheme(themeHasBeenSet: Bool) {
+        self.theme = themeHasBeenSet
     }
     
     func removeWorkoutAt(index: Int) {

@@ -27,14 +27,7 @@ class BarChartViewController: UICollectionViewController, UICollectionViewDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        let tab = TabBarViewController()
-        //tab.setIsWorkoutController(isWorkout: false)
-//        let lBtn = leftButton()
-        //self.navigationController?.navigationItem.setRightBarButton(lBtn, animated: true)
-//        let rightButton = UIBarButtonItem()
-//        rightButton.title = ""
-//        self.navigationController?.navigationBar.topItem?.rightBarButtonItem = rightButton
-        // Do any additional setup after loading the view, typically from a nib.
+
         buttonBack()
         
         collectionView?.backgroundColor = Colors.grey
@@ -53,7 +46,13 @@ class BarChartViewController: UICollectionViewController, UICollectionViewDelega
     func setDiaryLaunch(hasbeenLaunched: Bool) {
         BarChartViewController.diaryLaunch = hasbeenLaunched
     }
+    
+    var clicks = 0
+    
     override func viewWillAppear(_ animated: Bool) {
+        clicks = 0
+        self.tabBarController?.navigationItem.leftBarButtonItem = nil
+        self.tabBarController?.navigationItem.rightBarButtonItem = nil
         super.viewWillAppear(animated)
         self.collectionView?.reloadData()
         if BarChartViewController.freshLaunch == true {
@@ -64,6 +63,7 @@ class BarChartViewController: UICollectionViewController, UICollectionViewDelega
              BarChartViewController.diaryLaunch = false
             self.tabBarController?.selectedIndex = 3
         }
+        self.viewDidLoad()
     }
     
     
@@ -156,10 +156,31 @@ class BarChartViewController: UICollectionViewController, UICollectionViewDelega
         } else {
             sender.setTitle("Current view: Volume", for: .normal)
         }
+        let tab = TabBarViewController()
+        let colors = Colors()
+        clicks += 1
+        print("Clicks: \(clicks)" )
+        if (clicks == 2) {
+            if (TabBarViewController.workoutLog.getTheme()) {
+                TabBarViewController.workoutLog.setTheme(themeHasBeenSet: false)
+                print("Setting theme dark")
+                tab.deleteOldFile()
+                tab.saveMe()
+                colors.setColors()
+            } else {
+                TabBarViewController.workoutLog.setTheme(themeHasBeenSet: true)
+                 print("Setting theme light")
+                tab.deleteOldFile()
+                tab.saveMe()
+                colors.setColors()
+                
+            }
+        }
         //setValueList(num: numOfPresses)
     }
     
     func barPresed(barNumber: Int) {
+        
         let workout = TabBarViewController.workoutLog.getSpecificWorkout(id: barNumber)
         print("These are the sets \(workout.getTotalSets())")
         var typeOfData: String
