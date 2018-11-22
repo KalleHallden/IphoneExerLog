@@ -161,6 +161,22 @@ class BarChartViewController: UICollectionViewController, UICollectionViewDelega
         clicks += 1
         print("Clicks: \(clicks)" )
         if (clicks == 20) {
+            
+            if (clicks == 30) {
+                if (colors.isDarkTheme()) {
+                    print("Setting theme dark")
+                    tab.deleteOldFile()
+                    tab.saveMe()
+                    colors.setTheme(isDark: true)
+                    colors.setColors()
+                } else {
+                    print("Setting theme dark")
+                    colors.setTheme(isDark: false)
+                    tab.deleteOldFile()
+                    tab.saveMe()
+                    colors.setColors()
+                }
+            }
             if (TabBarViewController.workoutLog.getTheme()) {
                 TabBarViewController.workoutLog.setTheme(themeHasBeenSet: false)
                 print("Setting theme dark")

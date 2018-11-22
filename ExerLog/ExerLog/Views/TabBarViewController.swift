@@ -44,7 +44,6 @@ class TabBarViewController: UITabBarController {
 //        bar.layoutIfNeeded()
 //        bar.setNeedsDisplay()
 //    }
-    
     func setup() {
         
         let statViewController = BarChartViewController(collectionViewLayout: UICollectionViewFlowLayout())
@@ -58,11 +57,21 @@ class TabBarViewController: UITabBarController {
         //let tabBarList = [statViewController, profileViewController, addWorkoutViewController, diaryViewController, weightDiaryViewController]
         
         let tabBarList = [statViewController, addWorkoutViewController, diaryViewController]
-        
+        let colors = Colors()
         
         viewControllers = tabBarList
-        self.tabBar.barTintColor = Colors.blacks
-        self.tabBar.unselectedItemTintColor = Colors.greens
+        if (colors.isDarkTheme()) {
+            let backgroundclear = UIColor.clear.imageRepresentation
+            self.tabBar.backgroundImage = backgroundclear
+            self.tabBar.unselectedItemTintColor = .white
+        } else {
+            self.tabBar.barTintColor = Colors.blacks
+            if (TabBarViewController.workoutLog.getTheme()) {
+                self.tabBar.unselectedItemTintColor = Colors.darkGreen
+            } else {
+                self.tabBar.unselectedItemTintColor = Colors.greens
+            }
+        }
         
         
         //self.tabBarItem.image = UIImage.init(cgImage: #imageLiteral(resourceName: "statIcon"))

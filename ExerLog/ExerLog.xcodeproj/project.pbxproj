@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E30AEFBC21A5C5F0009092C9 /* clearImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30AEFBB21A5C5F0009092C9 /* clearImage.swift */; };
+		E30AEFBE21A5C8A9009092C9 /* textFieldExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30AEFBD21A5C8A9009092C9 /* textFieldExt.swift */; };
 		E30C7E4F2168B73E0037EF2E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30C7E4E2168B73E0037EF2E /* AppDelegate.swift */; };
 		E30C7E512168B73E0037EF2E /* AddWorkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30C7E502168B73E0037EF2E /* AddWorkoutViewController.swift */; };
 		E30C7E572168B73E0037EF2E /* ExerLog.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E30C7E552168B73E0037EF2E /* ExerLog.xcdatamodeld */; };
@@ -51,6 +53,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E30AEFBB21A5C5F0009092C9 /* clearImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = clearImage.swift; sourceTree = "<group>"; };
+		E30AEFBD21A5C8A9009092C9 /* textFieldExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = textFieldExt.swift; sourceTree = "<group>"; };
 		E30C7E4B2168B73E0037EF2E /* ExerLog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExerLog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E30C7E4E2168B73E0037EF2E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E30C7E502168B73E0037EF2E /* AddWorkoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWorkoutViewController.swift; sourceTree = "<group>"; };
@@ -141,6 +145,8 @@
 				E30C7E552168B73E0037EF2E /* ExerLog.xcdatamodeld */,
 				E3C8B23F2181E7430086163C /* colors.swift */,
 				E379592621A4226600F4396E /* TouchGestureRecognizer.swift */,
+				E30AEFBB21A5C5F0009092C9 /* clearImage.swift */,
+				E30AEFBD21A5C8A9009092C9 /* textFieldExt.swift */,
 			);
 			path = ExerLog;
 			sourceTree = "<group>";
@@ -365,6 +371,8 @@
 				E379592121A1B31500F4396E /* HideKeyBoard.swift in Sources */,
 				E30C7E512168B73E0037EF2E /* AddWorkoutViewController.swift in Sources */,
 				E3C8B2402181E7430086163C /* colors.swift in Sources */,
+				E30AEFBE21A5C8A9009092C9 /* textFieldExt.swift in Sources */,
+				E30AEFBC21A5C5F0009092C9 /* clearImage.swift in Sources */,
 				E30C7E802168B7890037EF2E /* Exercise.swift in Sources */,
 				E30C7E90216DEEC10037EF2E /* TabBarViewController.swift in Sources */,
 				E30C7E8C2169DF320037EF2E /* DiaryCell.swift in Sources */,

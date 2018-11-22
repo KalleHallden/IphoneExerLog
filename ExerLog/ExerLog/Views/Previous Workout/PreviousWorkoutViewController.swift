@@ -214,9 +214,11 @@ class PreviousWorkoutViewController: UIViewController {
     
     func setUpTextFields(textField: UITextField) {
         print("We are in")
+        let colors = Colors()
         textField.backgroundColor = Colors.greens
+        textField.setBottomBorder(isDark: colors.isDarkTheme(), lineColor: Colors.greens!)
         textField.borderStyle = .none
-        textField.textColor = Colors.grey
+        textField.textColor = Colors.blacks
         textField.translatesAutoresizingMaskIntoConstraints = false
     }
     

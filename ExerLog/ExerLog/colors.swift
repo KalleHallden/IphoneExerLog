@@ -18,8 +18,17 @@ class Colors: UIColor {
     static var darkGreen: UIColor?
     static var lightBlue: UIColor?
     
+    private static var blackTheme = false
     
+    func isDarkTheme() -> Bool{
+        return Colors.blackTheme
+    }
+    
+    func setTheme(isDark: Bool) {
+        Colors.blackTheme = isDark
+    }
     func setColors() {
+        Colors.blackTheme = TabBarViewController.workoutLog.getSuperDark()
         if (TabBarViewController.workoutLog.getTheme()) {
             print("Light theme")
             Colors.grey = UIColor.white
@@ -38,6 +47,15 @@ class Colors: UIColor {
             Colors.blacks = UIColor.black
             Colors.darkGrey = UIColor(red:0.04, green:0.04, blue:0.04, alpha:1.0)
             Colors.darkGreen = UIColor(red:0.01, green:0.33, blue:0.09, alpha:1.0)
+        }
+        
+        if (isDarkTheme()) {
+            Colors.grey = .black
+            Colors.greens = .white
+            Colors.whites = UIColor.white
+            Colors.blacks = UIColor.white
+            Colors.darkGrey = .black
+            Colors.darkGreen = UIColor(red:0.20, green:0.20, blue:0.25, alpha:1.0)
         }
     }
 }

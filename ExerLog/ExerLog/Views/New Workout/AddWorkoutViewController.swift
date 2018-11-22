@@ -143,10 +143,13 @@ class AddWorkoutViewController: UIViewController {
     }
     
     func setUpTextFields(textField: UITextField) {
-        textField.backgroundColor = Colors.greens
-        textField.borderStyle = .none
+        let colors = Colors()
+        textField.backgroundColor = Colors.grey
+        
+        textField.setBottomBorder(isDark: colors.isDarkTheme(), lineColor: Colors.greens!)
+        //textField.borderStyle = .none
         textField.heightAnchor.constraint(equalToConstant: 25).isActive = true
-        textField.textColor = Colors.grey
+        textField.textColor = Colors.blacks
         textField.translatesAutoresizingMaskIntoConstraints = false
     }
 
