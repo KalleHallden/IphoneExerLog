@@ -149,7 +149,9 @@ class AddWorkoutViewController: UIViewController {
         textField.setBottomBorder(isDark: colors.isDarkTheme(), lineColor: Colors.greens!)
         //textField.borderStyle = .none
         textField.heightAnchor.constraint(equalToConstant: 25).isActive = true
-        textField.textColor = Colors.blacks
+        
+        textField.textColor = Colors.greens
+        textField.font = UIFont.boldSystemFont(ofSize: 17)
         textField.translatesAutoresizingMaskIntoConstraints = false
     }
 

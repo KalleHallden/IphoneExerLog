@@ -104,11 +104,11 @@ class PreviousWorkoutViewController: UIViewController {
         let button:UIButton = {
             let btn = UIButton(type:.system)
             if (TabBarViewController.workoutLog.getTheme()) {
-                btn.backgroundColor = Colors.darkGreen
-                btn.tintColor = Colors.blacks
+                btn.backgroundColor = Colors.grey
+                btn.tintColor = Colors.greens
             } else {
-                btn.backgroundColor = Colors.darkGrey
-                btn.tintColor = Colors.darkGreen
+                btn.backgroundColor = Colors.grey
+                btn.tintColor = Colors.greens
             }
             btn.layer.cornerRadius = 15
             btn.heightAnchor.constraint(equalToConstant: 50).isActive = true
@@ -149,7 +149,9 @@ class PreviousWorkoutViewController: UIViewController {
         
         self.navigationController?.navigationBar.topItem?.leftBarButtonItem = save
         self.navigationController?.navigationBar.topItem?.rightBarButtonItem = delete
-        add.setTitle("add", for: .normal)
+        //add.setBackgroundImage(#imageLiteral(resourceName: "addIcon12"), for: .normal)
+        add.setImage(#imageLiteral(resourceName: "addIcon12"), for: .normal)
+//        add.titleLabel?.font = UIFont.boldSystemFont(ofSize: 50.0)
         add.addTarget(self, action: #selector(addAction), for: .touchUpInside)
         save.title = "Done"
         save.action = #selector(self.saveAction)
@@ -176,7 +178,6 @@ class PreviousWorkoutViewController: UIViewController {
         statbutton.addTarget(self, action: #selector(statAction), for: .touchUpInside)
         
         let top = topRow()
-        masterStackView.addArrangedSubview(top)
         masterStackView.addArrangedSubview(statbutton)
         
         let labelRow = createRowOfLabels()
@@ -198,6 +199,7 @@ class PreviousWorkoutViewController: UIViewController {
         scrollView.isScrollEnabled = true
         
         masterStackView.addArrangedSubview(scrollView)
+        masterStackView.addArrangedSubview(top)
         //let addbutton = addButton()
         // addbutton.addTarget(self, action: #selector(action), for: .touchUpInside)
         //masterStackView.addArrangedSubview(addbutton)
@@ -215,10 +217,14 @@ class PreviousWorkoutViewController: UIViewController {
     func setUpTextFields(textField: UITextField) {
         print("We are in")
         let colors = Colors()
-        textField.backgroundColor = Colors.greens
+        textField.backgroundColor = Colors.grey
+        
         textField.setBottomBorder(isDark: colors.isDarkTheme(), lineColor: Colors.greens!)
-        textField.borderStyle = .none
-        textField.textColor = Colors.blacks
+        //textField.borderStyle = .none
+        textField.heightAnchor.constraint(equalToConstant: 25).isActive = true
+        
+        textField.textColor = Colors.greens
+        textField.font = UIFont.boldSystemFont(ofSize: 17)
         textField.translatesAutoresizingMaskIntoConstraints = false
     }
     
