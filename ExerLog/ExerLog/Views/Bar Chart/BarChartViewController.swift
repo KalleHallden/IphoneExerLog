@@ -163,13 +163,13 @@ class BarChartViewController: UICollectionViewController, UICollectionViewDelega
             if (TabBarViewController.theme.getTheme()) {
                 TabBarViewController.theme.setTheme(themeHasBeenSet: false)
                 print("Setting theme dark")
-                //saver.deleteOldFile(path: saver.getPathTheme())
+                saver.deleteOldFile(path: saver.getPathTheme())
                 saver.save(path: saver.getFileForTheme()!)
                 colors.setColors()
             } else {
                 TabBarViewController.theme.setTheme(themeHasBeenSet: true)
                 print("Setting theme light")
-               // saver.deleteOldFile(path: saver.getFileForTheme()!)
+                saver.deleteOldFile(path: saver.getFileForTheme()!)
                 saver.save(path: saver.getPathTheme())
                 colors.setColors()
                 
@@ -239,7 +239,7 @@ class BarChartViewController: UICollectionViewController, UICollectionViewDelega
         if (wantsToChanges) {
             print("Setting theme dark")
             colors.setTheme(isDark: true)
-            //saver.deleteOldFile(path: saver.getPathTheme())
+            saver.deleteOldFile(path: saver.getPathTheme())
             TabBarViewController.theme.setSuperDark(themeHasBeenSet: wantsToChanges)
             print("Trying to print theme should be dark: \(TabBarViewController.theme.getSuperDark())")
             saver.save(path: saver.getPathTheme())
@@ -250,7 +250,7 @@ class BarChartViewController: UICollectionViewController, UICollectionViewDelega
             saver.deleteOldFile(path: saver.getPathTheme())
             TabBarViewController.theme.setSuperDark(themeHasBeenSet: wantsToChanges)
             print("Trying to print theme should be dark: \(TabBarViewController.theme.getSuperDark())")
-           // saver.save(path: saver.getPathTheme())
+            saver.save(path: saver.getPathTheme())
             colors.setColors()
         }
     }

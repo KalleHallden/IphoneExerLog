@@ -11,8 +11,8 @@ import Foundation
 class Theme: NSObject, Codable {
    
         func encode(with aCoder: NSCoder) {
-            aCoder.encode(Theme.theme, forKey: "thme")
-            aCoder.encode(Theme.superDark, forKey: "superdark")
+            aCoder.encode(theme, forKey: "thme")
+            aCoder.encode(superDark, forKey: "superdark")
     }
     
     required convenience init?(coder aDecoder: NSCoder) {
@@ -23,30 +23,30 @@ class Theme: NSObject, Codable {
         }
         self.init(theme: thme, superDark: suprdark)
     }
-    private static var theme = false
-    private static var superDark = false
+    private var theme = false
+    private var superDark = false
     
     init(theme: Bool, superDark: Bool) {
-        Theme.theme = theme
-        Theme.superDark = superDark
+        self.theme = theme
+        self.superDark = superDark
     }
     override init() {}
     
     
     func getTheme() -> Bool {
-        return Theme.theme
+        return self.theme
     }
     
     func getSuperDark() -> Bool {
-        return Theme.superDark
+        return self.superDark
     }
     
     func setTheme(themeHasBeenSet: Bool) {
-        Theme.theme = themeHasBeenSet
+        self.theme = themeHasBeenSet
     }
     
     func setSuperDark(themeHasBeenSet: Bool) {
-        Theme.superDark = themeHasBeenSet
+        self.superDark = themeHasBeenSet
     }
     
 }

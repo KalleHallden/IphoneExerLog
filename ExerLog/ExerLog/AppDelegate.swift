@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window = UIWindow(frame: UIScreen.main.bounds)
         self.window?.rootViewController = UINavigationController(rootViewController: TabBarViewController())
         self.window?.makeKeyAndVisible()
-        let theme = Theme()
+        let theme = TabBarViewController.theme
         if (theme.getTheme()) {
             if (theme.getSuperDark()) {
                 UINavigationBar.appearance().barTintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)

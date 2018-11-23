@@ -17,7 +17,7 @@ class Colors: UIColor {
     static var darkGrey: UIColor?
     static var darkGreen: UIColor?
     static var lightBlue: UIColor?
-    private var theme = Theme()
+    private var theme = TabBarViewController.theme
     private static var blackTheme = false
     
     func isDarkTheme() -> Bool{
