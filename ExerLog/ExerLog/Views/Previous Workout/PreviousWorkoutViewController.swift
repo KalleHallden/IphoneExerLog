@@ -11,6 +11,7 @@ import UIKit
 class PreviousWorkoutViewController: UIViewController {
 
     private static var workout: Workout!
+    let saver = Saver()
     
     func setWorkout(workout1: Workout) {
         print("This is the exercises: \(workout1.getExercises().count)")
@@ -98,12 +99,12 @@ class PreviousWorkoutViewController: UIViewController {
         master.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -10).isActive = true
         master.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 10).isActive = true
     }
-    
+
     
     func addButton() -> UIButton {
         let button:UIButton = {
             let btn = UIButton(type:.system)
-            if (TabBarViewController.workoutLog.getTheme()) {
+            if (TabBarViewController.theme.getTheme()) {
                 btn.backgroundColor = Colors.grey
                 btn.tintColor = Colors.greens
             } else {
@@ -175,6 +176,7 @@ class PreviousWorkoutViewController: UIViewController {
         
         setStatBut()
         let statbutton = getButton()
+        statbutton.titleLabel?.font = UIFont(name: "Avenir next", size: 20.0)!
         statbutton.addTarget(self, action: #selector(statAction), for: .touchUpInside)
         
         let top = topRow()
@@ -355,6 +357,7 @@ class PreviousWorkoutViewController: UIViewController {
         let stackview3 = UIStackView()
         for num in 1...5 {
             let label = UILabel()
+            label.font = UIFont(name: "Avenir next", size: 16.0)!
             if (num == 1) {
                 label.text = "Exercise"
                 stackview.addArrangedSubview(label)
@@ -429,9 +432,9 @@ class PreviousWorkoutViewController: UIViewController {
         let index = log.getWorkoutList().firstIndex(of: workout1)
         log.removeWorkoutAt(index: index!)
         let tab = TabBarViewController()
-        tab.deleteOldFile()
+        saver.deleteOldFile(path: saver.getPathWorkout())
         tab.setWorkoutList(log: log)
-        tab.saveMe()
+        saver.save(path: saver.getPathWorkout())
         regSegue()
     }
     
@@ -469,7 +472,7 @@ class PreviousWorkoutViewController: UIViewController {
     
     @objc func save() {
         let tab = TabBarViewController()
-        tab.deleteOldFile()
+        saver.deleteOldFile(path: saver.getPathWorkout())
         let bar = BarChartViewController()
         bar.setFresh(hasbeenLaunched: false)
         bar.setDiaryLaunch(hasbeenLaunched: true)
@@ -487,9 +490,9 @@ class PreviousWorkoutViewController: UIViewController {
             let log = TabBarViewController.workoutLog
             print("total workouts: \(log.getWorkoutList().count)")
             let tab = TabBarViewController()
-            tab.deleteOldFile()
+            saver.deleteOldFile(path: saver.getPathWorkout())
             tab.setWorkoutList(log: log)
-            tab.saveMe()
+            saver.save(path: saver.getPathWorkout())
             
             for wout in TabBarViewController.workoutLog.getWorkoutList() {
                 print("reps: \(wout.getTotalReps())")

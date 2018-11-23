@@ -11,6 +11,8 @@ import UIKit
 
 extension UITextField {
     func setBottomBorder(isDark: Bool, lineColor: UIColor) {
+        self.font = UIFont(name: "Avenir next", size: 16.0)!
+        self.font = UIFont.boldSystemFont(ofSize: 16)
         self.borderStyle = .none
         if (isDark) {
             self.layer.backgroundColor = UIColor.black.cgColor

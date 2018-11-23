@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		E30AEFBC21A5C5F0009092C9 /* clearImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30AEFBB21A5C5F0009092C9 /* clearImage.swift */; };
 		E30AEFBE21A5C8A9009092C9 /* textFieldExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30AEFBD21A5C8A9009092C9 /* textFieldExt.swift */; };
+		E30AEFC221A722D5009092C9 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30AEFC121A722D5009092C9 /* Theme.swift */; };
+		E30AEFC421A72723009092C9 /* Saver.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30AEFC321A72723009092C9 /* Saver.swift */; };
+		E30AEFC621A72C02009092C9 /* PersonalStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30AEFC521A72C02009092C9 /* PersonalStats.swift */; };
 		E30C7E4F2168B73E0037EF2E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30C7E4E2168B73E0037EF2E /* AppDelegate.swift */; };
 		E30C7E512168B73E0037EF2E /* AddWorkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30C7E502168B73E0037EF2E /* AddWorkoutViewController.swift */; };
 		E30C7E572168B73E0037EF2E /* ExerLog.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E30C7E552168B73E0037EF2E /* ExerLog.xcdatamodeld */; };
@@ -55,6 +58,9 @@
 /* Begin PBXFileReference section */
 		E30AEFBB21A5C5F0009092C9 /* clearImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = clearImage.swift; sourceTree = "<group>"; };
 		E30AEFBD21A5C8A9009092C9 /* textFieldExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = textFieldExt.swift; sourceTree = "<group>"; };
+		E30AEFC121A722D5009092C9 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		E30AEFC321A72723009092C9 /* Saver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Saver.swift; sourceTree = "<group>"; };
+		E30AEFC521A72C02009092C9 /* PersonalStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalStats.swift; sourceTree = "<group>"; };
 		E30C7E4B2168B73E0037EF2E /* ExerLog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExerLog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E30C7E4E2168B73E0037EF2E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E30C7E502168B73E0037EF2E /* AddWorkoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWorkoutViewController.swift; sourceTree = "<group>"; };
@@ -112,6 +118,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E30AEFBF21A72273009092C9 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E30AEFC721A72CFA009092C9 /* Personal stats */,
+				E30AEFC021A722C3009092C9 /* Theme */,
+				E30C7E812168BA330037EF2E /* WorkoutLog */,
+				E30AEFC321A72723009092C9 /* Saver.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		E30AEFC021A722C3009092C9 /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				E30AEFC121A722D5009092C9 /* Theme.swift */,
+			);
+			path = Theme;
+			sourceTree = "<group>";
+		};
+		E30AEFC721A72CFA009092C9 /* Personal stats */ = {
+			isa = PBXGroup;
+			children = (
+				E30AEFC521A72C02009092C9 /* PersonalStats.swift */,
+			);
+			path = "Personal stats";
+			sourceTree = "<group>";
+		};
 		E30C7E422168B73E0037EF2E = {
 			isa = PBXGroup;
 			children = (
@@ -135,8 +168,8 @@
 		E30C7E4D2168B73E0037EF2E /* ExerLog */ = {
 			isa = PBXGroup;
 			children = (
+				E30AEFBF21A72273009092C9 /* Model */,
 				E30C7E862169CEE40037EF2E /* Views */,
-				E30C7E812168BA330037EF2E /* WorkoutLog */,
 				E30C7E4E2168B73E0037EF2E /* AppDelegate.swift */,
 				E30C7E582168B73F0037EF2E /* Assets.xcassets */,
 				E311AF6A219D7935009742C5 /* ViewSources */,
@@ -371,6 +404,7 @@
 				E379592121A1B31500F4396E /* HideKeyBoard.swift in Sources */,
 				E30C7E512168B73E0037EF2E /* AddWorkoutViewController.swift in Sources */,
 				E3C8B2402181E7430086163C /* colors.swift in Sources */,
+				E30AEFC221A722D5009092C9 /* Theme.swift in Sources */,
 				E30AEFBE21A5C8A9009092C9 /* textFieldExt.swift in Sources */,
 				E30AEFBC21A5C5F0009092C9 /* clearImage.swift in Sources */,
 				E30C7E802168B7890037EF2E /* Exercise.swift in Sources */,
@@ -387,9 +421,11 @@
 				E3C8B2422181EB1F0086163C /* BarCell.swift in Sources */,
 				E379592F21A4677B00F4396E /* NavControllerBarChart.swift in Sources */,
 				E3C8B2442181EB5B0086163C /* BarChartViewController.swift in Sources */,
+				E30AEFC621A72C02009092C9 /* PersonalStats.swift in Sources */,
 				E379592721A4226600F4396E /* TouchGestureRecognizer.swift in Sources */,
 				E379591B21A176DF00F4396E /* PreviousWorkoutViewController.swift in Sources */,
 				E30C7E572168B73E0037EF2E /* ExerLog.xcdatamodeld in Sources */,
+				E30AEFC421A72723009092C9 /* Saver.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -557,7 +593,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 76A9484TZ5;
 				INFOPLIST_FILE = ExerLog/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -576,7 +612,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 76A9484TZ5;
 				INFOPLIST_FILE = ExerLog/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

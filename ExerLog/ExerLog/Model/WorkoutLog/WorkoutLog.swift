@@ -14,18 +14,14 @@ class WorkoutLog: NSObject, Codable {
 
     func encode(with aCoder: NSCoder) {
        aCoder.encode(workoutList, forKey: "workLst")
-        aCoder.encode(theme, forKey: "thme")
-        aCoder.encode(superDark, forKey: "superdark")
     }
 
     required convenience init?(coder aDecoder: NSCoder) {
-        guard let workList = aDecoder.decodeObject(forKey: "workLst") as? [Workout],
-        let thme = aDecoder.decodeObject(forKey: "thme") as? Bool,
-        let suprdark = aDecoder.decodeObject(forKey: "superdark") as? Bool else {
+        guard let workList = aDecoder.decodeObject(forKey: "workLst") as? [Workout] else {
             print("didn't work")
             return nil
         }
-        self.init(workoutLst: workList, theme: thme, superDark: suprdark)
+        self.init(workoutLst: workList)
     }
 
     
@@ -33,15 +29,11 @@ class WorkoutLog: NSObject, Codable {
         self.workoutList = workoutList
     }
     
-    init(workoutLst:[Workout], theme: Bool, superDark: Bool) {
+    init(workoutLst:[Workout]) {
         self.workoutList = workoutLst
-        self.theme = theme
-        self.superDark = superDark
     }
     override init() {}
 
-    private var superDark = false
-    private var theme = false
     private var workoutList = [Workout]()
 
     func addNewWorkout(numberOfWorkouts: Int) {
@@ -50,22 +42,6 @@ class WorkoutLog: NSObject, Codable {
             let newWorkout = Workout()
             self.workoutList.append(newWorkout)
         }
-    }
-    
-    func getTheme() -> Bool {
-        return self.theme
-    }
-    
-    func getSuperDark() -> Bool {
-        return self.superDark
-    }
-    
-    func setTheme(themeHasBeenSet: Bool) {
-        self.theme = themeHasBeenSet
-    }
-    
-    func setSuperDark(themeHasBeenSet: Bool) {
-        self.superDark = themeHasBeenSet
     }
     
     func removeWorkoutAt(index: Int) {

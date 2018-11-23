@@ -22,20 +22,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window = UIWindow(frame: UIScreen.main.bounds)
         self.window?.rootViewController = UINavigationController(rootViewController: TabBarViewController())
         self.window?.makeKeyAndVisible()
-        if (TabBarViewController.workoutLog.getTheme()) {
-            if (TabBarViewController.workoutLog.getSuperDark()) {
+        let theme = Theme()
+        if (theme.getTheme()) {
+            if (theme.getSuperDark()) {
+                UINavigationBar.appearance().barTintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
                 let color = Colors()
                 color.setColors()
                 UITabBar.appearance().tintColor = Colors.grey
             } else {
-                UINavigationBar.appearance().barTintColor = .white
+                UINavigationBar.appearance().barTintColor = Colors.grey
                 UITabBar.appearance().tintColor = .black
                 let color = Colors()
                 color.setColors()
             }
     
         } else {
-            if (TabBarViewController.workoutLog.getSuperDark()) {
+            if (theme.getSuperDark()) {
                 print("Wants to be super dark")
                 UINavigationBar.appearance().barTintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
                 let color = Colors()
