@@ -11,19 +11,21 @@ import UIKit
 class TabBarViewController: UITabBarController {
 
     public static var workoutLog = WorkoutLog()
+    public static var theme = Theme()
+    public static var personalStats = PersonalStats()
     let statImage = #imageLiteral(resourceName: "statIcon")
     let addImage = #imageLiteral(resourceName: "addIcon")
     let diaryImage = #imageLiteral(resourceName: "diaryIcon")
     let weightImage = #imageLiteral(resourceName: "weightIcon")
-    var path: String = ""
+    let saver = Saver()
     
     let log: WorkoutLog = TabBarViewController.workoutLog
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        path = fileInDocumentsDirectory(filename: "/workoutLst.json")
         setup()
-        load()
+        saver.load(pathWorkout: saver.getPathWorkout(), pathTheme: saver.getPathTheme(), pathPersonalStats: saver.getPathPersonal())
         
         // Do any additional setup after loading the view.
     }
@@ -33,18 +35,7 @@ class TabBarViewController: UITabBarController {
         self.viewDidLoad()
 //        doIt()
     }
-    
-//    func doIt() {
-//        guard let navigation = navigationController,
-//            !(navigation.topViewController === self) else {
-//                return
-//        }
-//        let bar = navigation.navigationBar
-//        bar.setNeedsLayout()
-//        bar.layoutIfNeeded()
-//        bar.setNeedsDisplay()
-//    }
-    
+
     func setup() {
         
         let statViewController = BarChartViewController(collectionViewLayout: UICollectionViewFlowLayout())
@@ -58,11 +49,21 @@ class TabBarViewController: UITabBarController {
         //let tabBarList = [statViewController, profileViewController, addWorkoutViewController, diaryViewController, weightDiaryViewController]
         
         let tabBarList = [statViewController, addWorkoutViewController, diaryViewController]
-        
+        let colors = Colors()
         
         viewControllers = tabBarList
-        self.tabBar.barTintColor = Colors.blacks
-        self.tabBar.unselectedItemTintColor = Colors.greens
+        if (colors.isDarkTheme()) {
+            let backgroundclear = UIColor.clear.imageRepresentation
+            self.tabBar.backgroundImage = backgroundclear
+            self.tabBar.unselectedItemTintColor = .white
+        } else {
+            self.tabBar.barTintColor = Colors.blacks
+            if (TabBarViewController.theme.getTheme()) {
+                self.tabBar.unselectedItemTintColor = Colors.darkGreen
+            } else {
+                self.tabBar.unselectedItemTintColor = Colors.greens
+            }
+        }
         
         
         //self.tabBarItem.image = UIImage.init(cgImage: #imageLiteral(resourceName: "statIcon"))
@@ -72,84 +73,8 @@ class TabBarViewController: UITabBarController {
         
 
     }
-    
-    
     func setWorkoutList(log: WorkoutLog) {
         TabBarViewController.workoutLog = log
     }
-    
-    func getFile() -> String? {
-        print(TabBarViewController.workoutLog.getWorkoutList().count)
-        let encodedObject = try? JSONEncoder().encode(TabBarViewController.workoutLog)
-        if let encodedObjectJsonString = String(data: encodedObject!, encoding: .utf8)
-        {
-            print(encodedObjectJsonString)
-            return encodedObjectJsonString
-        }
-        return "nope"
-    }
-    
-    func load() {
-        var workoutLog: WorkoutLog?
-        let jsondata = find()
-        if let jsonData = jsondata.data(using: .utf8)
-        {
-            //And here you get the Car object back
-            print("Här")
-            workoutLog = try? JSONDecoder().decode(WorkoutLog.self, from: jsonData)
-        } else {
-            print("Nej!")
-            workoutLog = WorkoutLog()
-        }
-        TabBarViewController.workoutLog = workoutLog ?? TabBarViewController.workoutLog
-    }
-
-    func documentstDirectory() -> String {
-        let documentsFolderPath = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)[0] as String
-        return documentsFolderPath
-    }
-    func fileInDocumentsDirectory(filename: String) -> String {
-        return documentstDirectory().appending(filename)
-    }
-
-    func deleteOldFile() {
-        let fileManager = FileManager.default
-        
-        do {
-            try fileManager.removeItem(atPath: path)
-            print("YESSSS")
-        }
-        catch let error as NSError {
-            print("Ooops! Something went wrong: \(error)")
-        }
-    }
-    
-    func saveMe() {
-        print("Save \(path)")
-        
-        
-        
-        let filetosave = getFile()
-        
-        
-            var success = false
-            success = NSKeyedArchiver.archiveRootObject(filetosave, toFile: path)
-            if (success) {
-                print("Saved successfully")
-            } else {
-                print("Not able to save")
-            }
-    }
-
-    func find() -> String {
-        if let returnString = NSKeyedUnarchiver.unarchiveObject(withFile: path) as? String  {
-            print("Yes..")
-            return returnString
-        } else {
-            return "no"
-        }
-    }
-    
-    
 }
 

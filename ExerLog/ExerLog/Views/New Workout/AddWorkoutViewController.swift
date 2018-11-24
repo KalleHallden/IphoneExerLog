@@ -5,6 +5,7 @@ import UIKit
 class AddWorkoutViewController: UIViewController {
     
     var workout: Workout?
+    let saver = Saver()
     private let contentView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false;
@@ -63,6 +64,7 @@ class AddWorkoutViewController: UIViewController {
             btn.backgroundColor = Colors.greens
             btn.setTitle("Total Volume: 0.0", for: .normal)
             btn.tintColor = Colors.grey
+            btn.titleLabel?.font = UIFont(name: "Avenir next", size: 18)!
             btn.layer.cornerRadius = 0
             btn.translatesAutoresizingMaskIntoConstraints = false
             return btn
@@ -143,10 +145,15 @@ class AddWorkoutViewController: UIViewController {
     }
     
     func setUpTextFields(textField: UITextField) {
-        textField.backgroundColor = Colors.greens
-        textField.borderStyle = .none
+        let colors = Colors()
+        textField.backgroundColor = Colors.grey
+        
+        textField.setBottomBorder(isDark: colors.isDarkTheme(), lineColor: Colors.greens!)
+        //textField.borderStyle = .none
         textField.heightAnchor.constraint(equalToConstant: 25).isActive = true
-        textField.textColor = Colors.grey
+        
+        textField.textColor = Colors.greens
+       // textField.font = UIFont.boldSystemFont(ofSize: 16)
         textField.translatesAutoresizingMaskIntoConstraints = false
     }
 
@@ -243,6 +250,7 @@ class AddWorkoutViewController: UIViewController {
         let stackview3 = UIStackView()
         for num in 1...5 {
             let label = UILabel()
+            label.font = UIFont(name: "Avenir next", size: 16)!
             if (num == 1) {
                 label.text = "Exercise"
                 stackview.addArrangedSubview(label)
@@ -305,8 +313,7 @@ class AddWorkoutViewController: UIViewController {
     }
     
     @objc func save() {
-        let tab = TabBarViewController()
-        tab.deleteOldFile()
+        saver.deleteOldFile(path: saver.getPathWorkout())
         workout!.clearExercises()
         for array in rows {
             if (!checkIfEmpty(array: array)) {
@@ -348,8 +355,7 @@ class AddWorkoutViewController: UIViewController {
             log.addWorkout(workout: workout)
 
             print("total workouts: \(log.getWorkoutList().count)")
-            let tab = TabBarViewController()
-            tab.saveMe()
+            saver.save(path: saver.getPathWorkout())
             startWorkout()
             
             for wout in TabBarViewController.workoutLog.getWorkoutList() {

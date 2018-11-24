@@ -22,17 +22,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window = UIWindow(frame: UIScreen.main.bounds)
         self.window?.rootViewController = UINavigationController(rootViewController: TabBarViewController())
         self.window?.makeKeyAndVisible()
-        if (TabBarViewController.workoutLog.getTheme()) {
-            UINavigationBar.appearance().barTintColor = .white
-            UITabBar.appearance().tintColor = .black
-            let color = Colors()
-            color.setColors()
+        let theme = TabBarViewController.theme
+        if (theme.getTheme()) {
+            if (theme.getSuperDark()) {
+                UINavigationBar.appearance().barTintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+                let color = Colors()
+                color.setColors()
+                UITabBar.appearance().tintColor = Colors.grey
+            } else {
+                UINavigationBar.appearance().barTintColor = Colors.grey
+                UITabBar.appearance().tintColor = .black
+                let color = Colors()
+                color.setColors()
+            }
     
         } else {
-        UINavigationBar.appearance().barTintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-            let color = Colors()
-            color.setColors()
-            UITabBar.appearance().tintColor = Colors.grey
+            if (theme.getSuperDark()) {
+                print("Wants to be super dark")
+                UINavigationBar.appearance().barTintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+                let color = Colors()
+                color.setColors()
+                UITabBar.appearance().tintColor = Colors.grey
+            } else {
+                UINavigationBar.appearance().barTintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+                let color = Colors()
+                color.setColors()
+                UITabBar.appearance().tintColor = Colors.grey
+            }
         }
         UIApplication.shared.statusBarStyle = .lightContent
         return true

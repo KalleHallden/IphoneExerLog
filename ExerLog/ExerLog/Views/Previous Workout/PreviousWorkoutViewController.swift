@@ -11,6 +11,7 @@ import UIKit
 class PreviousWorkoutViewController: UIViewController {
 
     private static var workout: Workout!
+    let saver = Saver()
     
     func setWorkout(workout1: Workout) {
         print("This is the exercises: \(workout1.getExercises().count)")
@@ -98,17 +99,17 @@ class PreviousWorkoutViewController: UIViewController {
         master.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -10).isActive = true
         master.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 10).isActive = true
     }
-    
+
     
     func addButton() -> UIButton {
         let button:UIButton = {
             let btn = UIButton(type:.system)
-            if (TabBarViewController.workoutLog.getTheme()) {
-                btn.backgroundColor = Colors.darkGreen
-                btn.tintColor = Colors.blacks
+            if (TabBarViewController.theme.getTheme()) {
+                btn.backgroundColor = Colors.grey
+                btn.tintColor = Colors.greens
             } else {
-                btn.backgroundColor = Colors.darkGrey
-                btn.tintColor = Colors.darkGreen
+                btn.backgroundColor = Colors.grey
+                btn.tintColor = Colors.greens
             }
             btn.layer.cornerRadius = 15
             btn.heightAnchor.constraint(equalToConstant: 50).isActive = true
@@ -149,7 +150,9 @@ class PreviousWorkoutViewController: UIViewController {
         
         self.navigationController?.navigationBar.topItem?.leftBarButtonItem = save
         self.navigationController?.navigationBar.topItem?.rightBarButtonItem = delete
-        add.setTitle("add", for: .normal)
+        //add.setBackgroundImage(#imageLiteral(resourceName: "addIcon12"), for: .normal)
+        add.setImage(#imageLiteral(resourceName: "addIcon12"), for: .normal)
+//        add.titleLabel?.font = UIFont.boldSystemFont(ofSize: 50.0)
         add.addTarget(self, action: #selector(addAction), for: .touchUpInside)
         save.title = "Done"
         save.action = #selector(self.saveAction)
@@ -173,10 +176,10 @@ class PreviousWorkoutViewController: UIViewController {
         
         setStatBut()
         let statbutton = getButton()
+        statbutton.titleLabel?.font = UIFont(name: "Avenir next", size: 20.0)!
         statbutton.addTarget(self, action: #selector(statAction), for: .touchUpInside)
         
         let top = topRow()
-        masterStackView.addArrangedSubview(top)
         masterStackView.addArrangedSubview(statbutton)
         
         let labelRow = createRowOfLabels()
@@ -198,6 +201,7 @@ class PreviousWorkoutViewController: UIViewController {
         scrollView.isScrollEnabled = true
         
         masterStackView.addArrangedSubview(scrollView)
+        masterStackView.addArrangedSubview(top)
         //let addbutton = addButton()
         // addbutton.addTarget(self, action: #selector(action), for: .touchUpInside)
         //masterStackView.addArrangedSubview(addbutton)
@@ -214,9 +218,15 @@ class PreviousWorkoutViewController: UIViewController {
     
     func setUpTextFields(textField: UITextField) {
         print("We are in")
-        textField.backgroundColor = Colors.greens
-        textField.borderStyle = .none
-        textField.textColor = Colors.grey
+        let colors = Colors()
+        textField.backgroundColor = Colors.grey
+        
+        textField.setBottomBorder(isDark: colors.isDarkTheme(), lineColor: Colors.greens!)
+        //textField.borderStyle = .none
+        textField.heightAnchor.constraint(equalToConstant: 25).isActive = true
+        
+        textField.textColor = Colors.greens
+        textField.font = UIFont.boldSystemFont(ofSize: 17)
         textField.translatesAutoresizingMaskIntoConstraints = false
     }
     
@@ -320,6 +330,7 @@ class PreviousWorkoutViewController: UIViewController {
         textFieldArray.append(textfield)
         for num in 1...4 {
             let textField = textfieldMaker()
+            textField.textAlignment = .center
             if (num < 3) {
                 stackview2.addArrangedSubview(textField)
             } else {
@@ -347,6 +358,7 @@ class PreviousWorkoutViewController: UIViewController {
         let stackview3 = UIStackView()
         for num in 1...5 {
             let label = UILabel()
+            label.font = UIFont(name: "Avenir next", size: 16.0)!
             if (num == 1) {
                 label.text = "Exercise"
                 stackview.addArrangedSubview(label)
@@ -421,9 +433,9 @@ class PreviousWorkoutViewController: UIViewController {
         let index = log.getWorkoutList().firstIndex(of: workout1)
         log.removeWorkoutAt(index: index!)
         let tab = TabBarViewController()
-        tab.deleteOldFile()
+        saver.deleteOldFile(path: saver.getPathWorkout())
         tab.setWorkoutList(log: log)
-        tab.saveMe()
+        saver.save(path: saver.getPathWorkout())
         regSegue()
     }
     
@@ -461,7 +473,7 @@ class PreviousWorkoutViewController: UIViewController {
     
     @objc func save() {
         let tab = TabBarViewController()
-        tab.deleteOldFile()
+        saver.deleteOldFile(path: saver.getPathWorkout())
         let bar = BarChartViewController()
         bar.setFresh(hasbeenLaunched: false)
         bar.setDiaryLaunch(hasbeenLaunched: true)
@@ -479,9 +491,9 @@ class PreviousWorkoutViewController: UIViewController {
             let log = TabBarViewController.workoutLog
             print("total workouts: \(log.getWorkoutList().count)")
             let tab = TabBarViewController()
-            tab.deleteOldFile()
+            saver.deleteOldFile(path: saver.getPathWorkout())
             tab.setWorkoutList(log: log)
-            tab.saveMe()
+            saver.save(path: saver.getPathWorkout())
             
             for wout in TabBarViewController.workoutLog.getWorkoutList() {
                 print("reps: \(wout.getTotalReps())")

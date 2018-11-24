@@ -67,7 +67,9 @@ class DiaryWorkoutsViewController: UIViewController{
             btn.backgroundColor = Colors.greens
             btn.setTitle(date, for: .normal)
             btn.tintColor = Colors.grey
-            btn.layer.cornerRadius = 0
+//            btn.isSpringLoaded = true
+            btn.titleLabel?.font = UIFont(name: "Avenir next", size: 16.0)!
+            btn.layer.cornerRadius = 30
             btn.translatesAutoresizingMaskIntoConstraints = false
             return btn
         }()
@@ -169,6 +171,7 @@ class DiaryWorkoutsViewController: UIViewController{
         return stackview
     }
     // Actions
+    //Hej
     var clickcount = 0
     
     @objc func statAction(sender:UIButton!) {
