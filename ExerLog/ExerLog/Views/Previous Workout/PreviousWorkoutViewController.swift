@@ -330,6 +330,7 @@ class PreviousWorkoutViewController: UIViewController {
         textFieldArray.append(textfield)
         for num in 1...4 {
             let textField = textfieldMaker()
+            textField.textAlignment = .center
             if (num < 3) {
                 stackview2.addArrangedSubview(textField)
             } else {
