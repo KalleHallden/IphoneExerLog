@@ -5,7 +5,11 @@ import UIKit
 class AddWorkoutViewController: UIViewController {
     
     var workout: Workout?
+    var workout2: Workout2?
+    
+    var arrayOfExerciseNames = [String]()
     let saver = Saver()
+    
     private let contentView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false;
@@ -168,7 +172,7 @@ class AddWorkoutViewController: UIViewController {
     }
     
     func startWorkout() {
-        workout = Workout()
+        workout2 = Workout2()
         for row in rowStack.arrangedSubviews {
             rowStack.removeArrangedSubview(row)
             row.removeFromSuperview()
@@ -179,12 +183,13 @@ class AddWorkoutViewController: UIViewController {
 
 
     func addNewExercise(exerciseNum: Int) {
-        workout!.clearExercises()
+        workout2!.clearExercises()
+        print(arrayOfExerciseNames[exerciseNum - 1])
         for array in rows {
-            workout!.addNewExercise(name: array[0].text!, reps: array[1].text!, sets: array[2].text!, weight: array[3].text!, rest: array[4].text!)
+            workout2!.addNewExercise(name: arrayOfExerciseNames[exerciseNum - 1], reps: array[0].text!, sets: array[1].text!, weight: array[2].text!, rest: array[3].text!)
         }
-        print(workout!.getExercises().count)
-        print(workout!.getTotalReps())
+        print(workout2!.getExercises().count)
+        print(workout2!.getTotalReps())
     }
     
     var rowCount = 1;
@@ -217,9 +222,13 @@ class AddWorkoutViewController: UIViewController {
         let stackview3 = UIStackView()
         var textFieldArray = [UITextField]()
         
-        let textfield = textfieldMaker()
-        textfield.widthAnchor.constraint(equalToConstant: 100)
-        textFieldArray.append(textfield)
+        let label = UILabel()
+        label.text = "exercise"
+        label.textColor = .white
+        let Exercisebutton = UIView()
+        Exercisebutton.addSubview(label)
+        Exercisebutton.widthAnchor.constraint(equalToConstant: 100)
+        //textFieldArray.append(Exercisebutton)
         for num in 1...4 {
             let textField = textfieldMaker()
             textField.textAlignment = .center
@@ -235,7 +244,7 @@ class AddWorkoutViewController: UIViewController {
         setupStackViewHorizontal(stackview: stackview3)
         setupStackViewHorizontal(stackview: stackview)
         
-        stackview.addArrangedSubview(textfield)
+        stackview.addArrangedSubview(Exercisebutton)
         stackview.addArrangedSubview(stackview2)
         stackview.addArrangedSubview(stackview3)
         rows.append(textFieldArray)
@@ -285,44 +294,36 @@ class AddWorkoutViewController: UIViewController {
     // Actions
     var clickcount = 0
    
-    //Code for the add button below the rows of exercises
-//    @objc func action(sender:UIButton!) {
-//        addRow()
-//        let button = getButton()
-//        if (clickcount == 0) {
-//            print("hello")
-//            button.setTitle("Total Volume: \(self.workout.getTotalReps())", for: .normal)
-//        } else if (clickcount == 1) {
-//            button.setTitle("Total Load: \(self.workout.getTotalWeight())kg", for: .normal)
-//        } else {
-//            button.setTitle("Total sets: \(self.workout.getTotalSets())", for: .normal)
-//        }
-//    }
     
     @objc func statAction(sender:UIButton!) {
         if (clickcount == 0) {
             clickcount += 1
-            sender.setTitle("Total Load: \(workout!.getTotalWeight())kg", for: .normal)
+            sender.setTitle("Total Load: \(workout2!.getTotalWeight())kg", for: .normal)
         } else if (clickcount == 1) {
-            sender.setTitle("Total sets: \(workout!.getTotalSets())", for: .normal)
+            sender.setTitle("Total sets: \(workout2!.getTotalSets())", for: .normal)
             clickcount += 1
         } else {
-            sender.setTitle("Total Volume: \(workout!.getTotalReps())", for: .normal)
+            sender.setTitle("Total Volume: \(workout2!.getTotalReps())", for: .normal)
             clickcount = 0
         }
     }
     
     @objc func save() {
         saver.deleteOldFile(path: saver.getPathWorkout())
-        workout!.clearExercises()
+        workout2!.clearExercises()
         for array in rows {
             if (!checkIfEmpty(array: array)) {
-                workout!.addNewExercise(name: array[0].text!, reps: array[1].text!, sets: array[2].text!, weight: array[3].text!, rest: array[4].text!)
+                exerciseCreator(array: array)
             }
         }
-        saveWorkout(workout: workout!)
+        saveWorkout(workout: workout2!)
+        numberOfExercisesAdded = 0
     }
+    var numberOfExercisesAdded = 0
     
+    func exerciseCreator(array: [UITextField]) {
+        workout2!.addNewExercise(name: arrayOfExerciseNames[numberOfExercisesAdded], reps: array[0].text!, sets: array[1].text!, weight: array[2].text!, rest: array[3].text!)
+    }
     
     func checkIfEmpty(array: [UITextField]) -> Bool {
         for field in array {
@@ -334,31 +335,31 @@ class AddWorkoutViewController: UIViewController {
     }
     
     @objc func add() {
-        addRow()
+        showSetOrExerciseAlert()
         let button = getButton()
         if (clickcount == 0) {
             print("hello")
-            button.setTitle("Total Volume: \(self.workout!.getTotalReps())", for: .normal)
+            button.setTitle("Total Volume: \(self.workout2!.getTotalReps())", for: .normal)
         } else if (clickcount == 1) {
-            button.setTitle("Total Load: \(self.workout!.getTotalWeight())kg", for: .normal)
+            button.setTitle("Total Load: \(self.workout2!.getTotalWeight())kg", for: .normal)
         } else {
-            button.setTitle("Total sets: \(self.workout!.getTotalSets())", for: .normal)
+            button.setTitle("Total sets: \(self.workout2!.getTotalSets())", for: .normal)
         }
     }
     
-    func saveWorkout(workout: Workout) {
+    func saveWorkout(workout: Workout2) {
         print("Hey you")
         if (workout.getExercises().count != 0 && workout.getTotalReps() != 0) {
             workout.setDate()
-            workout.setId(num: TabBarViewController.workoutLog.getWorkoutList().count + 1)
-            let log = TabBarViewController.workoutLog
-            log.addWorkout(workout: workout)
+            workout.setId(num: TabBarViewController.workoutLog2.getWorkoutList().count + 1)
+            let log2 = TabBarViewController.workoutLog2
+            log2.addWorkout(workout: workout2 ?? workout2!)
 
-            print("total workouts: \(log.getWorkoutList().count)")
+            print("total workouts: \(log2.getWorkoutList().count)")
             saver.save(path: saver.getPathWorkout())
             startWorkout()
             
-            for wout in TabBarViewController.workoutLog.getWorkoutList() {
+            for wout in TabBarViewController.workoutLog2.getWorkoutList() {
                 print("reps: \(wout.getTotalReps())")
                 print("Date: \(wout.getDate())")
             }
@@ -388,6 +389,88 @@ class AddWorkoutViewController: UIViewController {
             return btn
         }()
         return button
+    }
+    
+    func showSetOrExerciseAlert() {
+        
+        let message = "You can totally do another set \nthat was easy bro"
+        let alert = UIAlertController(title: message, message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
+        // Style of the alert
+        alert.view.subviews.first?.subviews.first?.subviews.first?.backgroundColor = Colors.darkGreen
+        alert.view.tintColor = Colors.darkGrey
+        
+        alert.addAction(UIAlertAction(title: "Set", style: .default, handler: { action in
+            switch action.style{
+            case .default:
+                print("Should Change")
+                self.addRow()
+            case .cancel:
+                print("cancel")
+                
+            case .destructive:
+                print("destructive")
+                
+                
+            }}))
+        alert.addAction(UIAlertAction(title: "Exercise", style: .default, handler: { action in
+            switch action.style{
+            case .default:
+                print("default")
+                self.showExerciseChoice()
+            case .cancel:
+                print("cancel")
+                
+            case .destructive:
+                print("destructive")
+                
+                
+            }}))
+        alert.addAction(UIAlertAction(title: "cancel", style: .cancel, handler: { action in
+            switch action.style{
+            case .default:
+                print("default")
+                
+            case .cancel:
+                print("cancel")
+                
+            case .destructive:
+                print("destructive")
+
+            }}))
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func showExerciseChoice() {
+        let message = "Name of exercise:"
+        
+        let alert = UIAlertController(title: message, message: nil, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alert.view.subviews.first?.subviews.first?.subviews.first?.backgroundColor = Colors.darkGreen
+        alert.view.tintColor = Colors.darkGrey
+        
+        alert.addTextField(configurationHandler: { textField in
+            textField.placeholder = " "
+            textField.adjustsFontForContentSizeCategory = true
+            textField.backgroundColor = Colors.darkGreen
+            textField.setBottomBorder(isDark: false, lineColor: Colors.grey!)
+            //textField.superview?.backgroundColor = Colors.grey
+        })
+        
+        alert.textFields?.forEach {
+            $0.superview?.backgroundColor = .clear
+            $0.superview?.superview?.subviews[0].removeFromSuperview()
+        }
+        
+        alert.addAction(UIAlertAction(title: "add", style: .default, handler: { action in
+            
+            if let name = alert.textFields?.first?.text {
+                print("Your exercisename: \(name)")
+                self.arrayOfExerciseNames.append(name)
+            }
+        }))
+        
+        self.present(alert, animated: true)
     }
     
     override func viewDidLoad() {

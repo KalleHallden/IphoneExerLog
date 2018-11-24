@@ -10,6 +10,7 @@ import UIKit
 
 class TabBarViewController: UITabBarController {
 
+    public static var workoutLog2 = Workoutlog2()
     public static var workoutLog = WorkoutLog()
     public static var theme = Theme()
     public static var personalStats = PersonalStats()
@@ -19,7 +20,7 @@ class TabBarViewController: UITabBarController {
     let weightImage = #imageLiteral(resourceName: "weightIcon")
     let saver = Saver()
     
-    let log: WorkoutLog = TabBarViewController.workoutLog
+    let log2: Workoutlog2 = TabBarViewController.workoutLog2
     
     
     override func viewDidLoad() {
@@ -73,8 +74,8 @@ class TabBarViewController: UITabBarController {
         
 
     }
-    func setWorkoutList(log: WorkoutLog) {
-        TabBarViewController.workoutLog = log
+    func setWorkoutList(log: Workoutlog2) {
+        TabBarViewController.workoutLog2 = log
     }
 }
 

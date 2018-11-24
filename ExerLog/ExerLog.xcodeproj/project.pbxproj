@@ -25,6 +25,10 @@
 		E30C7E8C2169DF320037EF2E /* DiaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30C7E8B2169DF320037EF2E /* DiaryCell.swift */; };
 		E30C7E8E2169E0690037EF2E /* DiaryWorkoutsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30C7E8D2169E0690037EF2E /* DiaryWorkoutsViewController.swift */; };
 		E30C7E90216DEEC10037EF2E /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30C7E8F216DEEC10037EF2E /* TabBarViewController.swift */; };
+		E326D9A521A98EE200A68715 /* Sets.swift in Sources */ = {isa = PBXBuildFile; fileRef = E326D9A421A98EE200A68715 /* Sets.swift */; };
+		E326D9A721A9900A00A68715 /* Exercise2.swift in Sources */ = {isa = PBXBuildFile; fileRef = E326D9A621A9900A00A68715 /* Exercise2.swift */; };
+		E326D9A921A992E600A68715 /* Workout2.swift in Sources */ = {isa = PBXBuildFile; fileRef = E326D9A821A992E600A68715 /* Workout2.swift */; };
+		E326D9AB21A99B1900A68715 /* Workoutlog2.swift in Sources */ = {isa = PBXBuildFile; fileRef = E326D9AA21A99B1900A68715 /* Workoutlog2.swift */; };
 		E379591B21A176DF00F4396E /* PreviousWorkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E379591A21A176DF00F4396E /* PreviousWorkoutViewController.swift */; };
 		E379591D21A187E100F4396E /* NavigationPreviousWorkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E379591C21A187E100F4396E /* NavigationPreviousWorkoutViewController.swift */; };
 		E379592121A1B31500F4396E /* HideKeyBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = E379592021A1B31500F4396E /* HideKeyBoard.swift */; };
@@ -80,6 +84,10 @@
 		E30C7E8B2169DF320037EF2E /* DiaryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryCell.swift; sourceTree = "<group>"; };
 		E30C7E8D2169E0690037EF2E /* DiaryWorkoutsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryWorkoutsViewController.swift; sourceTree = "<group>"; };
 		E30C7E8F216DEEC10037EF2E /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		E326D9A421A98EE200A68715 /* Sets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sets.swift; sourceTree = "<group>"; };
+		E326D9A621A9900A00A68715 /* Exercise2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exercise2.swift; sourceTree = "<group>"; };
+		E326D9A821A992E600A68715 /* Workout2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workout2.swift; sourceTree = "<group>"; };
+		E326D9AA21A99B1900A68715 /* Workoutlog2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workoutlog2.swift; sourceTree = "<group>"; };
 		E379591A21A176DF00F4396E /* PreviousWorkoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviousWorkoutViewController.swift; sourceTree = "<group>"; };
 		E379591C21A187E100F4396E /* NavigationPreviousWorkoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationPreviousWorkoutViewController.swift; sourceTree = "<group>"; };
 		E379592021A1B31500F4396E /* HideKeyBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideKeyBoard.swift; sourceTree = "<group>"; };
@@ -208,6 +216,10 @@
 				E30C7E7F2168B7890037EF2E /* Exercise.swift */,
 				E30C7E822168BA4C0037EF2E /* Workout.swift */,
 				E30C7E842168BEB00037EF2E /* WorkoutLog.swift */,
+				E326D9A421A98EE200A68715 /* Sets.swift */,
+				E326D9A621A9900A00A68715 /* Exercise2.swift */,
+				E326D9A821A992E600A68715 /* Workout2.swift */,
+				E326D9AA21A99B1900A68715 /* Workoutlog2.swift */,
 			);
 			path = WorkoutLog;
 			sourceTree = "<group>";
@@ -403,6 +415,7 @@
 			files = (
 				E379592121A1B31500F4396E /* HideKeyBoard.swift in Sources */,
 				E30C7E512168B73E0037EF2E /* AddWorkoutViewController.swift in Sources */,
+				E326D9A921A992E600A68715 /* Workout2.swift in Sources */,
 				E3C8B2402181E7430086163C /* colors.swift in Sources */,
 				E30AEFC221A722D5009092C9 /* Theme.swift in Sources */,
 				E30AEFBE21A5C8A9009092C9 /* textFieldExt.swift in Sources */,
@@ -413,7 +426,10 @@
 				E379591D21A187E100F4396E /* NavigationPreviousWorkoutViewController.swift in Sources */,
 				E30C7E852168BEB00037EF2E /* WorkoutLog.swift in Sources */,
 				E379593121A4679B00F4396E /* NavControllerDiary.swift in Sources */,
+				E326D9A521A98EE200A68715 /* Sets.swift in Sources */,
 				E30C7E4F2168B73E0037EF2E /* AppDelegate.swift in Sources */,
+				E326D9AB21A99B1900A68715 /* Workoutlog2.swift in Sources */,
+				E326D9A721A9900A00A68715 /* Exercise2.swift in Sources */,
 				E379592D21A4369300F4396E /* NavControllerAddWorkout.swift in Sources */,
 				E30C7E832168BA4C0037EF2E /* Workout.swift in Sources */,
 				E379593321A4683200F4396E /* NavigationViewController.swift in Sources */,
