@@ -11,7 +11,7 @@ import UIKit
 
 class DiaryWorkoutsViewController: UIViewController{
     
-    var workout = Workout()
+    var workout = Workout2()
     private var height = Int()
     
     func setHeight(height: Int) {
@@ -176,13 +176,13 @@ class DiaryWorkoutsViewController: UIViewController{
     
     @objc func statAction(sender:UIButton!) {
         let num = findWorkoutNum(text: (sender.titleLabel?.text)!)
-        let workout = TabBarViewController.workoutLog.getSpecificWorkout(id: num - 1)
+        let workout = TabBarViewController.workoutLog2.getSpecificWorkout(id: num - 1)
         print("This is the current workout date: \(workout.getExactDate())")
         print(workout.getTotalReps())
         regSegue(workout1: workout)
     }
     
-    func regSegue(workout1: Workout){
+    func regSegue(workout1: Workout2){
         let page = NavigationPreviousWorkoutViewController()
         page.setWorkout(workout1: workout1)
         present(page, animated: true, completion: nil)

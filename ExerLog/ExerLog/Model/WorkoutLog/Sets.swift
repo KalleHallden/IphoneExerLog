@@ -8,7 +8,26 @@
 
 import Foundation
 
-class Sets {
+class Sets: NSObject, Codable {
+    
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(reps, forKey: "reps")
+        aCoder.encode(setNum, forKey: "sets")
+        aCoder.encode(weight, forKey: "weight")
+        aCoder.encode(rest, forKey: "rest")
+    }
+    
+    required convenience init?(coder aDecoder: NSCoder) {
+        guard let reps = aDecoder.decodeObject(forKey: "reps") as? Double,
+            let sets = aDecoder.decodeObject(forKey: "setz") as? Double,
+            let weight = aDecoder.decodeObject(forKey: "weight") as? Double,
+            let rest = aDecoder.decodeObject(forKey: "rest") as? Double
+            else {
+                return nil
+        }
+        self.init(reps: reps, setNumb: Int(sets), weight: weight, rest: rest)
+    }
+    
     private var reps: Double = 0.0
     private var setNum: Int = 0
     private var weight: Double = 0.0
@@ -21,6 +40,9 @@ class Sets {
         self.rest = rest
     }
     
+    func getSetNum() -> Int {
+        return self.setNum
+    }
     func getReps() -> Double {
         return self.reps
     }

@@ -8,7 +8,22 @@
 
 import Foundation
 
-class Exercise2 {
+class Exercise2: NSObject, Codable {
+    
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(name, forKey: "name")
+        aCoder.encode(setsOfExercise, forKey: "sets")
+    }
+    
+    required convenience init?(coder aDecoder: NSCoder) {
+        guard let name = aDecoder.decodeObject(forKey: "name") as? String,
+            let sets = aDecoder.decodeObject(forKey: "sets") as? [Sets]
+            else {
+                return nil
+        }
+        self.init(name: name, sets: sets)
+    }
+    
     private var name = ""
     private var setsOfExercise = [Sets]()
     
@@ -17,6 +32,16 @@ class Exercise2 {
     }
     func getSetsOfExercises() -> [Sets] {
         return setsOfExercise
+    }
+    func getSets() -> Int {
+        var numOfSets = 0
+        for set in self.getSetsOfExercises() {
+            numOfSets += set.getSetNum()
+        }
+        return numOfSets
+    }
+    func clearSets() {
+        setsOfExercise.removeAll()
     }
     func getRepsOfExercise() -> Double {
         var totalReps = 0.0
@@ -32,11 +57,17 @@ class Exercise2 {
     init(name: String) {
         self.name = name
     }
-    func addSetOfExercise(reps: Double, sets: Double, weight: Double, rest: Double) {
-        let numofSets = Int(sets)
-        for set in 0...numofSets {
-            let newSet = Sets(reps: reps, setNumb: set, weight: weight, rest: rest)
+    init(name: String, sets: [Sets]) {
+        self.name = name
+        self.setsOfExercise = sets
+    }
+    var count = 0
+    
+    func addSetOfExercise(reps: Double, sets: Double, weight: Double, rest: Double, isNew: Bool) {
+        if (sets > 0) {
+            let newSet = Sets(reps: reps, setNumb: Int(sets), weight: weight, rest: rest)
             self.setsOfExercise.append(newSet)
+            print("This is what could be: \(self.setsOfExercise.count)")
         }
     }
 }

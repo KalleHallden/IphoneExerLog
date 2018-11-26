@@ -10,15 +10,23 @@ import UIKit
 
 class PreviousWorkoutViewController: UIViewController {
 
-    private static var workout: Workout!
+    private static var workout: Workout2!
     let saver = Saver()
+    var rowsOfSets = [[UITextField]]()
+    var arrayOfExerciseNames = [String]()
+    var howManySetsArray = [Int]()
+    var numSets = 0
     
-    func setWorkout(workout1: Workout) {
+    var rowCount = 0
+    var exerciseCount = 0
+    var setCount = 0
+    
+    func setWorkout(workout1: Workout2) {
         print("This is the exercises: \(workout1.getExercises().count)")
         PreviousWorkoutViewController.workout = workout1
     }
     
-    func getWorkout() -> Workout {
+    func getWorkout() -> Workout2 {
         return PreviousWorkoutViewController.workout
     }
     
@@ -165,14 +173,6 @@ class PreviousWorkoutViewController: UIViewController {
     }
     
     func setUpMasterStack() -> UIStackView {
-//
-//        var num = 0
-//        for subview in masterStackView.arrangedSubviews {
-//            masterStackView.removeArrangedSubview(subview)
-//            subview.removeFromSuperview()
-//            num += 1
-//            print("This is num: \(num)")
-//        }
         
         setStatBut()
         let statbutton = getButton()
@@ -186,9 +186,16 @@ class PreviousWorkoutViewController: UIViewController {
         masterStackView.addArrangedSubview(labelRow)
         
         print(getWorkout().getExercises().count)
+        var hasnotRun = true
         for exercise in getWorkout().getExercises() {
-            let row = setUpRowOfTextFields(exercise: exercise)
-            rowStack.addArrangedSubview(row)
+            if (hasnotRun) {
+                hasnotRun = false
+            } else {
+                setHowManySets()
+                numSets = 1
+            }
+            setUpRowOfTextFields(exercise: exercise, firstTime: true)
+            exerciseCount += 1
         }
         scrollView.addSubview(rowStack)
         rowStack.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
@@ -230,50 +237,66 @@ class PreviousWorkoutViewController: UIViewController {
         textField.translatesAutoresizingMaskIntoConstraints = false
     }
     
-    func setUpRowOfTextFields(exercise: Exercise) -> UIStackView {
+    func setUpRowOfTextFields(exercise: Exercise2, firstTime: Bool) {
         let widtdthTextField = (view.frame.width - 100) / 5
         let stackview = UIStackView()
         let stackview2 = UIStackView()
         let stackview3 = UIStackView()
         var textFieldArray = [UITextField]()
+        var setFieldArray = [UITextField]()
+        let label = UILabel()
         
-        let textfield1 = textfieldMaker()
-        textfield1.widthAnchor.constraint(equalToConstant: 100)
-        textFieldArray.append(textfield1)
-        textfield1.text = exercise.getName()
-        for num in 1...4 {
-            let textField = textfieldMaker()
-            textField.textAlignment = .center
-            
-            if (num < 3) {
-                stackview2.addArrangedSubview(textField)
-                if (num == 1) {
-                    textField.text = String(exercise.getReps())
-                } else if (num == 2) {
-                    textField.text = String(exercise.getSets())
+        var first = true
+        for set in exercise.getSetsOfExercises() {
+            numSets += 1
+            if (first) {
+                label.textColor = Colors.greens
+                label.font = UIFont(name: "Avenir next", size: 16)!
+                label.text = exercise.getName()
+                if (firstTime) {
+                    arrayOfExerciseNames.append(exercise.getName())
                 }
+                first = false
             } else {
-                stackview3.addArrangedSubview(textField)
-                if (num == 3) {
-                    textField.text = String(exercise.getWeight())
-                } else if (num == 4) {
-                    textField.text = String(exercise.getRest())
-                }
+                label.text = ""
             }
-            textFieldArray.append(textField)
-            textField.widthAnchor.constraint(equalToConstant: widtdthTextField)
+
+            print(exercise.getName())
+            for num in 1...4 {
+                let textField = textfieldMaker()
+                textField.textAlignment = .center
+                
+                if (num < 3) {
+                    stackview2.addArrangedSubview(textField)
+                    if (num == 1) {
+                        textField.text = String(set.getReps())
+                    } else if (num == 2) {
+                        textField.text = String(set.getSetNum())
+                    }
+                } else {
+                    stackview3.addArrangedSubview(textField)
+                    if (num == 3) {
+                        textField.text = String(set.getWeight())
+                    } else if (num == 4) {
+                        textField.text = String(set.getRest())
+                    }
+                }
+                textFieldArray.append(textField)
+                textField.widthAnchor.constraint(equalToConstant: widtdthTextField)
         }
+        
         setupStackViewHorizontal(stackview: stackview2)
         setupStackViewHorizontal(stackview: stackview3)
         setupStackViewHorizontal(stackview: stackview)
         
-        stackview.addArrangedSubview(textfield1)
+        stackview.addArrangedSubview(label)
         stackview.addArrangedSubview(stackview2)
         stackview.addArrangedSubview(stackview3)
         rows.append(textFieldArray)
-        
-        return stackview
+        rowsOfSets.append(setFieldArray)
+        rowStack.addArrangedSubview(stackview)
     }
+  }
     
     func startWorkout() {
         for row in rowStack.arrangedSubviews {
@@ -287,18 +310,40 @@ class PreviousWorkoutViewController: UIViewController {
     
     func addNewExercise(exerciseNum: Int) {
         getWorkout().clearExercises()
+        print("Exercise: \(arrayOfExerciseNames[exerciseNum - 1])")
         for array in rows {
-            getWorkout().addNewExercise(name: array[0].text!, reps: array[1].text!, sets: array[2].text!, weight: array[3].text!, rest: array[4].text!)
+            getWorkout().addNewExercise(name: arrayOfExerciseNames[exerciseNum - 1], reps: array[0].text!, sets: array[1].text!, weight: array[2].text!, rest: array[3].text!)
         }
         print(getWorkout().getExercises().count)
         print(getWorkout().getTotalReps())
     }
+        
+    func addNewSet() {
+        print("This is exercount: \(exerciseCount)")
+        print("This is namesarray: \(arrayOfExerciseNames.count)")
+        let exerciseList = getWorkout().getExercises()
+        let thisexercise = exerciseList[exerciseCount - 1]
+        thisexercise.clearSets()
+        for row in rows {
+            print("Row: \(row.count)")
+            print(exerciseCount)
+            getWorkout().addNewSet(name: arrayOfExerciseNames[exerciseCount - 1], reps: row[0].text!, sets: row[1].text!, weight: row[2].text!, rest: row[3].text!)
+        }
+    }
     
-    var rowCount = 1;
-    func addRow() {
-        let row = createRowOfTextFields()
-        rowStack.addArrangedSubview(row)
-        addNewExercise(exerciseNum: rowCount)
+    func addRow(isExercise: Bool) {
+        if (isExercise) {
+            let row = createRowOfTextFields(isExercise: true)
+            rowStack.addArrangedSubview(row)
+            addNewExercise(exerciseNum: exerciseCount)
+            setCount = 1
+            exerciseCount += 1
+        } else {
+            let row = createRowOfTextFields(isExercise: false)
+            rowStack.addArrangedSubview(row)
+            addNewSet()
+            setCount += 1
+        }
         rowCount += 1
     }
     
@@ -318,16 +363,24 @@ class PreviousWorkoutViewController: UIViewController {
     
     // Creates and returns a stackview containing five textfields which represent one row in the
     // addWorkoutView
-    func createRowOfTextFields() -> UIStackView {
+    func createRowOfTextFields(isExercise: Bool) -> UIStackView {
         let widtdthTextField = (view.frame.width - 100) / 5
         let stackview = UIStackView()
         let stackview2 = UIStackView()
         let stackview3 = UIStackView()
         var textFieldArray = [UITextField]()
+        var setFieldArray = [UITextField]()
+        let label = UILabel()
+        label.text = ""
+        label.textColor = Colors.greens
+        label.font = UIFont(name: "Avenir next", size: 16)!
         
-        let textfield = textfieldMaker()
-        textfield.widthAnchor.constraint(equalToConstant: 100)
-        textFieldArray.append(textfield)
+        if (isExercise) {
+            rowsOfSets.removeAll()
+            label.text = arrayOfExerciseNames[exerciseCount]
+        } else {
+            label.text = ""
+        }
         for num in 1...4 {
             let textField = textfieldMaker()
             textField.textAlignment = .center
@@ -337,17 +390,18 @@ class PreviousWorkoutViewController: UIViewController {
                 stackview3.addArrangedSubview(textField)
             }
             textFieldArray.append(textField)
+            setFieldArray.append(textField)
             textField.widthAnchor.constraint(equalToConstant: widtdthTextField)
         }
         setupStackViewHorizontal(stackview: stackview2)
         setupStackViewHorizontal(stackview: stackview3)
         setupStackViewHorizontal(stackview: stackview)
         
-        stackview.addArrangedSubview(textfield)
+        stackview.addArrangedSubview(label)
         stackview.addArrangedSubview(stackview2)
         stackview.addArrangedSubview(stackview3)
         rows.append(textFieldArray)
-        
+        rowsOfSets.append(setFieldArray)
         return stackview
     }
     
@@ -390,12 +444,98 @@ class PreviousWorkoutViewController: UIViewController {
         return stackview
     }
     
+    func showSetOrExerciseAlert() {
+        
+        let message = "You can totally do another set \nthat was easy bro"
+        let alert = UIAlertController(title: message, message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
+        // Style of the alert
+        alert.view.subviews.first?.subviews.first?.subviews.first?.backgroundColor = Colors.darkGreen
+        alert.view.tintColor = Colors.darkGrey
+        
+        alert.addAction(UIAlertAction(title: "Set", style: .default, handler: { action in
+            switch action.style{
+            case .default:
+                print("Should Change")
+                self.addRow(isExercise: false)
+                self.numSets += 1
+            case .cancel:
+                print("cancel")
+                
+            case .destructive:
+                print("destructive")
+                
+                
+            }}))
+        alert.addAction(UIAlertAction(title: "Exercise", style: .default, handler: { action in
+            switch action.style{
+            case .default:
+                print("default")
+                self.showExerciseChoice()
+            case .cancel:
+                print("cancel")
+                
+            case .destructive:
+                print("destructive")
+                
+                
+            }}))
+        alert.addAction(UIAlertAction(title: "cancel", style: .cancel, handler: { action in
+            switch action.style{
+            case .default:
+                print("default")
+                
+            case .cancel:
+                print("cancel")
+                
+            case .destructive:
+                print("destructive")
+                
+            }}))
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func showExerciseChoice() {
+        let message = "Name of exercise:"
+        
+        let alert = UIAlertController(title: message, message: nil, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alert.view.subviews.first?.subviews.first?.subviews.first?.backgroundColor = Colors.darkGreen
+        alert.view.tintColor = Colors.darkGrey
+        
+        alert.addTextField(configurationHandler: { textField in
+            textField.placeholder = " "
+            textField.adjustsFontForContentSizeCategory = true
+            textField.backgroundColor = Colors.darkGreen
+            textField.setBottomBorder(isDark: false, lineColor: Colors.grey!)
+            //textField.superview?.backgroundColor = Colors.grey
+        })
+        
+        alert.textFields?.forEach {
+            $0.superview?.backgroundColor = .clear
+            $0.superview?.superview?.subviews[0].removeFromSuperview()
+        }
+        
+        alert.addAction(UIAlertAction(title: "add", style: .default, handler: { action in
+            
+            if let name = alert.textFields?.first?.text {
+                print("Your exercisename: \(name)")
+                self.arrayOfExerciseNames.append(name)
+                self.setHowManySets()
+                self.numSets = 1
+                self.addRow(isExercise: true)
+            }
+        }))
+        
+        self.present(alert, animated: true)
+    }
+    
     // Actions
     var clickcount = 0
     
    // Code for the add button below the rows of exercises
     @objc func addAction(sender:UIButton!) {
-            addRow()
+            showSetOrExerciseAlert()
             changeStatLabel(button: getButton())
     }
     
@@ -403,15 +543,34 @@ class PreviousWorkoutViewController: UIViewController {
         regSegue()
     }
     
- @objc func saveAction()  {
-        getWorkout().clearExercises()
-        for array in rows {
-            if (!checkIfEmpty(array: array)) {
-                getWorkout().addNewExercise(name: array[0].text!, reps: array[1].text!, sets: array[2].text!, weight: array[3].text!, rest: array[4].text!)
-            }
+    func setHowManySets() {
+        howManySetsArray.insert(numSets, at: exerciseCount - 1)
+        for set in howManySetsArray {
+            print("Count of exercise sets: \(set)")
         }
-        saveWorkout(workout: getWorkout())
-        regSegue()
+    }
+    
+    
+ @objc func saveAction()  {
+    print(howManySetsArray.count)
+    for set in howManySetsArray {
+        print("Sets count: \(set)")
+    }
+    // for every exercise I need to add
+    // for every exercise go through every row below it
+    // array that holds how many sets are in each exercise
+//    for exercise in arrayOfExerciseNames {
+//            if (!checkIfEmpty(array: row)) {
+//                getWorkout().addNewExercise(name: exercise, reps: row[0].text!, sets: row[1].text!, weight: row[2].text!, rest: row[3].text!)
+//        }
+//    }
+//    for array in rows {
+//            if (!checkIfEmpty(array: array)) {
+//                getWorkout().addNewExercise(name: array[0].text!, reps: array[1].text!, sets: array[2].text!, weight: array[3].text!, rest: array[4].text!)
+//            }
+//        }
+//        saveWorkout(workout: getWorkout())
+//        regSegue()
     }
     
     func checkIfEmpty(array: [UITextField]) -> Bool {
@@ -428,13 +587,13 @@ class PreviousWorkoutViewController: UIViewController {
 
     }
     
-    func deleteWorkout(workout1: Workout) {
-        let log = TabBarViewController.workoutLog
+    func deleteWorkout(workout1: Workout2) {
+        let log = TabBarViewController.workoutLog2
         let index = log.getWorkoutList().firstIndex(of: workout1)
         log.removeWorkoutAt(index: index!)
         let tab = TabBarViewController()
         saver.deleteOldFile(path: saver.getPathWorkout())
-        tab.setWorkoutList(log: log)
+        //tab.setWorkoutList(log: log)
         saver.save(path: saver.getPathWorkout())
         regSegue()
     }
@@ -472,7 +631,6 @@ class PreviousWorkoutViewController: UIViewController {
     }
     
     @objc func save() {
-        let tab = TabBarViewController()
         saver.deleteOldFile(path: saver.getPathWorkout())
         let bar = BarChartViewController()
         bar.setFresh(hasbeenLaunched: false)
@@ -481,14 +639,13 @@ class PreviousWorkoutViewController: UIViewController {
     }
     
     @objc func add() {
-        addRow()
         changeStatLabel(button: getButton())
     }
     
-    func saveWorkout(workout: Workout) {
+    func saveWorkout(workout: Workout2) {
         print("Hey you")
         if (workout.getExercises().count != 0 && workout.getTotalReps() != 0) {
-            let log = TabBarViewController.workoutLog
+            let log = TabBarViewController.workoutLog2
             print("total workouts: \(log.getWorkoutList().count)")
             let tab = TabBarViewController()
             saver.deleteOldFile(path: saver.getPathWorkout())

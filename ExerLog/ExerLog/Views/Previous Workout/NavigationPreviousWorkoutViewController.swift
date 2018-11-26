@@ -9,14 +9,14 @@
 import UIKit
 
 class NavigationPreviousWorkoutViewController: UINavigationController {
-    private static var workout: Workout!
+    private static var workout: Workout2!
     
-    func setWorkout(workout1: Workout) {
+    func setWorkout(workout1: Workout2) {
         print("This is the exercises: \(workout1.getExercises().count)")
         NavigationPreviousWorkoutViewController.workout = workout1
     }
     
-    func getWorkout() -> Workout {
+    func getWorkout() -> Workout2 {
         return NavigationPreviousWorkoutViewController.workout
     }
         override func viewDidLoad() {

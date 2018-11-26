@@ -9,17 +9,31 @@
 import Foundation
 
 
-class Workoutlog2 {
+class Workoutlog2: NSObject, Codable {
     
+    
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(workoutList, forKey: "workLst")
+    }
+    
+    required convenience init?(coder aDecoder: NSCoder) {
+        guard let workList = aDecoder.decodeObject(forKey: "workLst") as? [Workout2] else {
+            print("didn't work")
+            return nil
+        }
+        self.init(workoutLst: workList)
+    }
+    
+    override init() {}
     private var workoutList = [Workout2]()
     
     func setUpWorkoutList(workoutList: [Workout2]) {
         self.workoutList = workoutList
     }
     
-//    init(workoutLst:[Workout2]) {
-//        self.workoutList = workoutLst
-//    }
+    init(workoutLst:[Workout2]) {
+        self.workoutList = workoutLst
+    }
     
     func addNewWorkout(numberOfWorkouts: Int) {
         for num in 1...numberOfWorkouts {

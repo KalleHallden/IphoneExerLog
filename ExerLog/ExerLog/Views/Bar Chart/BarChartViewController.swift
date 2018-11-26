@@ -70,7 +70,7 @@ class BarChartViewController: UICollectionViewController, UICollectionViewDelega
     
     func setValueList(num: Int) {
         values.removeAll()
-        let workoutList = TabBarViewController.workoutLog.getWorkoutList()
+        let workoutList = TabBarViewController.workoutLog2.getWorkoutList()
        // workoutList.reversed()
         if (num == 2) {
             for workout in workoutList {
@@ -257,8 +257,8 @@ class BarChartViewController: UICollectionViewController, UICollectionViewDelega
     
     func barPresed(barNumber: Int) {
         
-        let workout = TabBarViewController.workoutLog.getSpecificWorkout(id: barNumber)
-        print("These are the sets \(workout.getTotalSets())")
+        let workout = TabBarViewController.workoutLog2.getSpecificWorkout(id: barNumber)
+        print("workout num \(barNumber)")
         var typeOfData: String
         if (getNumberOfClicks() == 0) {
             typeOfData = "\nLoad: \(workout.getTotalWeight())"
@@ -329,11 +329,11 @@ class BarChartViewController: UICollectionViewController, UICollectionViewDelega
     
     func openThatWorkout(workoutnum: Int) {
         print("opening workout")
-        print(TabBarViewController.workoutLog.getSpecificWorkout(id: workoutnum).getExactDate())
-        let workouts = TabBarViewController.workoutLog.getSpecificWorkout(id: workoutnum)
+        print(TabBarViewController.workoutLog2.getSpecificWorkout(id: workoutnum).getExactDate())
+        let workouts = TabBarViewController.workoutLog2.getSpecificWorkout(id: workoutnum)
         regSegue(workout1: workouts)
     }
-    func regSegue(workout1: Workout){
+    func regSegue(workout1: Workout2){
         let page = NavigationPreviousWorkoutViewController()
         page.setWorkout(workout1: workout1)
         present(page, animated: true, completion: nil)
