@@ -149,6 +149,10 @@ class Workout2: NSObject, Codable {
         createdExercise.setName(name: name)
         createdExercise.addSetOfExercise(reps: theReps, sets: theSets, weight: theWeight, rest: theRest, isNew: true)
         exerciseList.append(createdExercise)
+        self.setValues()
+    }
+    
+    func setValues() {
         self.setTotalSets(listExercise: self.exerciseList)
         self.setTotalReps(listExercise: self.exerciseList)
         self.setTotalWeight(listExercise: self.exerciseList)
@@ -166,9 +170,7 @@ class Workout2: NSObject, Codable {
         } else {
             print("No exercise should get created!!")
         }
-        self.setTotalSets(listExercise: self.exerciseList)
-        self.setTotalReps(listExercise: self.exerciseList)
-        self.setTotalWeight(listExercise: self.exerciseList)
+        self.setValues()
     }
     
     func getSpecificExerciseByName(nameOfExercise: String) -> Exercise2 {

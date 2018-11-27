@@ -8,6 +8,8 @@ class AddWorkoutViewController: UIViewController {
     var workout2: Workout2?
     var isFirstAdd = true
     var rowsOfSets = [[UITextField]]()
+    var howManySetsArray = [Int]()
+    var numSets = 0
     
     var arrayOfExerciseNames = [String]()
     let saver = Saver()
@@ -200,14 +202,14 @@ class AddWorkoutViewController: UIViewController {
                 let row = createRowOfTextFields(isExercise: true)
                 rowStack.addArrangedSubview(row)
                 setCount = 1
-                exerciseCount += 1
+                //exerciseCount += 1
         } else {
             if (isExercise) {
                 let row = createRowOfTextFields(isExercise: true)
                 rowStack.addArrangedSubview(row)
                 addNewExercise(exerciseNum: exerciseCount)
                 setCount = 1
-                exerciseCount += 1
+               // exerciseCount += 1
             } else {
                 let row = createRowOfTextFields(isExercise: false)
                 rowStack.addArrangedSubview(row)
@@ -339,21 +341,37 @@ class AddWorkoutViewController: UIViewController {
     }
     
     @objc func save() {
+        
+        self.setHowManySets(index: self.exerciseCount - 1)
+        numSets = 1
         saver.deleteOldFile(path: saver.getPathWorkout())
         workout2!.clearExercises()
-        for array in rows {
-            if (!checkIfEmpty(array: array)) {
-                exerciseCreator(array: array)
-            }
-        }
+        exerciseCreator()
         TabBarViewController.workoutLog2.addWorkout(workout: workout2!)
         saveWorkout(workout: workout2!)
         numberOfExercisesAdded = 0
     }
     var numberOfExercisesAdded = 0
     
-    func exerciseCreator(array: [UITextField]) {
-        workout2!.addNewExercise(name: arrayOfExerciseNames[numberOfExercisesAdded], reps: array[0].text!, sets: array[1].text!, weight: array[2].text!, rest: array[3].text!)
+    func exerciseCreator() {
+        var countOfExercises = 0
+        var countOfRows = 0
+        for exercises in howManySetsArray{
+            for n in 1...exercises {
+                if (n == 1) {
+                    print("Name of exercise: \(arrayOfExerciseNames[countOfExercises])")
+                    print("Sets: \(rows[countOfRows][1].text!)")
+                    workout2!.addNewExercise(name: arrayOfExerciseNames[countOfExercises], reps: rows[countOfRows][0].text!, sets: rows[countOfRows][1].text!, weight: rows[countOfRows][2].text!, rest: rows[countOfRows][3].text!)
+                } else {
+                    print("Name of exercise: \(arrayOfExerciseNames[countOfExercises])")
+                    print("Sets: \(rows[countOfRows][1].text!)")
+                    workout2!.addNewSet(name: arrayOfExerciseNames[countOfExercises], reps: rows[countOfRows][0].text!, sets: rows[countOfRows][1].text!, weight: rows[countOfRows][2].text!, rest: rows[countOfRows][3].text!)
+                }
+                countOfRows += 1
+            }
+            print("\nExercise added\n")
+            countOfExercises += 1
+        }
     }
     
     func checkIfEmpty(array: [UITextField]) -> Bool {
@@ -368,7 +386,6 @@ class AddWorkoutViewController: UIViewController {
     @objc func add() {
         if (isFirstAdd) {
             showExerciseChoice()
-            isFirstAdd = false
         } else {
             showSetOrExerciseAlert()
         }
@@ -444,6 +461,7 @@ class AddWorkoutViewController: UIViewController {
             case .default:
                 print("Should Change")
                 self.addRow(isExercise: false)
+                self.numSets += 1
             case .cancel:
                 print("cancel")
                 
@@ -481,6 +499,13 @@ class AddWorkoutViewController: UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
+    func setHowManySets(index: Int) {
+        howManySetsArray.insert(numSets, at: index)
+        for set in howManySetsArray {
+            print("Count of exercise sets: \(set)")
+        }
+    }
+    
     func showExerciseChoice() {
         let message = "Name of exercise:"
         
@@ -506,8 +531,15 @@ class AddWorkoutViewController: UIViewController {
             
             if let name = alert.textFields?.first?.text {
                 print("Your exercisename: \(name)")
+                if (!self.isFirstAdd) {
+                    self.setHowManySets(index: self.exerciseCount - 1)
+                } else {
+                    self.isFirstAdd = false
+                }
                 self.arrayOfExerciseNames.append(name)
                 self.addRow(isExercise: true)
+                self.exerciseCount += 1
+                self.numSets = 1
             }
         }))
         

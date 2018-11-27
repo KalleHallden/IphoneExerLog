@@ -185,16 +185,14 @@ class PreviousWorkoutViewController: UIViewController {
         let labelRow = createRowOfLabels()
         masterStackView.addArrangedSubview(labelRow)
         
-        print(getWorkout().getExercises().count)
-        var hasnotRun = true
+        print("This is how many exercises: \(getWorkout().getExercises().count)")
         for exercise in getWorkout().getExercises() {
-            if (hasnotRun) {
-                hasnotRun = false
-            } else {
-                setHowManySets()
+            print("\nRun")
+            setUpRowOfTextFields(exercise: exercise, firstTime: true)
+            if (exerciseCount < getWorkout().getExercises().count - 1) {
+                setHowManySets(index: exerciseCount)
                 numSets = 1
             }
-            setUpRowOfTextFields(exercise: exercise, firstTime: true)
             exerciseCount += 1
         }
         scrollView.addSubview(rowStack)
@@ -224,7 +222,6 @@ class PreviousWorkoutViewController: UIViewController {
     }
     
     func setUpTextFields(textField: UITextField) {
-        print("We are in")
         let colors = Colors()
         textField.backgroundColor = Colors.grey
         
@@ -239,16 +236,17 @@ class PreviousWorkoutViewController: UIViewController {
     
     func setUpRowOfTextFields(exercise: Exercise2, firstTime: Bool) {
         let widtdthTextField = (view.frame.width - 100) / 5
-        let stackview = UIStackView()
-        let stackview2 = UIStackView()
-        let stackview3 = UIStackView()
         var textFieldArray = [UITextField]()
         var setFieldArray = [UITextField]()
-        let label = UILabel()
         
         var first = true
+        print("\nExercise Sets: \(exercise.getSetsOfExercises().count)\n")
         for set in exercise.getSetsOfExercises() {
-            numSets += 1
+            let stackview = UIStackView()
+            let stackview2 = UIStackView()
+            let stackview3 = UIStackView()
+            let label = UILabel()
+            print("Ran")
             if (first) {
                 label.textColor = Colors.greens
                 label.font = UIFont(name: "Avenir next", size: 16)!
@@ -258,10 +256,10 @@ class PreviousWorkoutViewController: UIViewController {
                 }
                 first = false
             } else {
-                label.text = ""
+                label.text = " "
             }
 
-            print(exercise.getName())
+            print(label.text)
             for num in 1...4 {
                 let textField = textfieldMaker()
                 textField.textAlignment = .center
@@ -292,9 +290,10 @@ class PreviousWorkoutViewController: UIViewController {
         stackview.addArrangedSubview(label)
         stackview.addArrangedSubview(stackview2)
         stackview.addArrangedSubview(stackview3)
+        rowStack.addArrangedSubview(stackview)
+        print("Stack: \(rowStack.arrangedSubviews.count)")
         rows.append(textFieldArray)
         rowsOfSets.append(setFieldArray)
-        rowStack.addArrangedSubview(stackview)
     }
   }
     
@@ -521,7 +520,7 @@ class PreviousWorkoutViewController: UIViewController {
             if let name = alert.textFields?.first?.text {
                 print("Your exercisename: \(name)")
                 self.arrayOfExerciseNames.append(name)
-                self.setHowManySets()
+                self.setHowManySets(index: self.exerciseCount - 1)
                 self.numSets = 1
                 self.addRow(isExercise: true)
             }
@@ -543,34 +542,17 @@ class PreviousWorkoutViewController: UIViewController {
         regSegue()
     }
     
-    func setHowManySets() {
-        howManySetsArray.insert(numSets, at: exerciseCount - 1)
+    func setHowManySets(index: Int) {
+        howManySetsArray.insert(numSets, at: index)
         for set in howManySetsArray {
             print("Count of exercise sets: \(set)")
         }
     }
     
     
- @objc func saveAction()  {
-    print(howManySetsArray.count)
-    for set in howManySetsArray {
-        print("Sets count: \(set)")
-    }
-    // for every exercise I need to add
-    // for every exercise go through every row below it
-    // array that holds how many sets are in each exercise
-//    for exercise in arrayOfExerciseNames {
-//            if (!checkIfEmpty(array: row)) {
-//                getWorkout().addNewExercise(name: exercise, reps: row[0].text!, sets: row[1].text!, weight: row[2].text!, rest: row[3].text!)
-//        }
-//    }
-//    for array in rows {
-//            if (!checkIfEmpty(array: array)) {
-//                getWorkout().addNewExercise(name: array[0].text!, reps: array[1].text!, sets: array[2].text!, weight: array[3].text!, rest: array[4].text!)
-//            }
-//        }
-//        saveWorkout(workout: getWorkout())
-//        regSegue()
+    @objc func saveAction() {
+        print("Saving this many: \(howManySetsArray.count)")
+        print("setcount: \(setCount)")
     }
     
     func checkIfEmpty(array: [UITextField]) -> Bool {
